@@ -1,6 +1,6 @@
 import React from "react";
 import {handleInstall} from "../common/handleInstall";
-import { handleShare } from "../common/handleShare";
+import {handleShare} from "../common/handleShare";
 
 // todo delete any unneeded controls
 function ControlBar({

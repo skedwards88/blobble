@@ -1,4 +1,4 @@
-import { createRoot } from "react-dom/client";
+import {createRoot} from "react-dom/client";
 import React from "react";
 import App from "./components/App";
 import "./styles/App.css";
@@ -15,7 +15,7 @@ if (process.env.NODE_ENV !== "development" && "serviceWorker" in navigator) {
   const scope = location.hostname === "localhost" ? "" : "/blobble/";
   window.addEventListener("load", () => {
     navigator.serviceWorker
-      .register(path, { scope: scope })
+      .register(path, {scope: scope})
       .then((registration) => {
         console.log("SW registered: ", registration);
       })

@@ -26,16 +26,17 @@ function parseUrlQuery() {
     numLetters = parseInt(numLetters);
   }
 
-  return [seed, numLetters]
+  return [seed, numLetters];
 }
 
 export default function App() {
-
   // TODO enter the actual return values
   const [seed, numLetters] = parseUrlQuery();
 
   // TODO enter value of the saved display state. If no daily challenge, remove daily logic.
-  const savedDisplay = JSON.parse(localStorage.getItem("blobbleDisplaySavedStateName"));
+  const savedDisplay = JSON.parse(
+    localStorage.getItem("blobbleDisplaySavedStateName"),
+  );
   const [display, setDisplay] = React.useState(
     savedDisplay === "game" || savedDisplay === "daily" ? savedDisplay : "game",
   );
@@ -87,33 +88,40 @@ export default function App() {
   React.useEffect(() => {
     // Need to store the function in a variable so that
     // the add and remove actions can reference the same function
-    const listener = (event) => handleBeforeInstallPrompt(
-      event,
-      setInstallPromptEvent,
-      setShowInstallButton,
-    );
+    const listener = (event) =>
+      handleBeforeInstallPrompt(
+        event,
+        setInstallPromptEvent,
+        setShowInstallButton,
+      );
 
     window.addEventListener("beforeinstallprompt", listener);
 
-    return () =>
-      window.removeEventListener("beforeinstallprompt", listener);
+    return () => window.removeEventListener("beforeinstallprompt", listener);
   }, []);
 
   React.useEffect(() => {
     // Need to store the function in a variable so that
     // the add and remove actions can reference the same function
-    const listener = () => handleAppInstalled(setInstallPromptEvent, setShowInstallButton);
+    const listener = () =>
+      handleAppInstalled(setInstallPromptEvent, setShowInstallButton);
 
     window.addEventListener("appinstalled", listener);
     return () => window.removeEventListener("appinstalled", listener);
   }, []);
 
   React.useEffect(() => {
-    window.localStorage.setItem("blobbleDisplaySavedStateName", JSON.stringify(display));
+    window.localStorage.setItem(
+      "blobbleDisplaySavedStateName",
+      JSON.stringify(display),
+    );
   }, [display]);
 
   React.useEffect(() => {
-    window.localStorage.setItem("blobbleGameSavedStateName", JSON.stringify(gameState));
+    window.localStorage.setItem(
+      "blobbleGameSavedStateName",
+      JSON.stringify(gameState),
+    );
   }, [gameState]);
 
   React.useEffect(() => {
@@ -128,13 +136,15 @@ export default function App() {
       return <Rules setDisplay={setDisplay}></Rules>;
 
     case "heart":
-      return <Heart
-        setDisplay={setDisplay}
-        appName="Blobble"
-        shareText="Check out this word puzzle!"
-        repoName="blobble"
-        url="https://skedwards88.github.io/blobble"
-      />;
+      return (
+        <Heart
+          setDisplay={setDisplay}
+          appName="Blobble"
+          shareText="Check out this word puzzle!"
+          repoName="blobble"
+          url="https://skedwards88.github.io/blobble"
+        />
+      );
 
     case "settings":
       return (

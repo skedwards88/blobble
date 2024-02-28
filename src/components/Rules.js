@@ -5,8 +5,7 @@ export default function Rules({setDisplay}) {
   return (
     <div className="App rules">
       <h1 id="rulesHeader">Blobble: How to play</h1>
-      <p id="rulesText">
-        {"TODO-rules"}</p>
+      <p id="rulesText">{"TODO-rules"}</p>
       <button
         id="rulesClose"
         className="close"

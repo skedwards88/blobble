@@ -2,12 +2,10 @@ import sendAnalytics from "../common/sendAnalytics";
 import getRandomSeed from "../common/getRandomSeed";
 import getDailySeed from "../common/getDailySeed";
 
-export function gameInit({
-  useSaved = true,
-  isDaily = false,
-  seed,
-}) {
-  const savedStateName = isDaily ? "blobbleDailySavedStateName" : "blobbleGameSavedStateName";
+export function gameInit({useSaved = true, isDaily = false, seed}) {
+  const savedStateName = isDaily
+    ? "blobbleDailySavedStateName"
+    : "blobbleGameSavedStateName";
 
   if (isDaily) {
     seed = getDailySeed();

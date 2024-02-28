@@ -17,13 +17,9 @@ export default function Settings({setDisplay, dispatchGameState, gameState}) {
   return (
     <form className="App settings" onSubmit={(e) => handleNewGame(e)}>
       <div id="settings">
-        <div className="setting">
-          {"TODO insert setting"}
-        </div>
+        <div className="setting">{"TODO insert setting"}</div>
 
-        <div className="setting">
-          {"TODO insert another setting"}
-        </div>
+        <div className="setting">{"TODO insert another setting"}</div>
       </div>
       <div id="setting-buttons">
         <button type="submit" aria-label="new game">

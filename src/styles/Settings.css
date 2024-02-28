@@ -100,7 +100,6 @@ input[type="range"]:focus::-ms-fill-upper {
   background: var(--light-color);
 }
 
-
 .settings {
   text-align: center;
   overflow: scroll;

@@ -1,4 +1,4 @@
-#controls{
+#controls {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -40,8 +40,7 @@
 }
 
 #calendarButton {
-  background-image:
-    url("../images/icons/daily.svg"),
+  background-image: url("../images/icons/daily.svg"),
     radial-gradient(circle, rgb(239 239 239 / 60%) 30%, rgb(55 54 71));
   width: calc(var(--default-font-size) * 2);
 }
