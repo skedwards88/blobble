@@ -87,7 +87,7 @@ button:disabled {
   color: rgb(0 162 255);
 }
 
-#todo-app-name {
+#blobble {
   display: grid;
   grid-template-areas:
     "controls"

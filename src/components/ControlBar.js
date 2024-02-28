@@ -1,5 +1,6 @@
 import React from "react";
 import {handleInstall} from "../common/handleInstall";
+import { handleShare } from "../common/handleShare";
 
 // todo delete any unneeded controls
 function ControlBar({
@@ -65,10 +66,9 @@ function ControlBar({
         <button
           id="shareButton"
           onClick={() => {
-            timerDispatch({action: "pause"});
             setDisplay("pause");
             handleShare({
-              text: "Try out this Gribbles puzzle:",
+              text: "TODO text",
               seed: `${gameState.seed}_${Math.sqrt(gameState.letters.length)}_${
                 gameState.minWordLength
               }_${gameState.easyMode ? "e" : "h"}`,

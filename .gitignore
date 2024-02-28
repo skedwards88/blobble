@@ -4,6 +4,3 @@ PWA_Builder
 .vscode/settings.json
 .env
 .env.test
-
-# TODO remove this:
-package-lock.json

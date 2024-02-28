@@ -35,7 +35,7 @@ export default function App() {
   const [seed, numLetters] = parseUrlQuery();
 
   // TODO enter value of the saved display state. If no daily challenge, remove daily logic.
-  const savedDisplay = JSON.parse(localStorage.getItem("TODODisplaySavedStateName"));
+  const savedDisplay = JSON.parse(localStorage.getItem("blobbleDisplaySavedStateName"));
   const [display, setDisplay] = React.useState(
     savedDisplay === "game" || savedDisplay === "daily" ? savedDisplay : "game",
   );
@@ -109,16 +109,16 @@ export default function App() {
   }, []);
 
   React.useEffect(() => {
-    window.localStorage.setItem("TODODisplaySavedStateName", JSON.stringify(display));
+    window.localStorage.setItem("blobbleDisplaySavedStateName", JSON.stringify(display));
   }, [display]);
 
   React.useEffect(() => {
-    window.localStorage.setItem("TODOGameSavedStateName", JSON.stringify(gameState));
+    window.localStorage.setItem("blobbleGameSavedStateName", JSON.stringify(gameState));
   }, [gameState]);
 
   React.useEffect(() => {
     window.localStorage.setItem(
-      "TODODailySavedStateName",
+      "blobbleDailySavedStateName",
       JSON.stringify(dailyGameState),
     );
   }, [dailyGameState]);
@@ -130,9 +130,10 @@ export default function App() {
     case "heart":
       return <Heart
         setDisplay={setDisplay}
-        appName="TODO app name"
-        shareText="TODO share text"
-        repoName="TODO repo name"
+        appName="Blobble"
+        shareText="Check out this word puzzle!"
+        repoName="blobble"
+        url="https://skedwards88.github.io/blobble"
       />;
 
     case "settings":
@@ -155,7 +156,7 @@ export default function App() {
         });
       }
       return (
-        <div className="App" id="todo-app-name">
+        <div className="App" id="blobble">
           <div id="exitDaily">
             <button
               id="helpButton"
@@ -185,7 +186,7 @@ export default function App() {
 
     default:
       return (
-        <div className="App" id="todo-app-name">
+        <div className="App" id="blobble">
           <ControlBar
             setDisplay={setDisplay}
             setInstallPromptEvent={setInstallPromptEvent}

@@ -5,40 +5,17 @@
 
 ## `package.json`
 
-- [ ] Remove these dependencies if this isn't a word game:
-  - @skedwards88/word_lists
-  - @skedwards88/word_logic
-  - @babel/plugin-syntax-import-assertions
 - [ ] Remove these dependencies if they aren't needed:
   - seedrandom
   - lodash.clonedeep
 - [ ] Potentially bump package versions
 - [ ] Run `npm install`
 
-## `.gitignore`
-
-- [ ] Remove `package-lock.json` and associated comment
-
-## `index.js`
-
-- [ ] If this app uses a custom url instead of the default GitHub Pages url, adjust the `path` and `scope` variables
-
-## `.github/ISSUE_TEMPLATE`
-
-- [ ] Remove these templates if they aren't needed:
-  - `.github/ISSUE_TEMPLATE/add_word.yaml`
-  - `.github/ISSUE_TEMPLATE/remove_word.yaml`
-- [ ] Add any other desired issue templates
-
 ## `.github/workflows`
 
 - [] If this is a word game, add the `repository_dispatch` trigger to the `.github/workflows/deploy.yml` workflow
 - [] If this is a word game, add the steps to update the word list to the `.github/workflows/deploy.yml` workflow
 - [ ] In your GitHub Pages settings, specify that GitHub Pages is built from GitHub Actions.
-
-## `jest.config.cjs`
-
-- [ ] If this is not a word game, remove the transform ignore patterns for the word packages
 
 ## `README`
 
@@ -51,7 +28,6 @@
 
 ## `manifest.json`
 
-- [ ] If using a custom url, update `start_url`
 - [ ] Update `name`
 - [ ] Update `short_name`
 - [ ] Update `description`
@@ -81,6 +57,9 @@
 ## Custom domains
 
 - [ ] If you are using a custom domain, follow the steps in https://github.com/skedwards88/react-base?tab=readme-ov-file#custom-domain-name
+  - [ ] update `start_url` in `manifest.json`
+  - [ ] adjust the `path` and `scope` variables in `index.js`
+  - [ ] update the URLs in `privacy.html` and in `src/components/Heart`
 
 ## PWA
 
@@ -89,3 +68,4 @@
 ## Google Analytics
 
 - [ ] See https://github.com/skedwards88/react-base?tab=readme-ov-file#google-analytics
+- [ ] Update the `G_TODO` id in `index.html`

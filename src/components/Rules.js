@@ -4,7 +4,7 @@ import packageJson from "../../package.json";
 export default function Rules({setDisplay}) {
   return (
     <div className="App rules">
-      <h1 id="rulesHeader">TODO-app-name: How to play</h1>
+      <h1 id="rulesHeader">Blobble: How to play</h1>
       <p id="rulesText">
         {"TODO-rules"}</p>
       <button

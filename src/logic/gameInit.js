@@ -7,7 +7,7 @@ export function gameInit({
   isDaily = false,
   seed,
 }) {
-  const savedStateName = isDaily ? "TODODailySavedStateName" : "TODOGameSavedStateName";
+  const savedStateName = isDaily ? "blobbleDailySavedStateName" : "blobbleGameSavedStateName";
 
   if (isDaily) {
     seed = getDailySeed();

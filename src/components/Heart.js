@@ -1,14 +1,14 @@
 import React from "react";
 import Share from "./Share";
 
-export default function Heart({setDisplay, appName, shareText, repoName}) {
+export default function Heart({setDisplay, appName, shareText, repoName, url}) {
 
   return (
     <div className="App info">
       <h1>{appName}</h1>
       <div className="infoText">
         {"Like this game? Share it with your friends.\n\n"}
-        {<Share appName={"TODO-app-name"} text={shareText} url={"TODO"}></Share>}
+        {<Share appName={appName} text={shareText} url={url}></Share>}
         {`\n\n`}
         {<hr></hr>}
         {`\n`}
