@@ -1,6 +1,7 @@
 import sendAnalytics from "../common/sendAnalytics";
 import getRandomSeed from "../common/getRandomSeed";
 import getDailySeed from "../common/getDailySeed";
+import {getLetters} from "../logic/getLetters";
 
 export function gameInit({useSaved = true, isDaily = false, seed}) {
   const savedStateName = isDaily
@@ -23,12 +24,20 @@ export function gameInit({useSaved = true, isDaily = false, seed}) {
     savedState
     // todo enter other requirements for using saved state here
   ) {
-    return savedState;
+    // todo uncomment return
+    // return savedState;
   }
 
   sendAnalytics("new_game");
+  const gridSize = 4;
+
+  const letters = getLetters(gridSize);
 
   return {
     // todo return game state
+    seed,
+    letters,
+    playedIndexes: [],
+    result: "",
   };
 }

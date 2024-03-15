@@ -4,6 +4,7 @@ html {
   --default-font-size: calc(var(--default-box-size) * 0.9);
   --dark-color: rgb(55 54 71);
   --light-color: rgb(239 239 239);
+  --board-box-diam: min(15vmax, 20vmin, 145px);
 
   background-color: var(--dark-color);
 }
@@ -109,4 +110,25 @@ button:disabled {
   width: 100vw;
   height: calc(var(--default-box-size) * 1.2);
   border-bottom: 2px solid var(--light-color);
+}
+
+#board {
+  display: grid;
+  background-color: var(--dark-color);
+  touch-action: none;
+  justify-content: center;
+  grid-template-columns: repeat(4, var(--board-box-diam));
+  grid-template-rows: repeat(4, var(--board-box-diam));
+  margin-bottom: 3vmax;
+  justify-self: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.letter.available {
+  color: lightblue;
+}
+
+.letter.unavailable {
+  color: green;
 }
