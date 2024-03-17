@@ -25,12 +25,6 @@ function ControlBar({
         }}
       ></button>
       <button
-        id="helpButton"
-        className="controlButton"
-        disabled={gameState.gameIsSolved}
-        onClick={() => dispatchGameState({action: "getHint"})}
-      ></button>
-      <button
         id="settingsButton"
         className="controlButton"
         onClick={() => setDisplay("settings")}

@@ -168,12 +168,6 @@ export default function App() {
       return (
         <div className="App" id="blobble">
           <div id="exitDaily">
-            <button
-              id="helpButton"
-              className="controlButton"
-              disabled={dailyGameState.gameIsSolved}
-              onClick={() => dailyDispatchGameState({action: "getHint"})}
-            ></button>
             <button id="exitDailyButton" onClick={() => setDisplay("game")}>
               Exit daily challenge
             </button>
