@@ -125,10 +125,43 @@ button:disabled {
   justify-items: center;
 }
 
+.letter {
+  background-color: var(--light-color);
+  width: 95%;
+  height: 95%;
+  color: var(--dark-color);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+
 .letter.available {
   color: lightblue;
 }
 
 .letter.unavailable {
   color: green;
+}
+
+#shapes {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  justify-items: center;
+}
+
+.shape {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(4, 1fr);
+  margin: 10px;
+}
+
+.shapeBox {
+  width: 5vmin;
+  height: 5vmin;
+}
+
+.shapeBox.filled {
+  background-color: var(--light-color);
 }

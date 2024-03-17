@@ -1,8 +1,23 @@
 import React from "react";
 import {Letter} from "./Letter";
 
+function ShapeBox({filled}) {
+  const className = filled ? "shapeBox filled" : "shapeBox";
+  return <div className={className}></div>;
+}
+
+function Shape({shape, gridSize}) {
+  const emptyGrid = Array(gridSize * gridSize).fill();
+
+  console.log(shape);
+  const boxes = emptyGrid.map((i, index) => (
+    <ShapeBox filled={shape.includes(index)} key={index}></ShapeBox>
+  ));
+
+  return <div className="shape">{boxes}</div>;
+}
+
 function Game({dispatchGameState, gameState}) {
-  console.log("rerender");
   return (
     <div id="game">
       <div id="board">
@@ -24,6 +39,16 @@ function Game({dispatchGameState, gameState}) {
           .toUpperCase()}
       </div>
       <div>{gameState.result}</div>
+
+      <div id="shapes">
+        {gameState.shapes.map((shape) => (
+          <Shape
+            shape={shape}
+            gridSize={Math.sqrt(gameState.letters.length)}
+            key={shape.join("-")}
+          ></Shape>
+        ))}
+      </div>
     </div>
   );
 }
