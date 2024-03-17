@@ -2,43 +2,73 @@ import {findAllWordIndexes} from "@skedwards88/word_logic";
 import {getLetters} from "../logic/getLetters";
 import {trie} from "./trie";
 import {transposeGrid} from "@skedwards88/word_logic";
+import {shuffleArray} from "@skedwards88/word_logic";
+import seedrandom from "seedrandom";
 
-export function getGame({gridSize}) {
-  const letters = getLetters(gridSize);
-  // const letters = ["B","E","P","U","H","J","Z","Z","Z","Z","Z","Z","Z","Z","Z","Z"]
+// todo add pseudoRandomGenerator where relevant
+
+function getRandomGame({gridSize, pseudoRandomGenerator}) {
+  const letters = getLetters(gridSize, pseudoRandomGenerator);
 
   const wordIndexes = findAllWordIndexes({
     grid: letters,
-    minWordLength: 4,
+    minWordLength: 6,
     maxWordLength: 6,
     easyMode: true,
     trie: trie,
   });
 
-  // todo shuffle words?
+  const shuffledWordIndexes = shuffleArray(wordIndexes, pseudoRandomGenerator);
 
   // Figure out what shape each word makes
-  const normalizedWordIndexes = wordIndexes.map((indexes) =>
+  const normalizedWordIndexes = shuffledWordIndexes.map((indexes) =>
     shiftIndexes(indexes, gridSize),
   );
 
   // Arrange the indexes into a dict of shapeIdentifier:[wordIndexes,...]
   let shapeLookup = {};
-  for (let index = 0; index < wordIndexes.length; index++) {
+  for (let index = 0; index < shuffledWordIndexes.length; index++) {
     const shapeID = normalizedWordIndexes[index].join("-");
     shapeLookup[shapeID]
-      ? shapeLookup[shapeID].push(wordIndexes[index])
-      : (shapeLookup[shapeID] = [wordIndexes[index]]);
+      ? shapeLookup[shapeID].push(shuffledWordIndexes[index])
+      : (shapeLookup[shapeID] = [shuffledWordIndexes[index]]);
   }
-  console.log("rw");
-  console.log(JSON.stringify(shapeLookup));
 
-  // Pick 4 unique shapes // todo handle case if < 4 // todo prefer shapes with more or fewer solutions? prefer shapes with most difference in morphology?
   const deduplicatedShapeLookup = omitDuplicateWords({shapeLookup, letters});
 
-  const shapeIDs = Object.keys(deduplicatedShapeLookup).slice(0, 4);
-  const shapes = shapeIDs.map((id) => id.split("-").map((i) => parseInt(i))); // todo make more elegant
-  return [letters, shapes];
+  return [letters, deduplicatedShapeLookup];
+}
+
+export function getGame({gridSize}) {
+  // Create a new seedable random number generator
+  const seed = Date.now(); //todo pass in
+  let pseudoRandomGenerator = seedrandom(seed);
+
+  let foundPlayableGame = false;
+  let letters;
+  let deduplicatedShapeLookup;
+  let selectedShapes;
+
+  while (!foundPlayableGame) {
+    console.log("again");
+    [letters, deduplicatedShapeLookup] = getRandomGame({
+      gridSize,
+      pseudoRandomGenerator,
+    });
+    const shapeIDs = Object.keys(deduplicatedShapeLookup);
+
+    if (shapeIDs.length >= 4) {
+      // todo instead of just taking first 4, do I want to add preference for more/fewer solutions or shapes with the most difference in morphology?
+      foundPlayableGame = true;
+      selectedShapes = shapeIDs
+        .slice(0, 4)
+        .map((id) => id.split("-").map((i) => parseInt(i))); // todo make more elegant
+    } else {
+      continue;
+    }
+  }
+
+  return [letters, selectedShapes];
 }
 
 function omitDuplicateWords({shapeLookup, letters}) {
