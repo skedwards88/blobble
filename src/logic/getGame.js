@@ -10,7 +10,7 @@ export function getGame({gridSize}) {
   const wordIndexes = findAllWordIndexes({
     grid: letters,
     minWordLength: 4,
-    maxWordLength: 4,
+    maxWordLength: 6,
     easyMode: true,
     trie: trie,
   });
@@ -22,8 +22,6 @@ export function getGame({gridSize}) {
     shiftIndexes(indexes, gridSize),
   );
 
-  console.log(JSON.stringify(normalizedWordIndexes));
-
   // Arrange the indexes into a dict of shapeIdentifier:[wordIndexes,...]
   let shapeLookup = {};
   for (let index = 0; index < wordIndexes.length; index++) {
@@ -32,17 +30,66 @@ export function getGame({gridSize}) {
       ? shapeLookup[shapeID].push(wordIndexes[index])
       : (shapeLookup[shapeID] = [wordIndexes[index]]);
   }
+  console.log("rw");
   console.log(JSON.stringify(shapeLookup));
 
-  // Pick 4 unique shapes // todo handle case if < 4 // todo prefer shapes with mroe of fewer solutions? prefer shapes with most difference in morphology?
+  // Pick 4 unique shapes // todo handle case if < 4 // todo prefer shapes with more or fewer solutions? prefer shapes with most difference in morphology?
+  const deduplicatedShapeLookup = omitDuplicateWords({shapeLookup, letters});
 
-  const shapeIDs = Object.keys(shapeLookup).slice(0, 4);
+  const shapeIDs = Object.keys(deduplicatedShapeLookup).slice(0, 4);
   const shapes = shapeIDs.map((id) => id.split("-").map((i) => parseInt(i))); // todo make more elegant
   return [letters, shapes];
 }
 
+function omitDuplicateWords({shapeLookup, letters}) {
+  // The same word can be present in multiple shapes,
+  // but it feels weird to find the same word twice.
+
+  const allShapeIDs = Object.keys(shapeLookup);
+  let potentialShapeIDs = new Set(allShapeIDs);
+
+  // Compare each shape to each other shape
+  for (let index1 = 0; index1 < allShapeIDs.length - 1; index1++) {
+    const shapeId1 = allShapeIDs[index1];
+    if (!potentialShapeIDs.has(shapeId1)) {
+      continue;
+    }
+    const words1 = new Set(
+      shapeLookup[shapeId1].map((wordIndexes) =>
+        wordIndexes.map((letterIndex) => letters[letterIndex]).join(""),
+      ),
+    );
+    for (let index2 = index1 + 1; index2 < allShapeIDs.length; index2++) {
+      const shapeId2 = allShapeIDs[index2];
+      if (!potentialShapeIDs.has(shapeId2)) {
+        continue;
+      }
+      const words2 = new Set(
+        shapeLookup[shapeId2].map((wordIndexes) =>
+          wordIndexes.map((letterIndex) => letters[letterIndex]).join(""),
+        ),
+      );
+
+      // If the shapes share a word, remove the shape that has more words
+      const uniqueValues = new Set([...words1, ...words2]);
+      if (uniqueValues.size < words1.size + words2.size) {
+        words1.size < words2.size
+          ? potentialShapeIDs.delete(shapeId2)
+          : potentialShapeIDs.delete(shapeId1);
+      }
+    }
+  }
+
+  let deduplicatedShapeLookup = {};
+  for (const shapeID of Array.from(potentialShapeIDs)) {
+    deduplicatedShapeLookup[shapeID] = shapeLookup[shapeID];
+  }
+
+  return deduplicatedShapeLookup;
+}
+
 function shiftIndexes(indexes, gridSize) {
-  const sortedIndexes = [...indexes].sort();
+  const sortedIndexes = [...indexes].sort((a, b) => a - b);
   const [maxShiftUp, maxShiftLeft] = getMaxShifts(sortedIndexes, gridSize);
 
   const shiftedLeft = sortedIndexes.map((index) => index - maxShiftLeft);

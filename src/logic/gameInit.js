@@ -4,6 +4,10 @@ import getDailySeed from "../common/getDailySeed";
 import {getGame} from "./getGame";
 
 export function gameInit({useSaved = true, isDaily = false, seed}) {
+  if (isDaily) {
+    // todo remove
+    return {}
+  }
   const savedStateName = isDaily
     ? "blobbleDailySavedStateName"
     : "blobbleGameSavedStateName";
