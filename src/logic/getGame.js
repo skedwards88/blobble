@@ -8,30 +8,30 @@ import seedrandom from "seedrandom";
 // todo add pseudoRandomGenerator where relevant
 
 function getRandomGame({gridSize, pseudoRandomGenerator}) {
-  // const letters = getLetters(gridSize, pseudoRandomGenerator);
-  const letters = [
-    "W",
-    "S",
-    "O",
-    "E",
-    "Z",
-    "A",
-    "R",
-    "I",
-    "M",
-    "E",
-    "K",
-    "I",
-    "R",
-    "Y",
-    "A",
-    "R",
-  ];
+  const letters = getLetters(gridSize, pseudoRandomGenerator);
+  // const letters = [
+  //   "W",
+  //   "S",
+  //   "O",
+  //   "E",
+  //   "Z",
+  //   "A",
+  //   "R",
+  //   "I",
+  //   "M",
+  //   "E",
+  //   "K",
+  //   "I",
+  //   "R",
+  //   "Y",
+  //   "A",
+  //   "R",
+  // ];
 
   const wordIndexes = findAllWordIndexes({
     grid: letters,
-    minWordLength: 6,
-    maxWordLength: 6,
+    minWordLength: 3,
+    maxWordLength: 4,
     easyMode: true,
     trie: trie,
   });
@@ -57,15 +57,15 @@ function getRandomGame({gridSize, pseudoRandomGenerator}) {
   return [letters, deduplicatedShapeLookup];
 }
 
-export function getGame({gridSize}) {
+export function getGame({gridSize, seed}) {
   // Create a new seedable random number generator
-  const seed = Date.now(); //todo pass in
   let pseudoRandomGenerator = seedrandom(seed);
 
   let foundPlayableGame = false;
   let letters;
   let deduplicatedShapeLookup;
   let selectedShapes;
+  let officialSolutions;
 
   while (!foundPlayableGame) {
     console.log("again");
@@ -78,15 +78,16 @@ export function getGame({gridSize}) {
     if (shapeIDs.length >= 4) {
       // todo instead of just taking first 4, do I want to add preference for more/fewer solutions or shapes with the most difference in morphology?
       foundPlayableGame = true;
-      selectedShapes = shapeIDs
-        .slice(0, 4)
-        .map((id) => id.split("-").map((i) => parseInt(i))); // todo make more elegant
+      const selectedShapeIDs = shapeIDs.slice(0, 4);
+      selectedShapes = selectedShapeIDs.map((id) => id.split("-").map((i) => parseInt(i))); // todo make more elegant
+      // the "official" answer is the first word for each selected shape
+      officialSolutions = selectedShapeIDs.map(id => deduplicatedShapeLookup[id][0])
     } else {
       continue;
     }
   }
 
-  return [letters, selectedShapes];
+  return [letters, selectedShapes, officialSolutions];
 }
 
 function omitDuplicateWords({shapeLookup, letters}) {
@@ -117,8 +118,6 @@ function omitDuplicateWords({shapeLookup, letters}) {
           wordIndexes.map((letterIndex) => letters[letterIndex]).join(""),
         ),
       );
-      console.log(JSON.stringify(Array.from(words1)));
-      console.log(JSON.stringify(Array.from(words2)));
       // If the shapes share a word, remove the shape that has more words
       const uniqueValues = new Set([...words1, ...words2]);
       if (uniqueValues.size < words1.size + words2.size) {

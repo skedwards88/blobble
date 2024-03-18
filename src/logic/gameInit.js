@@ -35,13 +35,16 @@ export function gameInit({useSaved = true, isDaily = false, seed}) {
   sendAnalytics("new_game");
   const gridSize = 4;
 
-  const [letters, shapes] = getGame({gridSize});
+  const [letters, shapes, officialSolutions] = getGame({gridSize, seed});
+
+  console.log(officialSolutions.map(solution => solution.map(index => letters[index]).join("")))
 
   return {
     // todo return game state
     seed,
     letters,
     shapes,
+    officialSolutions,
     playedIndexes: [],
     result: "",
   };

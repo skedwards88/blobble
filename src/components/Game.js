@@ -9,7 +9,6 @@ function ShapeBox({filled}) {
 function Shape({shape, gridSize}) {
   const emptyGrid = Array(gridSize * gridSize).fill();
 
-  console.log(shape);
   const boxes = emptyGrid.map((i, index) => (
     <ShapeBox filled={shape.includes(index)} key={index}></ShapeBox>
   ));

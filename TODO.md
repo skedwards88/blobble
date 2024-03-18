@@ -1,4 +1,4 @@
-
+omit "soaker" "ROAMER","Loo"
 ## All files
 
 - [ ] Replace TODO instances
