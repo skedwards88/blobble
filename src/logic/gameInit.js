@@ -6,7 +6,7 @@ import {getGame} from "./getGame";
 export function gameInit({useSaved = true, isDaily = false, seed}) {
   if (isDaily) {
     // todo remove
-    return {}
+    return {};
   }
   const savedStateName = isDaily
     ? "blobbleDailySavedStateName"
@@ -37,7 +37,11 @@ export function gameInit({useSaved = true, isDaily = false, seed}) {
 
   const [letters, shapes, officialSolutions] = getGame({gridSize, seed});
 
-  console.log(officialSolutions.map(solution => solution.map(index => letters[index]).join("")))
+  console.log(
+    officialSolutions.map((solution) =>
+      solution.map((index) => letters[index]).join(""),
+    ),
+  );
 
   return {
     // todo return game state

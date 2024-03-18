@@ -79,9 +79,13 @@ export function getGame({gridSize, seed}) {
       // todo instead of just taking first 4, do I want to add preference for more/fewer solutions or shapes with the most difference in morphology?
       foundPlayableGame = true;
       const selectedShapeIDs = shapeIDs.slice(0, 4);
-      selectedShapes = selectedShapeIDs.map((id) => id.split("-").map((i) => parseInt(i))); // todo make more elegant
+      selectedShapes = selectedShapeIDs.map((id) =>
+        id.split("-").map((i) => parseInt(i)),
+      ); // todo make more elegant
       // the "official" answer is the first word for each selected shape
-      officialSolutions = selectedShapeIDs.map(id => deduplicatedShapeLookup[id][0])
+      officialSolutions = selectedShapeIDs.map(
+        (id) => deduplicatedShapeLookup[id][0],
+      );
     } else {
       continue;
     }
