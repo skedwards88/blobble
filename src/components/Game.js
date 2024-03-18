@@ -31,13 +31,14 @@ function Game({dispatchGameState, gameState}) {
           ></Letter>
         ))}
       </div>
-      <div>
+      <div id="currentWord">
         {gameState.playedIndexes
           .map((index) => gameState.letters[index])
           .join("")
           .toUpperCase()}
       </div>
-      <div>{gameState.result}</div>
+      {gameState.result ? (<div id="wordResult" className="fadeOut">{gameState.result}</div>) : (<></>)}
+
 
       <div id="shapes">
         {gameState.shapes.map((shape) => (

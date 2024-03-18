@@ -100,6 +100,12 @@ button:disabled {
 
 #game {
   grid-area: game;
+  display: grid;
+  grid-template-areas:
+    "board"
+    "currentWord"
+    "shapes"
+    ;
 }
 
 #exitDaily {
@@ -114,6 +120,7 @@ button:disabled {
 
 #board {
   display: grid;
+  grid-area: board;
   background-color: var(--dark-color);
   touch-action: none;
   justify-content: center;
@@ -155,6 +162,7 @@ button:disabled {
 
 #shapes {
   display: grid;
+  grid-area: shapes;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(2, 1fr);
   justify-items: center;
@@ -162,16 +170,41 @@ button:disabled {
 
 .shape {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 5vmin);
+  grid-template-rows: repeat(4, 5vmin);
   margin: 10px;
-}
-
-.shapeBox {
-  width: 5vmin;
-  height: 5vmin;
+  gap:0;
 }
 
 .shapeBox.filled {
   background-color: var(--light-color);
+}
+
+#currentWord {
+  grid-area: currentWord;
+  height: var(--default-font-size);
+  overflow: hidden;
+  justify-self: center;
+  align-self: center;
+}
+
+#wordResult {
+  grid-area: currentWord;
+  height: var(--default-font-size);
+  overflow: hidden;
+  justify-self: center;
+  align-self: center;
+}
+
+.fadeOut {
+  opacity: 0;
+  pointer-events: none;
+  animation-duration: 2s;
+  animation-name: fadeout;
+}
+
+@keyframes fadeout {
+  from {
+    opacity: 0.9;
+  }
 }

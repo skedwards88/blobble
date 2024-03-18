@@ -12,6 +12,7 @@ export function gameReducer(currentGameState, payload) {
     return {
       ...currentGameState,
       playedIndexes: [playedIndex],
+      result: "",
     };
   } else if (payload.action === "addLetter") {
     // exit early if a word isn't in progress
@@ -39,6 +40,7 @@ export function gameReducer(currentGameState, payload) {
     return {
       ...currentGameState,
       playedIndexes: newPlayedIndexes,
+      result: "",
     };
   } else if (payload.action === "removeLetter") {
     // exit early if a word isn't in progress
@@ -61,6 +63,7 @@ export function gameReducer(currentGameState, payload) {
     return {
       ...currentGameState,
       playedIndexes: newPlayedIndexes,
+      result: "",
     };
   } else if (payload.action === "endWord") {
     // exit early if a word isn't in progress
