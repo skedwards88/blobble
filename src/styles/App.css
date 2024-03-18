@@ -104,8 +104,7 @@ button:disabled {
   grid-template-areas:
     "board"
     "currentWord"
-    "shapes"
-    ;
+    "shapes";
 }
 
 #exitDaily {
@@ -173,7 +172,7 @@ button:disabled {
   grid-template-columns: repeat(4, 5vmin);
   grid-template-rows: repeat(4, 5vmin);
   margin: 10px;
-  gap:0;
+  gap: 0;
 }
 
 .shapeBox.filled {
