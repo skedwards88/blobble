@@ -8,7 +8,25 @@ import seedrandom from "seedrandom";
 // todo add pseudoRandomGenerator where relevant
 
 function getRandomGame({gridSize, pseudoRandomGenerator}) {
-  const letters = getLetters(gridSize, pseudoRandomGenerator);
+  // const letters = getLetters(gridSize, pseudoRandomGenerator);
+  const letters = [
+    "W",
+    "S",
+    "O",
+    "E",
+    "Z",
+    "A",
+    "R",
+    "I",
+    "M",
+    "E",
+    "K",
+    "I",
+    "R",
+    "Y",
+    "A",
+    "R",
+  ];
 
   const wordIndexes = findAllWordIndexes({
     grid: letters,
@@ -99,7 +117,8 @@ function omitDuplicateWords({shapeLookup, letters}) {
           wordIndexes.map((letterIndex) => letters[letterIndex]).join(""),
         ),
       );
-
+      console.log(JSON.stringify(Array.from(words1)));
+      console.log(JSON.stringify(Array.from(words2)));
       // If the shapes share a word, remove the shape that has more words
       const uniqueValues = new Set([...words1, ...words2]);
       if (uniqueValues.size < words1.size + words2.size) {

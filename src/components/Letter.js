@@ -53,18 +53,25 @@ export function Letter({letter, index, letterAvailability, dispatchGameState}) {
   }, [letterAvailability]);
 
   return (
-    <div
-      ref={letterRef}
-      className="letter"
-      onPointerDown={(event) =>
-        handlePointerDown(event, index, dispatchGameState)
-      }
-      onPointerEnter={(event) =>
-        handlePointerEnter(event, index, letterAvailability, dispatchGameState)
-      }
-      onPointerUp={(event) => handlePointerUp(event, dispatchGameState)}
-    >
-      {letter}
+    // Use two different elements for the letter and the background so that touching the edge of a box won't select the letter (without us having to constantly monitor and calculate the pointer position)
+    <div ref={letterRef} className="letterBox">
+      <div
+        className="letter"
+        onPointerDown={(event) =>
+          handlePointerDown(event, index, dispatchGameState)
+        }
+        onPointerEnter={(event) =>
+          handlePointerEnter(
+            event,
+            index,
+            letterAvailability,
+            dispatchGameState,
+          )
+        }
+        onPointerUp={(event) => handlePointerUp(event, dispatchGameState)}
+      >
+        {letter}
+      </div>
     </div>
   );
 }

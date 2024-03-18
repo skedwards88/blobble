@@ -119,28 +119,38 @@ button:disabled {
   justify-content: center;
   grid-template-columns: repeat(4, var(--board-box-diam));
   grid-template-rows: repeat(4, var(--board-box-diam));
-  margin-bottom: 3vmax;
+  margin: 3vmax 0;
   justify-self: center;
   align-items: center;
   justify-items: center;
 }
 
-.letter {
-  background-color: var(--light-color);
+.letterBox {
   width: 95%;
   height: 95%;
+  background-color: var(--light-color);
+  display: flex;
+  justify-content: center;
+}
+
+.letter {
+  background-color: transparent;
+  width: 60%;
+  height: 60%;
+  font-size: calc(var(--default-font-size) * 1.2);
   color: var(--dark-color);
+  display: flex;
   align-items: center;
   justify-content: center;
-  display: flex;
+  align-self: center;
 }
 
-.letter.available {
-  color: lightblue;
+.letterBox.unavailable {
+  background-color: var(--dark-color);
 }
 
-.letter.unavailable {
-  color: green;
+.letterBox.unavailable > .letter {
+  color: var(--light-color);
 }
 
 #shapes {
