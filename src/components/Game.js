@@ -1,5 +1,6 @@
 import React from "react";
 import {Letter} from "./Letter";
+import {indexesToWord} from "../logic/indexesToWord";
 
 function ShapeBox({filled}) {
   const className = filled ? "shapeBox filled" : "shapeBox";
@@ -32,10 +33,7 @@ function Game({dispatchGameState, gameState}) {
         ))}
       </div>
       <div id="currentWord">
-        {gameState.playedIndexes
-          .map((index) => gameState.letters[index])
-          .join("")
-          .toUpperCase()}
+        {indexesToWord(gameState.playedIndexes, gameState.letters)}
       </div>
       {gameState.result ? (
         <div id="wordResult" className="fadeOut">

@@ -1,3 +1,5 @@
+import {indexesToWord} from "./indexesToWord";
+
 export function omitDuplicateWordsAcrossShapes({shapeLookup, letters}) {
   // The same word can be present in multiple shapes,
   // but it feels weird to find the same word twice.
@@ -14,7 +16,7 @@ export function omitDuplicateWordsAcrossShapes({shapeLookup, letters}) {
     }
     const words1 = new Set(
       shapeLookup[shapeId1].map((wordIndexes) =>
-        wordIndexes.map((letterIndex) => letters[letterIndex]).join(""),
+        indexesToWord(wordIndexes, letters),
       ),
     );
     for (let index2 = index1 + 1; index2 < allShapeIDs.length; index2++) {
@@ -24,7 +26,7 @@ export function omitDuplicateWordsAcrossShapes({shapeLookup, letters}) {
       }
       const words2 = new Set(
         shapeLookup[shapeId2].map((wordIndexes) =>
-          wordIndexes.map((letterIndex) => letters[letterIndex]).join(""),
+          indexesToWord(wordIndexes, letters),
         ),
       );
       // If the shapes share a word, remove the shape that has more words
