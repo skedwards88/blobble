@@ -3,6 +3,7 @@ import {gameInit} from "./gameInit";
 import sendAnalytics from "../common/sendAnalytics";
 import {checkIfNeighbors, isKnown} from "@skedwards88/word_logic";
 import {trie} from "./trie";
+import {indexesToWord} from "./indexesToWord";
 
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
@@ -71,18 +72,22 @@ export function gameReducer(currentGameState, payload) {
       return currentGameState;
     }
 
-    // todo check if matches original solution (in case word list changed)
+    const word = indexesToWord(
+      currentGameState.playedIndexes,
+      currentGameState.letters,
+    );
+
+    // Check if it matches the original solution (in case word list changed)
+    const matchesSolution = currentGameState.officialSolutions
+      .map((solution) => indexesToWord(solution, currentGameState.letters))
+      .includes(word);
 
     // Check for word validity
-    const word = currentGameState.playedIndexes
-      .map((index) => currentGameState.letters[index])
-      .join("")
-      .toUpperCase();
     const {isWord} = isKnown(word, trie);
 
-    // if it isn't a word // todo or doesn't match the original solution
+    // if it isn't a word or doesn't match the original solution
     // end the word and show and "unknown word" message
-    if (!isWord) {
+    if (!isWord && !matchesSolution) {
       return {
         ...currentGameState,
         playedIndexes: [],
