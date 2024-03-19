@@ -37,8 +37,13 @@ function Game({dispatchGameState, gameState}) {
           .join("")
           .toUpperCase()}
       </div>
-      {gameState.result ? (<div id="wordResult" className="fadeOut">{gameState.result}</div>) : (<></>)}
-
+      {gameState.result ? (
+        <div id="wordResult" className="fadeOut">
+          {gameState.result}
+        </div>
+      ) : (
+        <></>
+      )}
 
       <div id="shapes">
         {gameState.shapes.map((shape) => (

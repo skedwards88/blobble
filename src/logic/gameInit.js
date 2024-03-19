@@ -38,7 +38,12 @@ export function gameInit({useSaved = true, isDaily = false, seed}) {
   const minWordLength = 4; // todo don't hardcode
   const maxWordLength = 4; // todo don't hardcode
 
-  const [letters, shapes, officialSolutions] = getGame({gridSize, minWordLength, maxWordLength, seed});
+  const [letters, shapes, officialSolutions] = getGame({
+    gridSize,
+    minWordLength,
+    maxWordLength,
+    seed,
+  });
 
   console.log(
     officialSolutions.map((solution) =>
