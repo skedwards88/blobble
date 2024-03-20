@@ -2,19 +2,38 @@ import React from "react";
 import {Letter} from "./Letter";
 import {indexesToWord} from "../logic/indexesToWord";
 
-function ShapeBox({filled}) {
-  const className = filled ? "shapeBox filled" : "shapeBox";
+function ShapeBox({filled, solved}) {
+  let className = "shapeBox";
+  if (filled) {
+    className += " filled";
+    if (solved) {
+      className += " solved";
+    }
+  }
+
   return <div className={className}></div>;
 }
 
-function Shape({shape, gridSize}) {
+function Shape({shape, foundSolution, gridSize, letters}) {
+  const shapeIsSolved = foundSolution.every((i) => i != undefined);
   const emptyGrid = Array(gridSize * gridSize).fill();
 
   const boxes = emptyGrid.map((i, index) => (
-    <ShapeBox filled={shape.includes(index)} key={index}></ShapeBox>
+    <ShapeBox
+      filled={shape.includes(index)}
+      solved={shapeIsSolved}
+      key={index}
+    ></ShapeBox>
   ));
 
-  return <div className="shape">{boxes}</div>;
+  const word = indexesToWord(foundSolution, letters);
+
+  return (
+    <div className="shape">
+      {boxes}
+      <div className="foundWord">{word}</div>
+    </div>
+  );
 }
 
 function Game({dispatchGameState, gameState}) {
@@ -44,10 +63,12 @@ function Game({dispatchGameState, gameState}) {
       )}
 
       <div id="shapes">
-        {gameState.shapes.map((shape) => (
+        {gameState.shapes.map((shape, index) => (
           <Shape
             shape={shape}
+            foundSolution={gameState.foundSolutions[index]}
             gridSize={Math.sqrt(gameState.letters.length)}
+            letters={gameState.letters}
             key={shape.join("-")}
           ></Shape>
         ))}

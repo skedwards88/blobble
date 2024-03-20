@@ -179,6 +179,14 @@ button:disabled {
   background-color: var(--light-color);
 }
 
+.shapeBox.filled.solved {
+  opacity: 0.5;
+}
+
+.foundWord {
+  font-size: 5vmin;
+}
+
 #currentWord {
   grid-area: currentWord;
   height: var(--default-font-size);

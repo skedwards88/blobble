@@ -4,6 +4,7 @@ import sendAnalytics from "../common/sendAnalytics";
 import {checkIfNeighbors, isKnown} from "@skedwards88/word_logic";
 import {trie} from "./trie";
 import {indexesToWord} from "./indexesToWord";
+import {shapesMatchQ} from "./shapesMatchQ";
 
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
@@ -95,13 +96,40 @@ export function gameReducer(currentGameState, payload) {
       };
     }
 
-    // todo check if it matches a shape
+    // For each shape,
+    // if a match for the shape hasn't been found
+    // check if the played indexes match the shape
+    let matchingShapeIndex;
+    for (let index = 0; index < currentGameState.shapes.length; index++) {
+      const shapeIsSolved = currentGameState.foundSolutions[index].every(
+        (i) => i != undefined,
+      );
+      if (shapeIsSolved) {
+        continue;
+      }
+      const shapesMatch = shapesMatchQ({
+        indexes1: currentGameState.playedIndexes,
+        indexes2: currentGameState.shapes[index],
+        gridSize: Math.sqrt(currentGameState.letters.length),
+      });
+      if (shapesMatch) {
+        matchingShapeIndex = index;
+        break;
+      }
+    }
+
+    let newFoundSolutions = cloneDeep(currentGameState.foundSolutions);
+    if (matchingShapeIndex != undefined) {
+      newFoundSolutions[matchingShapeIndex] = currentGameState.playedIndexes;
+    }
+
     // todo record analytics if game solved
     // todo calculate stats if game solved
 
     return {
       ...currentGameState,
       playedIndexes: [],
+      foundSolutions: newFoundSolutions,
       result: "",
     };
   } else if (payload.action === "todo handle other cases") {

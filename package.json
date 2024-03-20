@@ -28,6 +28,7 @@
     "@skedwards88/word_lists": "latest",
     "@skedwards88/word_logic": "2.0.7",
     "lodash.clonedeep": "^4.5.0",
+    "lodash.isequal": "^4.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "seedrandom": "3.0.5"
