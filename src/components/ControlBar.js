@@ -39,8 +39,10 @@ function ControlBar({
         className="controlButton"
         onClick={() => setDisplay("heart")}
       ></button>
+      {/* todo undisable both calendar buttons below */}
       {dailyIsSolved ? (
         <button
+          disabled
           id="calendarButtonSolved"
           className="controlButton"
           onClick={() => {
@@ -50,6 +52,7 @@ function ControlBar({
         ></button>
       ) : (
         <button
+          disabled
           id="calendarButton"
           className="controlButton"
           onClick={() => setDisplay("daily")}

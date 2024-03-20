@@ -26,7 +26,8 @@ export default function Settings({setDisplay, dispatchGameState, gameState}) {
         </div>
       </div>
       <div id="setting-buttons">
-        <button type="submit" aria-label="new game">
+        {/* todo un-disable the new game button */}
+        <button type="submit" aria-label="new game" disabled>
           New game
         </button>
         <button
