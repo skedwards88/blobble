@@ -52,7 +52,6 @@ export function gameInit({useSaved = true, isDaily = false, seed}) {
   );
 
   const foundSolutions = shapes.map((shape) => shape.map(() => undefined));
-  foundSolutions[1] = [5, 6, 7, 8, 8, 9, 0];
 
   return {
     seed,
