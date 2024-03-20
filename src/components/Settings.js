@@ -19,7 +19,11 @@ export default function Settings({setDisplay, dispatchGameState, gameState}) {
       <div id="settings">
         <div className="setting">{"TODO insert setting"}</div>
 
-        <div className="setting">{"TODO insert another setting"}</div>
+        <div className="setting">
+          {
+            "TODO You found a game that is still in development! Check back soon for the full game play"
+          }
+        </div>
       </div>
       <div id="setting-buttons">
         <button type="submit" aria-label="new game">

@@ -11,9 +11,13 @@ export default function Heart({setDisplay, appName, shareText, repoName, url}) {
         {`\n\n`}
         {<hr></hr>}
         {`\n`}
-        {`Want more games? Check `}
-        <a href="https://skedwards88.github.io/">these</a>
-        {` out. `}
+        {`Want more games? Check out `}
+        <a href="https://crossjig.com">Crossjig</a>
+        {" and "}
+        <a href="https://lexlet.com">Lexlet</a>
+        {" or see all of our puzzle games "}
+        <a href="https://skedwards88.github.io/">here</a>
+        {`. `}
         {`\n\n`}
         {<hr></hr>}
         {`\n`}
@@ -32,6 +36,7 @@ export default function Heart({setDisplay, appName, shareText, repoName, url}) {
           skedwards88/word_lists
         </a>
         {`.`}
+        {`\n\n`}
         {<hr></hr>}
         {`\n`}
         <a href="./privacy.html">Privacy policy</a>

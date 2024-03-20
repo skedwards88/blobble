@@ -70,3 +70,7 @@ omit "soaker" "ROAMER","Loo"
 
 - [ ] See https://github.com/skedwards88/react-base?tab=readme-ov-file#google-analytics
 - [ ] Update the `G_TODO` id in `index.html`
+
+## Other
+
+Rules -- rotation no allowed. overlap allowed.
