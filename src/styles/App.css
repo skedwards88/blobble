@@ -1,10 +1,10 @@
 /* General */
 html {
-  --default-box-size: min(8vw, 5.5vh);
-  --default-font-size: calc(var(--default-box-size) * 0.9);
+  --board-box-diam: min(15vmax, 20vmin, 145px);
+  --shape-box-diam: 5vmin;
+  --default-font-size: calc(var(--board-box-diam) * 0.4);
   --dark-color: rgb(55 54 71);
   --light-color: rgb(239 239 239);
-  --board-box-diam: min(15vmax, 20vmin, 145px);
 
   background-color: var(--dark-color);
 }
@@ -109,7 +109,7 @@ button:disabled {
   align-items: center;
   grid-area: controls;
   width: 100vw;
-  height: calc(var(--default-box-size) * 1.2);
+  height: calc(var(--default-font-size) * 1.2);
   border-bottom: 2px solid var(--light-color);
 }
 
@@ -165,10 +165,9 @@ button:disabled {
 
 .shape {
   display: grid;
-  grid-template-columns: repeat(4, 5vmin);
-  grid-template-rows: repeat(4, 5vmin);
-  margin: 10px;
-  gap: 0;
+  grid-template-columns: repeat(4, var(--shape-box-diam));
+  grid-template-rows: repeat(5, var(--shape-box-diam));
+  margin: calc(var(--shape-box-diam) * 0.4);
 }
 
 .shapeBox.filled {
@@ -180,7 +179,7 @@ button:disabled {
 }
 
 .foundWord {
-  font-size: 5vmin;
+  font-size: var(--shape-box-diam);
 }
 
 #currentWord {
