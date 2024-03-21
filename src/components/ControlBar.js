@@ -11,6 +11,9 @@ function ControlBar({
   showInstallButton,
   installPromptEvent,
   dailyIsSolved,
+  appName,
+  shareText,
+  url,
 }) {
   return (
     <div id="controls">
@@ -62,14 +65,9 @@ function ControlBar({
       {navigator.canShare ? (
         <button
           id="shareButton"
+          className="controlButton"
           onClick={() => {
-            setDisplay("pause");
-            handleShare({
-              text: "TODO text",
-              seed: `${gameState.seed}_${Math.sqrt(gameState.letters.length)}_${
-                gameState.minWordLength
-              }_${gameState.easyMode ? "e" : "h"}`,
-            });
+            handleShare({appName, text: shareText, fullUrl: url});
           }}
         ></button>
       ) : (

@@ -199,6 +199,9 @@ export default function App() {
             dispatchGameState={dispatchGameState}
             gameState={gameState}
             dailyIsSolved={dailyGameState.gameIsSolved}
+            appName="Blobble"
+            shareText="Check out this word puzzle!"
+            url="https://skedwards88.github.io/blobble"
           ></ControlBar>
           <Game
             dispatchGameState={dispatchGameState}
