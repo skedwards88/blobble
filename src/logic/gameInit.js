@@ -35,8 +35,8 @@ export function gameInit({useSaved = true, isDaily = false, seed}) {
   sendAnalytics("new_game");
 
   const gridSize = 4;
-  const minWordLength = 4; // todo don't hardcode
-  const maxWordLength = 4; // todo don't hardcode
+  const minWordLength = 7; // todo don't hardcode
+  const maxWordLength = 7; // todo don't hardcode
 
   const [letters, shapes, officialSolutions] = getGame({
     gridSize,

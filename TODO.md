@@ -74,3 +74,7 @@ omit "soaker" "ROAMER","Loo"
 ## Other
 
 Rules -- rotation no allowed. overlap allowed.
+
+make sure desktop works
+
+make sure doesn't look terrible on large screen

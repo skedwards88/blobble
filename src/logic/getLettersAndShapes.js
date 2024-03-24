@@ -3,7 +3,7 @@ import {getLetters} from "../logic/getLetters";
 import {trie} from "./trie";
 import {shuffleArray} from "@skedwards88/word_logic";
 import {omitDuplicateWordsAcrossShapes} from "./omitDuplicateWordsAcrossShapes";
-import {shiftIndexesToTopLeft} from "./shiftIndexesToTopLeft";
+import {centerIndexes} from "./centerIndexes";
 
 export function getLettersAndShapes({
   gridSize,
@@ -14,25 +14,27 @@ export function getLettersAndShapes({
   const letters = getLetters(gridSize, pseudoRandomGenerator);
   // const letters = [
   //   "W",
+  //   "H",
+  //   "E",
+  //   "A",
   //   "S",
+  //   "R",
+  //   "D",
+  //   "T",
+  //   "E",
   //   "O",
-  //   "E",
-  //   "Z",
-  //   "A",
-  //   "R",
-  //   "I",
-  //   "M",
-  //   "E",
-  //   "K",
-  //   "I",
-  //   "R",
-  //   "Y",
-  //   "A",
-  //   "R",
+  //   "G",
+  //   "W",
+  //   "S",
+  //   "N",
+  //   "T",
+  //   "U",
   // ];
 
   const wordIndexes = findAllWordIndexes({
-    grid: letters,
+    letters,
+    numColumns: Math.sqrt(letters.length),
+    numRows: Math.sqrt(letters.length),
     minWordLength,
     maxWordLength,
     easyMode: true,
@@ -42,9 +44,9 @@ export function getLettersAndShapes({
   const shuffledWordIndexes = shuffleArray(wordIndexes, pseudoRandomGenerator);
 
   // Figure out what shape each word makes
-  // by shifting the word indexes to the top left of the grid
+  // by centering the word indexes in the grid
   const normalizedWordIndexes = shuffledWordIndexes.map((indexes) =>
-    shiftIndexesToTopLeft(indexes, gridSize),
+    centerIndexes(indexes, gridSize),
   );
 
   // Arrange the indexes into a dict of shapeIdentifier:[wordIndexes,...]

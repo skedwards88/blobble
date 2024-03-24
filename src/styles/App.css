@@ -167,6 +167,12 @@ button:disabled {
   display: grid;
   grid-template-columns: repeat(4, var(--shape-box-diam));
   grid-template-rows: repeat(5, var(--shape-box-diam));
+  grid-template-areas:
+    "shape0 shape1 shape2 shape3"
+    "shape4 shape5 shape6 shape7"
+    "shape8 shape9 shape10 shape11"
+    "shape12 shape13 shape14 shape15"
+    "word word word word";
   margin: calc(var(--shape-box-diam) * 0.4);
 }
 
@@ -180,6 +186,9 @@ button:disabled {
 
 .foundWord {
   font-size: var(--shape-box-diam);
+  grid-area: word;
+  text-align: center;
+  justify-self: center;
 }
 
 #currentWord {
