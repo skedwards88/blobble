@@ -1,7 +1,6 @@
 import {centerGrid} from "@skedwards88/word_logic";
 
 export function centerIndexes(indexes, gridSize) {
-
   // Arrange the flat indexes into a 2D grid of 0 and 1 where 1 represents an input index
   let grid = Array.from({length: gridSize}, () => Array(gridSize).fill(0));
   for (const index of indexes) {
@@ -23,5 +22,5 @@ export function centerIndexes(indexes, gridSize) {
       return filledIndexes;
     }, []);
 
-    return filledIndexes
+  return filledIndexes;
 }
