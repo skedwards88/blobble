@@ -11,6 +11,25 @@
   "theme_color": "#373647",
   "shortcuts": [],
   "categories": ["games", "entertainment", "education"],
-  "icons": [],
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any"
+    },
+    {
+      "src": "icon_512.png",
+      "type": "image/png",
+      "sizes": "512x512 192x192",
+      "purpose": "any"
+    },
+    {
+      "src": "icon_512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    }
+  ],
   "screenshots": []
 }
