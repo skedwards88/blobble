@@ -7,7 +7,7 @@
     "version";
   text-align: center;
   overflow: scroll;
-  font-size: calc(var(--default-font-size) * 0.75);
+  font-size: calc(var(--default-font-size) * 0.70);
   justify-items: center;
   align-items: center;
 }

@@ -33,7 +33,7 @@ button {
   text-decoration: none;
   text-align: center;
   appearance: none;
-  font-size: calc(var(--default-font-size) * 0.75);
+  font-size: calc(var(--default-font-size) * 0.7);
   font-family: sans-serif;
   background-color: var(--light-color);
   border: 1px solid var(--light-color);
@@ -73,7 +73,7 @@ button:disabled {
   flex-direction: column;
   text-align: center;
   align-items: center;
-  font-size: calc(var(--default-font-size) * 0.75);
+  font-size: calc(var(--default-font-size) * 0.7);
 }
 
 .infoText {

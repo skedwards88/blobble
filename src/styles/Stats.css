@@ -1,5 +1,5 @@
 .stats {
-  font-size: calc(var(--default-font-size) * 0.75);
+  font-size: calc(var(--default-font-size) * 0.7);
   overflow: scroll;
   display: flex;
   flex-direction: column;

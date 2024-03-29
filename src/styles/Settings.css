@@ -103,7 +103,7 @@ input[type="range"]:focus::-ms-fill-upper {
 .settings {
   text-align: center;
   overflow: scroll;
-  font-size: calc(var(--default-font-size) * 0.75);
+  font-size: calc(var(--default-font-size) * 0.7);
   justify-items: center;
   align-items: center;
   display: flex;
