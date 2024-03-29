@@ -13,6 +13,8 @@ on:
       - ".prettierrc.json"
       - ".stylelintrc.json"
   workflow_dispatch:
+  repository_dispatch:
+    types: [update-word-lists]
 
 permissions:
   contents: write # Required for bumping version (read-only required for deployment)
@@ -35,7 +37,7 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Install requirements
-        run: npm install
+        run: npm ci
 
       - name: Run tests
         run: npm test
@@ -48,9 +50,28 @@ jobs:
       - name: Bump version
         run: npm version patch
 
-      - name: Push the version bump
+      - name: Print packages
+        run: npm list --depth=0
+
+      - name: Update word lists
+        run: npm update @skedwards88/word_lists
+
+      - name: Print packages
+        run: npm list --depth=0
+
+      # This keeps package-lock.json up to date with the deployed game
+      - name: Commit the word list update if there are changes to commit
+        run: |-
+          if git diff --exit-code > /dev/null -- package-lock.json; then
+            echo "No changes to commit"
+          else
+            git add package-lock.json
+            git commit -m "Update @skedwards88/word_lists"
+          fi
+
+      - name: Push the version bump and potential word list update
         run: |
-          git push origin main
+          git push
 
       - name: Build
         run: npm run build
