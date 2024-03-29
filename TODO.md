@@ -1,15 +1,6 @@
-omit "soaker" "ROAMER","Loo"
 ## All files
 
 - [ ] Replace TODO instances
-
-## `package.json`
-
-- [ ] Remove these dependencies if they aren't needed:
-  - seedrandom
-  - lodash.clonedeep
-- [ ] Potentially bump package versions
-- [ ] Run `npm install`
 
 ## `.github/workflows`
 
@@ -19,38 +10,13 @@ omit "soaker" "ROAMER","Loo"
 
 - [ ] Customize this for the game
 
-## `index.html`
-
-- [ ] Adust the theme color
-- [ ] Adjust the name and description
-
-## `manifest.json`
-
-- [ ] Update `name`
-- [ ] Update `short_name`
-- [ ] Update `description`
-- [ ] Update `id`
-- [ ] Change or remove `orientation` if needed
-- [ ] Update `background` and `theme_color`
-- [ ] Update `categories`
-- [ ] Update `icons`
-- [ ] Update `screenshots`
-
 ## `src/images`
 
-- [ ] Add an svg favicon and reflect it in:
-  - [ ] `index.html`
-  - [ ] `manifest.json`
-  - [ ] `webpack.config.js`
 - [ ] Delete unneeded icons
-- [ ] Add a maskable icon, screenshots, and PNG icons and reflect them in:
+- [ ] Add screenshots and reflect them in:
   - [ ] `index.html`
   - [ ] `manifest.json`
   - [ ] `webpack.config.js`
-
-## `src/components/Heart.js`
-
-- [ ] If this isn't a word game, remove the word data attribution
 
 ## Custom domains
 
@@ -63,11 +29,6 @@ omit "soaker" "ROAMER","Loo"
 
 - [ ] Use Lighthouse in Chrome developer tools to verify that the app is installable and meets PWA requirements.
 
-## Google Analytics
-
-- [ ] See https://github.com/skedwards88/react-base?tab=readme-ov-file#google-analytics
-- [ ] Update the `G_TODO` id in `index.html`
-
 ## Other
 
 Rules -- rotation no allowed. overlap allowed.
@@ -75,3 +36,5 @@ Rules -- rotation no allowed. overlap allowed.
 make sure desktop works
 
 make sure doesn't look terrible on large screen
+
+omit "soaker" "ROAMER","Loo"

@@ -1,16 +1,17 @@
 {
   "name": "Blobble",
   "short_name": "Blobble",
-  "description": "TODO description",
+  "description": "A spatial word puzzle",
   "id": "?blobble=202402221",
   "dir": "auto",
   "lang": "en-US",
   "display": "standalone",
+  "orientation": "portrait",
   "start_url": "../.",
   "background_color": "#373647",
   "theme_color": "#373647",
   "shortcuts": [],
-  "categories": ["games", "entertainment", "education"],
+  "categories": ["games", "puzzle", "words", "entertainment", "education"],
   "icons": [
     {
       "src": "favicon.svg",
