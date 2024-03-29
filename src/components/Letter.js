@@ -1,12 +1,14 @@
 import React from "react";
 
-function handlePointerDown(event, index, dispatchGameState) {
+function handlePointerDown(event, index, letterAvailability, dispatchGameState) {
   event.preventDefault();
   event.target.releasePointerCapture(event.pointerId);
-  dispatchGameState({
-    action: "startWord",
-    letterIndex: index,
-  });
+  if (letterAvailability) {
+    dispatchGameState({
+      action: "startWord",
+      letterIndex: index,
+    });
+  }
 }
 
 function handlePointerEnter(
@@ -58,7 +60,7 @@ export function Letter({letter, index, letterAvailability, dispatchGameState}) {
       <div
         className="letter"
         onPointerDown={(event) =>
-          handlePointerDown(event, index, dispatchGameState)
+          handlePointerDown(event, index, letterAvailability, dispatchGameState)
         }
         onPointerEnter={(event) =>
           handlePointerEnter(

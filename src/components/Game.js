@@ -1,6 +1,7 @@
 import React from "react";
 import {Letter} from "./Letter";
 import {indexesToWord} from "../logic/indexesToWord";
+import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
 
 function ShapeBox({filled, solved}) {
   let className = "shapeBox";
@@ -37,6 +38,8 @@ function Shape({shape, foundSolution, gridSize, letters}) {
 }
 
 function Game({dispatchGameState, gameState}) {
+  const gameOver = gameIsSolvedQ(gameState.foundSolutions);
+
   return (
     <div id="game">
       <div id="board">
@@ -44,7 +47,7 @@ function Game({dispatchGameState, gameState}) {
           <Letter
             letter={letter}
             index={index}
-            letterAvailability={!gameState.playedIndexes.includes(index)} // todo make false if gameover?
+            letterAvailability={gameOver ? false : !gameState.playedIndexes.includes(index)}
             dispatchGameState={dispatchGameState}
             draggable={false}
             key={index}
