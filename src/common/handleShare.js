@@ -3,7 +3,7 @@ import sendAnalytics from "./sendAnalytics";
 export function handleShare({appName, text, fullUrl}) {
   navigator
     .share({
-      title: {appName},
+      title: appName,
       text: `${text}\n\n`,
       url: fullUrl,
     })
