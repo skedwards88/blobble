@@ -5,6 +5,7 @@ import {checkIfNeighbors, isKnown} from "@skedwards88/word_logic";
 import {trie} from "./trie";
 import {indexesToWord} from "./indexesToWord";
 import {shapesMatchQ} from "./shapesMatchQ";
+import {shapeIsSolvedQ} from "./shapeIsSolvedQ";
 
 export function gameReducer(currentGameState, payload) {
   if (payload.action === "newGame") {
@@ -102,8 +103,8 @@ export function gameReducer(currentGameState, payload) {
     // check if the played indexes match the shape
     let matchingShapeIndex;
     for (let index = 0; index < currentGameState.shapes.length; index++) {
-      const shapeIsSolved = currentGameState.foundSolutions[index].every(
-        (i) => i != undefined,
+      const shapeIsSolved = shapeIsSolvedQ(
+        currentGameState.foundSolutions[index],
       );
       if (shapeIsSolved) {
         continue;
