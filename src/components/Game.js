@@ -2,6 +2,7 @@ import React from "react";
 import {Letter} from "./Letter";
 import {indexesToWord} from "../logic/indexesToWord";
 import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
+import Share from "./Share";
 
 function ShapeBox({filled, solved}) {
   let className = "shapeBox";
@@ -47,20 +48,35 @@ function Game({dispatchGameState, gameState}) {
           <Letter
             letter={letter}
             index={index}
-            letterAvailability={gameOver ? false : !gameState.playedIndexes.includes(index)}
+            letterAvailability={
+              gameOver ? false : !gameState.playedIndexes.includes(index)
+            }
             dispatchGameState={dispatchGameState}
             draggable={false}
             key={index}
           ></Letter>
         ))}
       </div>
+
       <div id="currentWord">
         {indexesToWord(gameState.playedIndexes, gameState.letters)}
       </div>
+
       {gameState.result ? (
         <div id="wordResult" className="fadeOut">
           {gameState.result}
         </div>
+      ) : (
+        <></>
+      )}
+
+      {gameOver ? (
+        <Share
+          appName={"appName"}
+          text={"shareText"}
+          url={"url"}
+          className="gameOverShare"
+        ></Share>
       ) : (
         <></>
       )}
