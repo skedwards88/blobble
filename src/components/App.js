@@ -166,7 +166,16 @@ export default function App() {
         });
       }
       return (
-        <div className="App" id="blobble">
+        <div
+          className="App"
+          id="blobble"
+          onPointerUp={(event) => {
+            event.preventDefault();
+            dispatchGameState({
+              action: "endWord",
+            });
+          }}
+        >
           <div id="exitDaily">
             <button id="exitDailyButton" onClick={() => setDisplay("game")}>
               Exit daily challenge
@@ -190,7 +199,16 @@ export default function App() {
 
     default:
       return (
-        <div className="App" id="blobble">
+        <div
+          className="App"
+          id="blobble"
+          onPointerUp={(event) => {
+            event.preventDefault();
+            dispatchGameState({
+              action: "endWord",
+            });
+          }}
+        >
           <ControlBar
             setDisplay={setDisplay}
             setInstallPromptEvent={setInstallPromptEvent}
