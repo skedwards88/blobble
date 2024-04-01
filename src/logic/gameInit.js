@@ -3,7 +3,32 @@ import getRandomSeed from "../common/getRandomSeed";
 import getDailySeed from "../common/getDailySeed";
 import {getGame} from "./getGame";
 
-export function gameInit({useSaved = true, isDaily = false, seed}) {
+function getShapeSizeForDifficulty(difficultyLevel) {
+  // Difficulty can be 1-7
+  const difficulties = [
+    [3, 3],
+    [3, 4],
+    [4, 4],
+    [4, 5],
+    [5, 5],
+    [5, 6],
+    [6, 6],
+  ];
+
+  return difficulties[difficultyLevel];
+}
+
+function getDifficultyLevelForDay() {
+  // todo
+  return 3;
+}
+
+export function gameInit({
+  difficultyLevel,
+  useSaved = true,
+  isDaily = false,
+  seed,
+}) {
   if (isDaily) {
     // todo remove
     return {};
@@ -35,8 +60,11 @@ export function gameInit({useSaved = true, isDaily = false, seed}) {
   sendAnalytics("new_game");
 
   const gridSize = 4;
-  const minWordLength = 4; // todo don't hardcode
-  const maxWordLength = 4; // todo don't hardcode
+
+  difficultyLevel = isDaily ? getDifficultyLevelForDay() : difficultyLevel || 3;
+
+  const [minWordLength, maxWordLength] =
+    getShapeSizeForDifficulty(difficultyLevel);
 
   const [letters, shapes, officialSolutions] = getGame({
     gridSize,
@@ -62,5 +90,6 @@ export function gameInit({useSaved = true, isDaily = false, seed}) {
     foundSolutions,
     playedIndexes: [],
     result: "",
+    difficultyLevel,
   };
 }

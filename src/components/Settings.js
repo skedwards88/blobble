@@ -3,13 +3,13 @@ import React from "react";
 export default function Settings({setDisplay, dispatchGameState, gameState}) {
   function handleNewGame(event) {
     event.preventDefault();
-    const newNumLetters = event.target.elements.numLetters.value;
-    const newIndicateValidity = event.target.elements.indicateValidity.checked;
+    const newDifficultyLevel = parseInt(
+      event.target.elements.difficultyLevel.value,
+    );
 
     dispatchGameState({
       action: "newGame",
-      numLetters: newNumLetters,
-      indicateValidity: newIndicateValidity,
+      difficultyLevel: newDifficultyLevel,
     });
     setDisplay("game");
   }
@@ -17,17 +17,26 @@ export default function Settings({setDisplay, dispatchGameState, gameState}) {
   return (
     <form className="App settings" onSubmit={(e) => handleNewGame(e)}>
       <div id="settings">
-        <div className="setting">{"TODO insert setting"}</div>
-
         <div className="setting">
-          {
-            "TODO You found a game that is still in development! Check back soon for the full game play"
-          }
+          <div className="setting-description">
+            <label htmlFor="difficultyLevel">Difficulty</label>
+          </div>
+          <div id="settingSliderContainer">
+            <div className="settingSliderValue">–</div>
+            <input
+              id="difficultyLevel"
+              className="difficultyLevel"
+              type="range"
+              min="1"
+              max="7"
+              defaultValue={gameState.difficultyLevel || "3"}
+            />
+            <div className="settingSliderValue">+</div>
+          </div>
         </div>
       </div>
       <div id="setting-buttons">
-        {/* todo un-disable the new game button */}
-        <button type="submit" aria-label="new game" disabled>
+        <button type="submit" aria-label="new game">
           New game
         </button>
         <button
