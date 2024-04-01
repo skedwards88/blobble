@@ -166,7 +166,7 @@ button:disabled {
 .shape {
   display: grid;
   grid-template-columns: repeat(4, var(--shape-box-diam));
-  grid-template-rows: repeat(5, var(--shape-box-diam));
+  grid-template-rows: repeat(4, var(--shape-box-diam)) 1fr;
   grid-template-areas:
     "shape0 shape1 shape2 shape3"
     "shape4 shape5 shape6 shape7"
@@ -188,7 +188,9 @@ button:disabled {
   font-size: var(--shape-box-diam);
   grid-area: word;
   text-align: center;
+  display: flex;
   justify-self: center;
+  align-items: center;
 }
 
 #currentWord {
