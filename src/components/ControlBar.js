@@ -42,6 +42,19 @@ function ControlBar({
         className="controlButton"
         onClick={() => setDisplay("heart")}
       ></button>
+
+      {navigator.canShare ? (
+        <button
+          id="shareButton"
+          className="controlButton"
+          onClick={() => {
+            handleShare({appName, text: shareText, fullUrl: url});
+          }}
+        ></button>
+      ) : (
+        <></>
+      )}
+
       {/* todo undisable both calendar buttons below */}
       {dailyIsSolved ? (
         <button
@@ -60,18 +73,6 @@ function ControlBar({
           className="controlButton"
           onClick={() => setDisplay("daily")}
         ></button>
-      )}
-
-      {navigator.canShare ? (
-        <button
-          id="shareButton"
-          className="controlButton"
-          onClick={() => {
-            handleShare({appName, text: shareText, fullUrl: url});
-          }}
-        ></button>
-      ) : (
-        <></>
       )}
 
       {showInstallButton && installPromptEvent ? (
