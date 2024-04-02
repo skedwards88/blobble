@@ -2,26 +2,8 @@ import sendAnalytics from "../common/sendAnalytics";
 import getRandomSeed from "../common/getRandomSeed";
 import getDailySeed from "../common/getDailySeed";
 import {getGame} from "./getGame";
-
-function getShapeSizeForDifficulty(difficultyLevel) {
-  // Difficulty can be 1-7
-  const difficulties = [
-    [3, 3],
-    [3, 4],
-    [4, 4],
-    [4, 5],
-    [5, 5],
-    [5, 6],
-    [6, 6],
-  ];
-
-  return difficulties[difficultyLevel];
-}
-
-function getDifficultyLevelForDay() {
-  // todo
-  return 3;
-}
+import {getDifficultyLevelForDay} from "./getDifficultyLevelForDay";
+import {getShapeSizeForDifficulty} from "./getShapeSizeForDifficulty";
 
 export function gameInit({
   difficultyLevel,
