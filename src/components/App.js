@@ -119,14 +119,14 @@ export default function App() {
 
   React.useEffect(() => {
     window.localStorage.setItem(
-      "blobbleGameSavedStateName",
+      "blobbleGameSavedState",
       JSON.stringify(gameState),
     );
   }, [gameState]);
 
   React.useEffect(() => {
     window.localStorage.setItem(
-      "blobbleDailySavedStateName",
+      "blobbleDailySavedState",
       JSON.stringify(dailyGameState),
     );
   }, [dailyGameState]);

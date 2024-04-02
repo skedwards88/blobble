@@ -15,9 +15,10 @@ export function gameInit({
     // todo remove
     return {};
   }
+
   const savedStateName = isDaily
-    ? "blobbleDailySavedStateName"
-    : "blobbleGameSavedStateName";
+    ? "blobbleDailySavedState"
+    : "blobbleGameSavedState";
 
   if (isDaily) {
     seed = getDailySeed();
@@ -33,13 +34,10 @@ export function gameInit({
 
   if (
     savedState
-    // todo enter other requirements for using saved state here
+    // todo enter other requirements for using saved state here, including whether game is complete
   ) {
-    // todo uncomment return
-    // return savedState;
+    return savedState;
   }
-
-  sendAnalytics("new_game");
 
   const gridSize = 4;
 
@@ -62,6 +60,8 @@ export function gameInit({
   );
 
   const foundSolutions = shapes.map((shape) => shape.map(() => undefined));
+
+  sendAnalytics("new_game");
 
   return {
     seed,
