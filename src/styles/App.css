@@ -103,16 +103,6 @@ button:disabled {
     "shapes";
 }
 
-#exitDaily {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  grid-area: controls;
-  width: 100vw;
-  height: calc(var(--default-font-size) * 1.2);
-  border-bottom: 2px solid var(--light-color);
-}
-
 #board {
   display: grid;
   grid-area: board;

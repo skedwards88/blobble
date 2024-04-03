@@ -1,4 +1,4 @@
-#controls {
+#controls, #exitDaily {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -56,4 +56,11 @@
 
 #installButton {
   background-image: url("../images/icons/install.svg");
+}
+
+#exitDailyButton {
+  border: 0;
+  width: fit-content;
+  height: var(--default-font-size);
+  padding: 1px 6px;
 }

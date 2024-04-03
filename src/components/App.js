@@ -12,6 +12,7 @@ import Settings from "./Settings";
 import {gameInit} from "../logic/gameInit";
 import {gameReducer} from "../logic/gameReducer";
 import getDailySeed from "../common/getDailySeed";
+import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
 
 function parseUrlQuery() {
   const searchParams = new URLSearchParams(document.location.search);
@@ -33,7 +34,6 @@ export default function App() {
   // TODO enter the actual return values
   const [seed, numLetters] = parseUrlQuery();
 
-  // TODO enter value of the saved display state. If no daily challenge, remove daily logic.
   const savedDisplay = JSON.parse(
     localStorage.getItem("blobbleDisplaySavedStateName"),
   );
@@ -44,7 +44,7 @@ export default function App() {
   const [installPromptEvent, setInstallPromptEvent] = React.useState();
   const [showInstallButton, setShowInstallButton] = React.useState(true);
 
-  // TODO update values passed to inits. If no daily challenge, remove daily logic.
+  // TODO update values passed to inits.
   const [gameState, dispatchGameState] = React.useReducer(
     gameReducer,
     {
@@ -60,10 +60,8 @@ export default function App() {
     gameInit,
   );
 
-  // TODO If no daily challenge, remove this.
   const [, setLastOpened] = React.useState(Date.now());
 
-  // TODO If no daily challenge, remove this.
   function handleVisibilityChange() {
     // If the visibility of the app changes to become visible,
     // update the state to force the app to re-render.
@@ -74,7 +72,6 @@ export default function App() {
     }
   }
 
-  // TODO If no daily challenge, remove this.
   React.useEffect(() => {
     // When the component is mounted, attach the visibility change event listener
     // (and remove the event listener when the component is unmounted).
@@ -155,7 +152,6 @@ export default function App() {
         />
       );
 
-    // todo remove if no daily challenge
     case "daily":
       // force reinitialize the daily state if the day has changed
       if (dailyGameState.seed != getDailySeed()) {
@@ -183,11 +179,7 @@ export default function App() {
           </div>
           <Game
             dispatchGameState={dailyDispatchGameState}
-            gameState={{
-              ...dailyGameState,
-              indicateValidity: gameState?.indicateValidity ?? false,
-            }}
-            setDisplay={setDisplay}
+            gameState={dailyGameState}
           ></Game>
         </div>
       );
@@ -216,7 +208,7 @@ export default function App() {
             installPromptEvent={installPromptEvent}
             dispatchGameState={dispatchGameState}
             gameState={gameState}
-            dailyIsSolved={dailyGameState.gameIsSolved}
+            dailyIsSolved={gameIsSolvedQ(dailyGameState.foundSolutions)}
             appName="Blobble"
             shareText="Check out this word puzzle!"
             url="https://skedwards88.github.io/blobble"

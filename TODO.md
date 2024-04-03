@@ -38,3 +38,5 @@ make sure desktop works
 make sure doesn't look terrible on large screen
 
 omit "soaker" "ROAMER","Loo"
+
+for daily challenge -- decide how to indicate daily is solved. stats?

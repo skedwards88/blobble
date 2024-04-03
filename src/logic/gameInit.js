@@ -11,11 +11,6 @@ export function gameInit({
   isDaily = false,
   seed,
 }) {
-  if (isDaily) {
-    // todo remove
-    return {};
-  }
-
   const savedStateName = isDaily
     ? "blobbleDailySavedState"
     : "blobbleGameSavedState";

@@ -55,20 +55,17 @@ function ControlBar({
         <></>
       )}
 
-      {/* todo undisable both calendar buttons below */}
       {dailyIsSolved ? (
         <button
-          disabled
           id="calendarButtonSolved"
           className="controlButton"
           onClick={() => {
-            dispatchGameState({action: "clearStreakIfNeeded"});
+            // dispatchGameState({action: "clearStreakIfNeeded"});//todo handle this action
             setDisplay("daily");
           }}
         ></button>
       ) : (
         <button
-          disabled
           id="calendarButton"
           className="controlButton"
           onClick={() => setDisplay("daily")}
