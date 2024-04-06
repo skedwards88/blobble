@@ -167,7 +167,7 @@ export default function App() {
           id="blobble"
           onPointerUp={(event) => {
             event.preventDefault();
-            dispatchGameState({
+            dailyDispatchGameState({
               action: "endWord",
             });
           }}
