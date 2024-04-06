@@ -98,9 +98,9 @@ button:disabled {
   grid-area: game;
   display: grid;
   grid-template-areas:
-    "board"
+    "shapes"
     "currentWord"
-    "shapes";
+    "board";
 }
 
 #board {

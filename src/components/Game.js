@@ -43,18 +43,15 @@ function Game({dispatchGameState, gameState}) {
 
   return (
     <div id="game">
-      <div id="board">
-        {gameState.letters.map((letter, index) => (
-          <Letter
-            letter={letter}
-            index={index}
-            letterAvailability={
-              gameOver ? false : !gameState.playedIndexes.includes(index)
-            }
-            dispatchGameState={dispatchGameState}
-            draggable={false}
-            key={index}
-          ></Letter>
+            <div id="shapes">
+        {gameState.shapes.map((shape, index) => (
+          <Shape
+            shape={shape}
+            foundSolution={gameState.foundSolutions[index]}
+            gridSize={Math.sqrt(gameState.letters.length)}
+            letters={gameState.letters}
+            key={shape.join("-")}
+          ></Shape>
         ))}
       </div>
 
@@ -81,15 +78,18 @@ function Game({dispatchGameState, gameState}) {
         <></>
       )}
 
-      <div id="shapes">
-        {gameState.shapes.map((shape, index) => (
-          <Shape
-            shape={shape}
-            foundSolution={gameState.foundSolutions[index]}
-            gridSize={Math.sqrt(gameState.letters.length)}
-            letters={gameState.letters}
-            key={shape.join("-")}
-          ></Shape>
+<div id="board">
+        {gameState.letters.map((letter, index) => (
+          <Letter
+            letter={letter}
+            index={index}
+            letterAvailability={
+              gameOver ? false : !gameState.playedIndexes.includes(index)
+            }
+            dispatchGameState={dispatchGameState}
+            draggable={false}
+            key={index}
+          ></Letter>
         ))}
       </div>
     </div>
