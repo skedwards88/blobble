@@ -1,6 +1,11 @@
 import React from "react";
 
-function handlePointerDown(event, index, letterAvailability, dispatchGameState) {
+function handlePointerDown(
+  event,
+  index,
+  letterAvailability,
+  dispatchGameState,
+) {
   event.preventDefault();
   event.target.releasePointerCapture(event.pointerId);
   if (letterAvailability) {

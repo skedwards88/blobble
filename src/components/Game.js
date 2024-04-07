@@ -7,7 +7,7 @@ import {handleShare} from "../common/handleShare";
 
 function GameOver({gameState, dispatchGameState, isDaily}) {
   if (isDaily) {
-    return <div className="gameMessage">Solved!</div>
+    return <div className="gameMessage">Solved!</div>;
   }
 
   return (

@@ -135,7 +135,7 @@ export function gameReducer(currentGameState, payload) {
       result: "",
     };
   } else if (payload.action === "hint") {
-    console.log("hi")
+    console.log("hi");
     // A hint reveals one letter at a time (in order) of the official solution
     const actualSolution =
       currentGameState.officialSolutions[payload.shapeIndex];
@@ -144,7 +144,7 @@ export function gameReducer(currentGameState, payload) {
 
     // Since hints may have been given previously, get the next unrevealed index for the hint
     const nextHintIndex = hintedSolution.findIndex(
-      (i) => i === null || i === undefined
+      (i) => i === null || i === undefined,
     );
 
     // If all hints have been given for the shape, return

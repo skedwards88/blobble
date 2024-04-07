@@ -6,9 +6,7 @@ export default function Share({appName, text, seed, url}) {
 
   if (navigator.canShare) {
     return (
-      <button
-        onClick={() => handleShare({appName, text, fullUrl})}
-      >
+      <button onClick={() => handleShare({appName, text, fullUrl})}>
         Share
       </button>
     );
