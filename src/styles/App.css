@@ -1,4 +1,3 @@
-/* General */
 html {
   --board-box-diam: min(15vmax, 20vmin, 145px);
   --shape-box-diam: 5vmin;
@@ -111,10 +110,10 @@ button:disabled {
   justify-content: center;
   grid-template-columns: repeat(4, var(--board-box-diam));
   grid-template-rows: repeat(4, var(--board-box-diam));
-  margin: 3vmax 0;
   justify-self: center;
   align-items: center;
   justify-items: center;
+  align-self: center;
 }
 
 .letterBox {
@@ -183,7 +182,7 @@ button:disabled {
   align-items: center;
 }
 
-#currentWord {
+.gameMessage {
   grid-area: currentWord;
   height: var(--default-font-size);
   overflow: hidden;
@@ -191,23 +190,24 @@ button:disabled {
   align-self: center;
 }
 
-#wordResult {
+.gameOver {
   grid-area: currentWord;
-  height: var(--default-font-size);
-  overflow: hidden;
-  justify-self: center;
-  align-self: center;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100vw;
 }
 
-.gameOverShare{
-  grid-area: currentWord;
-  justify-self: center;
-  width: 80vw;
-  margin: 0;
+.gameOver > button {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: 0;
+  width: var(--default-font-size);
+  height: var(--default-font-size);
+  background-color: transparent;
   padding: 0;
-  height: fit-content;
-  justify-self: center;
-  align-self: center;
+  margin: 0;
 }
 
 .fadeOut {

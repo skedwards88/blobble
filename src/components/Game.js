@@ -1,41 +1,54 @@
 import React from "react";
 import {Letter} from "./Letter";
+import {Shape} from "./Shape";
 import {indexesToWord} from "../logic/indexesToWord";
 import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
-import Share from "./Share";
+import {handleShare} from "../common/handleShare";
 
-function ShapeBox({filled, solved}) {
-  let className = "shapeBox";
-  if (filled) {
-    className += " filled";
-    if (solved) {
-      className += " solved";
-    }
-  }
-
-  return <div className={className}></div>;
-}
-
-function Shape({shape, foundSolution, gridSize, letters}) {
-  const shapeIsSolved = foundSolution.every((i) => i != undefined);
-  const emptyGrid = Array(gridSize * gridSize).fill();
-
-  const boxes = emptyGrid.map((i, index) => (
-    <ShapeBox
-      filled={shape.includes(index)}
-      solved={shapeIsSolved}
-      key={index}
-    ></ShapeBox>
-  ));
-
-  const word = indexesToWord(foundSolution, letters);
-
+function GameOver({gameState, dispatchGameState}) {
   return (
-    <div className="shape">
-      {boxes}
-      <div className="foundWord">{word}</div>
+    <div className="gameOver">
+      {navigator.canShare ? (
+        <button
+          id="shareButton"
+          onClick={() => {
+            handleShare({
+              appName: "Blobble",
+              text: "Check out this word puzzle!",
+              fullUrl: "TODO url plus seed",
+            });
+          }}
+        ></button>
+      ) : (
+        <></>
+      )}
+      <button
+        id="newGameButton"
+        onClick={() => {
+          dispatchGameState({
+            ...gameState,
+            action: "newGame",
+          });
+        }}
+      ></button>
     </div>
   );
+}
+
+function GameMessage({gameState}) {
+  if (gameState.playedIndexes.length) {
+    return (
+      <div className="gameMessage">
+        {indexesToWord(gameState.playedIndexes, gameState.letters)}
+      </div>
+    );
+  }
+
+  if (gameState.result) {
+    return <div className="gameMessage fadeOut">{gameState.result}</div>;
+  }
+
+  return <div className="gameMessage"></div>;
 }
 
 function Game({dispatchGameState, gameState}) {
@@ -43,7 +56,7 @@ function Game({dispatchGameState, gameState}) {
 
   return (
     <div id="game">
-            <div id="shapes">
+      <div id="shapes">
         {gameState.shapes.map((shape, index) => (
           <Shape
             shape={shape}
@@ -55,30 +68,16 @@ function Game({dispatchGameState, gameState}) {
         ))}
       </div>
 
-      <div id="currentWord">
-        {indexesToWord(gameState.playedIndexes, gameState.letters)}
-      </div>
-
-      {gameState.result ? (
-        <div id="wordResult" className="fadeOut">
-          {gameState.result}
-        </div>
-      ) : (
-        <></>
-      )}
-
       {gameOver ? (
-        <Share
-          appName={"appName"}
-          text={"shareText"}
-          url={"url"}
-          className="gameOverShare"
-        ></Share>
+        <GameOver
+          gameState={gameState}
+          dispatchGameState={dispatchGameState}
+        ></GameOver>
       ) : (
-        <></>
+        <GameMessage gameOver={gameOver} gameState={gameState}></GameMessage>
       )}
 
-<div id="board">
+      <div id="board">
         {gameState.letters.map((letter, index) => (
           <Letter
             letter={letter}
