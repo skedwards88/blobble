@@ -134,6 +134,34 @@ export function gameReducer(currentGameState, payload) {
       foundSolutions: newFoundSolutions,
       result: "",
     };
+  } else if (payload.action === "hint") {
+    console.log("hi")
+    // A hint reveals one letter at a time (in order) of the official solution
+    const actualSolution =
+      currentGameState.officialSolutions[payload.shapeIndex];
+    let newFoundSolutions = cloneDeep(currentGameState.foundSolutions);
+    let hintedSolution = newFoundSolutions[payload.shapeIndex];
+
+    // Since hints may have been given previously, get the next unrevealed index for the hint
+    const nextHintIndex = hintedSolution.findIndex(
+      (i) => i === null || i === undefined
+    );
+
+    // If all hints have been given for the shape, return
+    if (nextHintIndex < 0) {
+      return {
+        ...currentGameState,
+      };
+    }
+
+    // Otherwise, reveal the next letter
+    const hintValue = actualSolution[nextHintIndex];
+    newFoundSolutions[payload.shapeIndex][nextHintIndex] = hintValue;
+
+    return {
+      ...currentGameState,
+      foundSolutions: newFoundSolutions,
+    };
   } else if (payload.action === "todo handle other cases") {
     return {
       ...currentGameState,

@@ -68,6 +68,8 @@ function Game({dispatchGameState, gameState, isDaily}) {
             gridSize={Math.sqrt(gameState.letters.length)}
             letters={gameState.letters}
             key={shape.join("-")}
+            dispatchGameState={dispatchGameState}
+            shapeIndex={index}
           ></Shape>
         ))}
       </div>
