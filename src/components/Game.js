@@ -5,7 +5,11 @@ import {indexesToWord} from "../logic/indexesToWord";
 import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
 import {handleShare} from "../common/handleShare";
 
-function GameOver({gameState, dispatchGameState}) {
+function GameOver({gameState, dispatchGameState, isDaily}) {
+  if (isDaily) {
+    return <div className="gameMessage">Solved!</div>
+  }
+
   return (
     <div className="gameOver">
       {navigator.canShare ? (
@@ -51,7 +55,7 @@ function GameMessage({gameState}) {
   return <div className="gameMessage"></div>;
 }
 
-function Game({dispatchGameState, gameState}) {
+function Game({dispatchGameState, gameState, isDaily}) {
   const gameOver = gameIsSolvedQ(gameState.foundSolutions);
 
   return (
@@ -72,6 +76,7 @@ function Game({dispatchGameState, gameState}) {
         <GameOver
           gameState={gameState}
           dispatchGameState={dispatchGameState}
+          isDaily={isDaily}
         ></GameOver>
       ) : (
         <GameMessage gameOver={gameOver} gameState={gameState}></GameMessage>

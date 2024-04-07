@@ -180,6 +180,7 @@ export default function App() {
           <Game
             dispatchGameState={dailyDispatchGameState}
             gameState={dailyGameState}
+            isDaily={true}
           ></Game>
         </div>
       );
