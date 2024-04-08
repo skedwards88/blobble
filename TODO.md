@@ -31,7 +31,7 @@
 
 ## Other
 
-Rules -- rotation no allowed. overlap allowed.
+Rules -- swipe to form words that match given shape. rotation no allowed. overlap allowed. tap shape for hint.
 
 make sure desktop works
 
