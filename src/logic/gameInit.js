@@ -28,8 +28,11 @@ export function gameInit({
     : undefined;
 
   if (
-    savedState
+    savedState &&
+    savedState.seed &&
+    savedState.seed == seed
     // todo enter other requirements for using saved state here, including whether game is complete
+    // todo dont use saved if game is solved and is not daily
   ) {
     return savedState;
   }

@@ -20,7 +20,7 @@ function GameOver({gameState, dispatchGameState, isDaily}) {
               appName: "Blobble",
               text: "Check out this word puzzle!",
               url: "https://skedwards88.github.io/blobble",
-              seed: gameState.seed
+              seed: `${gameState.seed}_${gameState.difficultyLevel}`,
             });
           }}
         ></button>

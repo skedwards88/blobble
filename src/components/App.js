@@ -17,21 +17,22 @@ function parseUrlQuery() {
   const searchParams = new URLSearchParams(document.location.search);
   const query = searchParams.get("id");
 
-  // TODO-parse query. Example below
-  // The seed query consists of two parts: the seed and the min number of letters, separated by an underscore
-  let numLetters;
+  // The seed query consists of two parts: the seed and the difficulty level, separated by an underscore
+  let difficultyLevel;
   let seed;
   if (query) {
-    [seed, numLetters] = query.split("_");
-    numLetters = parseInt(numLetters);
+    [seed, difficultyLevel] = query.split("_");
+    difficultyLevel = parseInt(difficultyLevel);
   }
 
-  return [seed, numLetters];
+  return [seed, difficultyLevel];
 }
 
 export default function App() {
-  // TODO enter the actual return values
-  const [seed, numLetters] = parseUrlQuery();
+  const [seed, difficultyLevel] = parseUrlQuery();
+
+  console.log(`seed is ${seed}`);
+  console.log(`level is ${difficultyLevel}`);
 
   const savedDisplay = JSON.parse(
     localStorage.getItem("blobbleDisplaySavedStateName"),
@@ -43,12 +44,11 @@ export default function App() {
   const [installPromptEvent, setInstallPromptEvent] = React.useState();
   const [showInstallButton, setShowInstallButton] = React.useState(true);
 
-  // TODO update values passed to inits.
   const [gameState, dispatchGameState] = React.useReducer(
     gameReducer,
     {
       seed,
-      numLetters,
+      difficultyLevel,
     },
     gameInit,
   );
