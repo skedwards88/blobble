@@ -47,7 +47,7 @@ function ControlBar({
           id="shareButton"
           className="controlButton"
           onClick={() => {
-            handleShare({appName, text: shareText, fullUrl: url});
+            handleShare({appName, text: shareText, url});
           }}
         ></button>
       ) : (

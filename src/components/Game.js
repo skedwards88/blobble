@@ -19,7 +19,8 @@ function GameOver({gameState, dispatchGameState, isDaily}) {
             handleShare({
               appName: "Blobble",
               text: "Check out this word puzzle!",
-              fullUrl: "TODO url plus seed",
+              url: "https://skedwards88.github.io/blobble",
+              seed: gameState.seed
             });
           }}
         ></button>

@@ -1,18 +1,17 @@
 import React from "react";
 import {handleShare, handleCopy} from "../common/handleShare";
 
-export default function Share({appName, text, seed, url}) {
-  const fullUrl = seed ? `${url}?id=${seed}` : url;
+export default function Share({appName, text, url, seed}) {
 
   if (navigator.canShare) {
     return (
-      <button onClick={() => handleShare({appName, text, fullUrl})}>
+      <button onClick={() => handleShare({appName, text, url, seed})}>
         Share
       </button>
     );
   } else {
     return (
-      <button onClick={() => handleCopy({text, fullUrl})}>
+      <button onClick={() => handleCopy({text, url, seed})}>
         Copy sharing link
       </button>
     );

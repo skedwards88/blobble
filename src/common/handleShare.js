@@ -1,6 +1,13 @@
 import sendAnalytics from "./sendAnalytics";
 
-export function handleShare({appName, text, fullUrl}) {
+export function assembleShareLink({url, seed}) {
+  const fullUrl = seed ? `${url}?id=${seed}` : url;
+  return fullUrl
+}
+
+export function handleShare({appName, text, url, seed}) {
+  const fullUrl = assembleShareLink({url, seed});
+
   navigator
     .share({
       title: appName,
@@ -14,7 +21,9 @@ export function handleShare({appName, text, fullUrl}) {
   sendAnalytics("share");
 }
 
-export function handleCopy({text, fullUrl}) {
+export function handleCopy({text, url, seed}) {
+  const fullUrl = assembleShareLink({url, seed});
+
   try {
     navigator.clipboard.writeText(`${text}\n\n${fullUrl}`);
   } catch (error) {
