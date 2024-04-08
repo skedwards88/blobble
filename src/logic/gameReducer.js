@@ -161,10 +161,6 @@ export function gameReducer(currentGameState, payload) {
       ...currentGameState,
       foundSolutions: newFoundSolutions,
     };
-  } else if (payload.action === "todo handle other cases") {
-    return {
-      ...currentGameState,
-    };
   } else {
     console.log(`unknown action: ${payload.action}`);
     return currentGameState;
