@@ -2,7 +2,6 @@ import React from "react";
 import Game from "./Game";
 import Heart from "./Heart";
 import Rules from "./Rules";
-import Stats from "./Stats";
 import ControlBar from "./ControlBar";
 import {
   handleAppInstalled,
@@ -183,11 +182,6 @@ export default function App() {
             isDaily={true}
           ></Game>
         </div>
-      );
-
-    case "dailyStats":
-      return (
-        <Stats setDisplay={setDisplay} stats={dailyGameState.stats}></Stats>
       );
 
     default:

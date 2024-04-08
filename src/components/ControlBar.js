@@ -59,7 +59,6 @@ function ControlBar({
           id="calendarButtonSolved"
           className="controlButton"
           onClick={() => {
-            // dispatchGameState({action: "clearStreakIfNeeded"});//todo handle this action
             setDisplay("daily");
           }}
         ></button>

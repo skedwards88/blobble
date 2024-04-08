@@ -126,7 +126,6 @@ export function gameReducer(currentGameState, payload) {
     }
 
     // todo record analytics if game solved
-    // todo calculate stats if game solved
 
     return {
       ...currentGameState,
