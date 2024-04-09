@@ -28,10 +28,6 @@
   background-image: url("../images/icons/new_game.svg");
 }
 
-#helpButton {
-  background-image: url("../images/icons/help.svg");
-}
-
 #rulesButton {
   background-image: url("../images/icons/info.svg");
 }

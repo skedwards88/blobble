@@ -12,7 +12,6 @@
 
 ## `src/images`
 
-- [ ] Delete unneeded icons
 - [ ] Add screenshots and reflect them in:
   - [ ] `index.html`
   - [ ] `manifest.json`
