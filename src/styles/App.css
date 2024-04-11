@@ -1,6 +1,6 @@
 html {
-  --board-box-diam: min(15vmax, 20vmin, 145px);
-  --shape-box-diam: 5vmin;
+  --board-box-diam: min(10vmax, 20vmin);
+  --shape-box-diam: min(5vmin, 3vmax);
   --default-font-size: calc(var(--board-box-diam) * 0.4);
   --dark-color: rgb(55 54 71);
   --light-color: rgb(239 239 239);

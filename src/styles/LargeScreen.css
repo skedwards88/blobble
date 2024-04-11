@@ -1,0 +1,20 @@
+/* Landscape, large screen */
+@media (orientation: landscape) and (min-width: 1000px) {
+  html {
+    --board-box-diam: min(5vmax, 10vmin);
+    --shape-box-diam: min(3vmin, 2vmax);
+  }
+
+  .App {
+    justify-content: center;
+  }
+
+  #board {
+    align-self: start;
+  }
+
+  #controls,
+  #exitDaily {
+    width: 100%;
+  }
+}

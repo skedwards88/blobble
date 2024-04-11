@@ -24,10 +24,6 @@
   - [ ] adjust the `path` and `scope` variables in `index.js`
   - [ ] update the URLs in `privacy.html` and in `src/components/Heart`
 
-## PWA
-
-- [ ] Use Lighthouse in Chrome developer tools to verify that the app is installable and meets PWA requirements.
-
 ## Other
 
 Rules -- swipe to form words that match given shape. rotation no allowed. overlap allowed. tap shape for hint.
