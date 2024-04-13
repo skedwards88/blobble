@@ -7,7 +7,9 @@ export default function Rules({setDisplay}) {
       <h1 id="rulesHeader">Blobble: How to play</h1>
       <p id="rulesText">
         {
-          "TODO-rules You found a game that is still in development! Check back soon for the full game play and rules."
+          `Swipe the letters to form words that match a given shape. (Shapes cannot be rotated.)
+
+          Tap on a shape to reveal the next letter in the word.`
         }
       </p>
       <button
