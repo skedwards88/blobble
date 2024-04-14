@@ -6,10 +6,6 @@
 
 - [] If this is a word game, add the word game to the [`word_list` package workflow](https://github.com/skedwards88/word_lists/blob/3126cc2fcc997468ea0d642d853aa5b74c174836/.github/workflows/package.yml#L60)
 
-## `README`
-
-- [ ] Customize this for the game
-
 ## `src/images`
 
 - [ ] Add screenshots and reflect them in:
