@@ -26,13 +26,5 @@
 
 ## Other
 
-Rules -- swipe to form words that match given shape. rotation no allowed. overlap allowed. tap shape for hint.
-
-make sure desktop works
-
-make sure doesn't look terrible on large screen
-
 omit "soaker" "ROAMER","Loo","Joe"
 add "Jeer"
-
-make it look ok on large screens -- calculate the sizes to never exceed screen -- should I use % instead?
