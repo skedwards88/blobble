@@ -1,6 +1,5 @@
 import cloneDeep from "lodash.clonedeep";
 import {gameInit} from "./gameInit";
-import sendAnalytics from "../common/sendAnalytics";
 import {checkIfNeighbors, isKnown} from "@skedwards88/word_logic";
 import {trie} from "./trie";
 import {indexesToWord} from "./indexesToWord";
@@ -124,8 +123,6 @@ export function gameReducer(currentGameState, payload) {
     if (matchingShapeIndex != undefined) {
       newFoundSolutions[matchingShapeIndex] = currentGameState.playedIndexes;
     }
-
-    // todo record analytics if game solved
 
     return {
       ...currentGameState,
