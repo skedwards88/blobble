@@ -12,24 +12,6 @@ export function getLettersAndShapes({
   pseudoRandomGenerator,
 }) {
   const letters = getLetters(gridSize, pseudoRandomGenerator);
-  // const letters = [
-  //   "W",
-  //   "H",
-  //   "E",
-  //   "A",
-  //   "S",
-  //   "R",
-  //   "D",
-  //   "T",
-  //   "E",
-  //   "O",
-  //   "G",
-  //   "W",
-  //   "S",
-  //   "N",
-  //   "T",
-  //   "U",
-  // ];
 
   const wordIndexes = findAllWordIndexes({
     letters,

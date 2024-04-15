@@ -24,3 +24,7 @@
 
 omit "soaker" "ROAMER","Loo","Joe"
 add "Jeer"
+
+disfavor words that end in single s
+
+don't allow dup words as plural
