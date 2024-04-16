@@ -31,9 +31,6 @@ function parseUrlQuery() {
 export default function App() {
   const [seed, difficultyLevel] = parseUrlQuery();
 
-  console.log(`seed is ${seed}`);
-  console.log(`level is ${difficultyLevel}`);
-
   const savedDisplay = JSON.parse(
     localStorage.getItem("blobbleDisplaySavedStateName"),
   );
