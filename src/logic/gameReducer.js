@@ -131,7 +131,6 @@ export function gameReducer(currentGameState, payload) {
       result: "",
     };
   } else if (payload.action === "hint") {
-    console.log("hi");
     // A hint reveals one letter at a time (in order) of the official solution
     const actualSolution =
       currentGameState.officialSolutions[payload.shapeIndex];
