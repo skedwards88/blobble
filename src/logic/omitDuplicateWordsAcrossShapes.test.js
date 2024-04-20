@@ -191,10 +191,6 @@ test("Will delete shapes with repeated words and plurals (case 2)", () => {
     "H",
   ];
 
-  // "0-5-10-14":[[14,10,5,0]],
-  // "6-9-10":[[7,10,11],[6,2,5],[1,5,4]],
-  // "1-6-10":[[4,9,13]],
-
   const expected = {
     "1-2-6-9": [
       [8, 5, 1, 0],
@@ -203,14 +199,14 @@ test("Will delete shapes with repeated words and plurals (case 2)", () => {
       [10, 7, 2, 3],
     ], // ["TALL","TALL","ISLE","OPEN"]
     "4-5-10": [[14, 9, 8]], // ["FIT"],
-    "1-5-10-14": [[14, 10, 5, 1]], // ["FOAL"], // TODO should be missing?
+    "1-5-10-14": [[14, 10, 5, 1]], // ["FOAL"],
     "5-8-10": [
       [10, 5, 8],
       [7, 2, 5],
       [13, 10, 15],
     ], // ["OAT","PEA","OOH"],
     "4-5-6-10": [[6, 2, 1, 0]], // ["SELL"],
-    "4-9-10": [[4, 9, 10]], // ["BIO"],// TODO should be missing?
+    "4-9-10": [[4, 9, 10]], // ["BIO"],
     "2-5-8-9": [[7, 10, 13, 14]], // ["POOF"],
     "4-6-9-10": [
       [14, 10, 13, 8],
@@ -241,7 +237,7 @@ test("Will delete shapes with repeated words and plurals (case 2)", () => {
       [6, 10, 11],
       [4, 9, 8],
       [0, 5, 4],
-    ], // ["SOD","BIT","LAB"],// TODO should be missing?
+    ], // ["SOD","BIT","LAB"],
     "1-6-9-14": [[15, 10, 7, 2]], // ["HOPE"],
     "6-7-8-9": [
       [11, 10, 13, 12],
