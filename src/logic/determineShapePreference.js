@@ -1,7 +1,11 @@
 import {indexesToWord} from "./indexesToWord";
 import {getNumberOfWordsEndingInSingleS} from "./getNumberOfWordsEndingInSingleS";
 
-export function determineShapePreference(shapeIndexes1, shapeIndexes2, letters) {
+export function determineShapePreference(
+  shapeIndexes1,
+  shapeIndexes2,
+  letters,
+) {
   const wordsForShape1 = shapeIndexes1.map((wordIndexes) =>
     indexesToWord(wordIndexes, letters),
   );

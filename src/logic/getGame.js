@@ -23,7 +23,10 @@ export function getGame({gridSize, minWordLength, maxWordLength, seed}) {
     const shapeIDs = Object.keys(deduplicatedShapeLookup);
 
     if (shapeIDs.length >= 4) {
-      const sortedShapeIDs = orderShapeIdsByPreference(deduplicatedShapeLookup, letters);
+      const sortedShapeIDs = orderShapeIdsByPreference(
+        deduplicatedShapeLookup,
+        letters,
+      );
 
       foundPlayableGame = true;
       const selectedShapeIDs = sortedShapeIDs.slice(0, 4);

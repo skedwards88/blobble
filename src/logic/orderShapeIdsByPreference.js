@@ -1,4 +1,4 @@
-import { determineShapePreference } from './determineShapePreference';
+import {determineShapePreference} from "./determineShapePreference";
 
 export function orderShapeIdsByPreference(shapeLookup, letters) {
   const shapeIds = Object.keys(shapeLookup);

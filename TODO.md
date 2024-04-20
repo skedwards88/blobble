@@ -11,3 +11,6 @@
   - [ ] update `start_url` in `manifest.json`
   - [ ] adjust the `path` and `scope` variables in `index.js`
   - [ ] update the URLs in `privacy.html` and in `src/components/Heart`
+
+- add to google play store
+- add to profile

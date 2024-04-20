@@ -2,7 +2,7 @@ import sendAnalytics from "./sendAnalytics";
 
 export function assembleShareLink({url, seed}) {
   const fullUrl = seed ? `${url}?id=${seed}` : url;
-  return fullUrl
+  return fullUrl;
 }
 
 export function handleShare({appName, text, url, seed}) {
