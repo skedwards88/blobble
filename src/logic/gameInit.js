@@ -4,6 +4,32 @@ import getDailySeed from "../common/getDailySeed";
 import {getGame} from "./getGame";
 import {getDifficultyLevelForDay} from "./getDifficultyLevelForDay";
 import {getShapeSizeForDifficulty} from "./getShapeSizeForDifficulty";
+import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
+
+function validateSavedState(savedState) {
+  if (typeof savedState !== "object" || savedState === null) {
+    return false;
+  }
+
+  const fieldsAreExpectedTypes =
+    Array.isArray(savedState.letters) &&
+    savedState.letters.every((letter) => typeof letter === "string") &&
+    Array.isArray(savedState.shapes) &&
+    savedState.shapes.every((shape) => Array.isArray(shape)) &&
+    Array.isArray(savedState.officialSolutions) &&
+    savedState.officialSolutions.every((shape) => Array.isArray(shape)) &&
+    Array.isArray(savedState.foundSolutions) &&
+    savedState.foundSolutions.every((solution) => Array.isArray(solution)) &&
+    typeof savedState.difficultyLevel === "number" &&
+    typeof savedState.result === "string" &&
+    Array.isArray(savedState.playedIndexes);
+
+  if (!fieldsAreExpectedTypes) {
+    return false;
+  }
+
+  return true;
+}
 
 export function gameInit({
   difficultyLevel,
@@ -30,11 +56,15 @@ export function gameInit({
   if (
     savedState &&
     savedState.seed &&
-    savedState.seed == seed
-    // todo enter other requirements for using saved state here, including whether game is complete
-    // todo dont use saved if game is solved and is not daily
+    // If daily, use the saved state if the seed matches
+    // otherwise, we don't care if the seed matches
+    (!isDaily || savedState.seed == seed) &&
+    validateSavedState(savedState) &&
+    // Use the saved state if daily even if the game is solved
+    // otherwise, don't use the saved state if the game is solved
+    !(!isDaily && gameIsSolvedQ(savedState.foundSolutions))
   ) {
-    return savedState;
+    return {...savedState, playedIndexes: [], result: ""};
   }
 
   const gridSize = 4;
