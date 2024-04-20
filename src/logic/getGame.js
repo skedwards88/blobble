@@ -1,5 +1,6 @@
 import seedrandom from "seedrandom";
 import {getLettersAndShapes} from "./getLettersAndShapes";
+import {orderShapeIdsByPreference} from "./orderShapeIdsByPreference";
 
 export function getGame({gridSize, minWordLength, maxWordLength, seed}) {
   // Create a new seedable random number generator
@@ -22,12 +23,14 @@ export function getGame({gridSize, minWordLength, maxWordLength, seed}) {
     const shapeIDs = Object.keys(deduplicatedShapeLookup);
 
     if (shapeIDs.length >= 4) {
-      // todo instead of just taking first 4, do I want to add preference for more/fewer solutions or shapes with the most difference in morphology?
+      const sortedShapeIDs = orderShapeIdsByPreference(deduplicatedShapeLookup, letters);
+
       foundPlayableGame = true;
-      const selectedShapeIDs = shapeIDs.slice(0, 4);
+      const selectedShapeIDs = sortedShapeIDs.slice(0, 4);
+      // Convert the shape ID back to an array of indexes
       selectedShapes = selectedShapeIDs.map((id) =>
         id.split("-").map((i) => parseInt(i)),
-      ); // todo make more elegant
+      );
       // the "official" answer is the first word for each selected shape
       officialSolutions = selectedShapeIDs.map(
         (id) => deduplicatedShapeLookup[id][0],
