@@ -1,10 +1,7 @@
 .rules {
-  display: grid;
-  grid-template-areas:
-    "header"
-    "text"
-    "close"
-    "version";
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   text-align: center;
   overflow: scroll;
   font-size: calc(var(--default-font-size) * 0.7);
@@ -13,22 +10,28 @@
 }
 
 #rulesHeader {
-  grid-area: header;
+  font-size: var(--default-font-size);
 }
 
-#rulesText {
+.rulesText {
   white-space: pre-line;
   margin: 0 2vmax;
-  grid-area: text;
 }
 
 #rulesClose {
   height: fit-content;
   width: fit-content;
-  grid-area: close;
 }
 
 #rulesVersion {
-  grid-area: version;
   margin: 0 0 1vmax;
+}
+
+#rulesDemo{
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: contain;
+  width: 80vmin;
+  aspect-ratio: 2/1;
+  background-image: url("../images/rules_demo.svg");
 }
