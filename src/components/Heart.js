@@ -8,7 +8,7 @@ export default function Heart({setDisplay, appName, shareText, repoName, url}) {
       <div className="infoText">
         {"Like this game? Share it with your friends.\n\n"}
         {<Share appName={appName} text={shareText} url={url}></Share>}
-        {`\n\n`}
+        {`\n`}
         {<hr></hr>}
         {`\n`}
         {`Want more games? Check out `}

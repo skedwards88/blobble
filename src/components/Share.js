@@ -1,5 +1,5 @@
 import React from "react";
-import {handleShare, handleCopy} from "../common/handleShare";
+import {handleShare} from "../common/handleShare";
 
 export default function Share({appName, text, url, seed}) {
   if (navigator.canShare) {
@@ -10,9 +10,7 @@ export default function Share({appName, text, url, seed}) {
     );
   } else {
     return (
-      <button onClick={() => handleCopy({text, url, seed})}>
-        Copy sharing link
-      </button>
+      <></>
     );
   }
 }
