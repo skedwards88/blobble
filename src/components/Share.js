@@ -9,8 +9,6 @@ export default function Share({appName, text, url, seed}) {
       </button>
     );
   } else {
-    return (
-      <></>
-    );
+    return <></>;
   }
 }
