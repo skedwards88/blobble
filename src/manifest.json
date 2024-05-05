@@ -33,5 +33,76 @@
       "purpose": "maskable"
     }
   ],
-  "screenshots": []
+  "screenshots": [
+    {
+      "src": "blobble_new_720x1280.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "New game of Blobble"
+    },
+    {
+      "src": "blobble_progress_720x1280.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "In progress game of Blobble"
+    },
+    {
+      "src": "blobble_partial_720x1280.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "In progress game of Blobble"
+    },
+    {
+      "src": "blobble_complete_720x1280.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Complete game of Blobble"
+    },
+    {
+      "src": "blobble_rules_720x1280.png",
+      "sizes": "720x1280",
+      "type": "image/png",
+      "platform": "narrow",
+      "label": "Blobble rules"
+    },
+    {
+      "src": "blobble_new_1080x1080.png",
+      "sizes": "1080x1080",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "New game of Blobble"
+    },
+    {
+      "src": "blobble_progress_1080x1080.png",
+      "sizes": "1080x1080",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "In progress game of Blobble"
+    },
+    {
+      "src": "blobble_partial_1080x1080.png",
+      "sizes": "1080x1080",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "In progress game of Blobble"
+    },
+    {
+      "src": "blobble_complete_1080x1080.png",
+      "sizes": "1080x1080",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Complete game of Blobble"
+    },
+    {
+      "src": "blobble_rules_1080x1080.png",
+      "sizes": "1080x1080",
+      "type": "image/png",
+      "platform": "wide",
+      "label": "Blobble rules"
+    }
+  ]
 }
