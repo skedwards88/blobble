@@ -43,9 +43,7 @@ export default function App() {
   const savedDisplay = JSON.parse(
     localStorage.getItem("blobbleDisplaySavedStateName"),
   );
-  const [display, setDisplay] = React.useState(
-    getInitialState(savedDisplay),
-  );
+  const [display, setDisplay] = React.useState(getInitialState(savedDisplay));
 
   const [installPromptEvent, setInstallPromptEvent] = React.useState();
   const [showInstallButton, setShowInstallButton] = React.useState(true);
