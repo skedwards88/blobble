@@ -1,4 +1,7 @@
-export function getInitialState(savedDisplay, hasVisited) {
+import { hasVisitedSince } from "./hasVisitedSince";
+
+export function getInitialState(savedDisplay) {
+  const hasVisited = hasVisitedSince();
   if (!hasVisited) {
     return "rules";
   }

@@ -13,8 +13,5 @@ export function hasVisitedSince() {
 
   const resetDate = convertYYYYMMDDToDate("20240429");
 
-  console.log(lastVisitedDate);
-  console.log(resetDate);
-  console.log(lastVisitedDate >= resetDate);
   return lastVisitedDate >= resetDate;
 }
