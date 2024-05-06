@@ -13,6 +13,7 @@ import {gameReducer} from "../logic/gameReducer";
 import getDailySeed from "../common/getDailySeed";
 import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
 import {getInitialState} from "../logic/getInitialState";
+import {hasVisitedSince} from "../logic/hasVisitedSince";
 
 function parseUrlQuery() {
   const searchParams = new URLSearchParams(document.location.search);
@@ -32,6 +33,7 @@ function parseUrlQuery() {
 export default function App() {
   const [seed, difficultyLevel] = parseUrlQuery();
 
+  const hasVisited = hasVisitedSince();
   const [lastVisited] = React.useState(getDailySeed());
   React.useEffect(() => {
     window.localStorage.setItem(
@@ -44,7 +46,7 @@ export default function App() {
     localStorage.getItem("blobbleDisplaySavedStateName"),
   );
   const [display, setDisplay] = React.useState(
-    getInitialState(savedDisplay),
+    getInitialState(savedDisplay, hasVisited),
   );
 
   const [installPromptEvent, setInstallPromptEvent] = React.useState();
