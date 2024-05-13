@@ -8,7 +8,7 @@ A spatial word game.
 
 [Play Now!](https://skedwards88.github.io/blobble/)
 
-<a href="[YOUR_URL_HERE](https://skedwards88.github.io/blobble/)">
+<a href="https://skedwards88.github.io/blobble/">
   <img src="src/images/screenshots/blobble_new_720x1280.png" alt="game icon" width="170"/>
 </a>
 
