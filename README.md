@@ -8,7 +8,7 @@ A spatial word game.
 
 [Play Now!](https://skedwards88.github.io/blobble/)
 
-<img src="src/images/favicons/icon_512.png" alt="game icon" width="70"/>
+<img src="src/images/screenshots/blobble_new_720x1280.png" alt="game icon" width="170"/>
 
 Do you have feedback or ideas for improvement? [Open an issue](https://github.com/skedwards88/blobble/issues/new).
 
@@ -18,7 +18,7 @@ Want more games? Check out [Crossjig](https://crossjig.com) and [Lexlet](https:/
 
 ## Development
 
-To build, run `npm run build`.
+To build, run `npm run build`. (Run `npm install` first if you haven't already.)
 
 To run locally with live reloading and no service worker, run `npm run dev`. (If a service worker was previously registered, you can unregister it in chrome developer tools: `Application` > `Service workers` > `Unregister`.)
 
