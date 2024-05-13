@@ -144,20 +144,20 @@ button:disabled {
   align-self: center;
 }
 
-#board.size4 > .letter {
-  font-size: calc(var(--board-box-diam-4) * 0.5);
-}
-
-#board.size5 > .letter {
-  font-size: calc(var(--board-box-diam-4) * 0.5);
-}
-
 .letterBox.unavailable {
   background-color: var(--dark-color);
 }
 
 .letterBox.unavailable > .letter {
   color: var(--light-color);
+}
+
+#board.size4 > .letter {
+  font-size: calc(var(--board-box-diam-4) * 0.5);
+}
+
+#board.size5 > .letter {
+  font-size: calc(var(--board-box-diam-4) * 0.5);
 }
 
 #shapes {
@@ -180,12 +180,12 @@ button:disabled {
   margin: calc(var(--shape-box-diam) * 0.4);
 }
 
-.shape.size4{
+.shape.size4 {
   grid-template-columns: repeat(4, var(--shape-box-diam));
   grid-template-rows: repeat(4, var(--shape-box-diam));
 }
 
-.shape.size5{
+.shape.size5 {
   grid-template-columns: repeat(5, var(--shape-box-diam));
   grid-template-rows: repeat(5, var(--shape-box-diam));
 }
