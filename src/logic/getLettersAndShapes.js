@@ -4,6 +4,7 @@ import {trie} from "./trie";
 import {shuffleArray} from "@skedwards88/word_logic";
 import {omitDuplicateWordsAcrossShapes} from "./omitDuplicateWordsAcrossShapes";
 import {centerIndexes} from "./centerIndexes";
+import {omitShapesThatExceedSize} from "./omitShapesThatExceedSize";
 
 export function getLettersAndShapes({
   gridSize,
@@ -23,7 +24,16 @@ export function getLettersAndShapes({
     trie: trie,
   });
 
-  const shuffledWordIndexes = shuffleArray(wordIndexes, pseudoRandomGenerator);
+  // Remove wordIndexes that exceed a shape width or height of gridSize - 1
+  const wordIndexesOfAppropriateSize = omitShapesThatExceedSize({
+    wordIndexes,
+    gridSize,
+  });
+
+  const shuffledWordIndexes = shuffleArray(
+    wordIndexesOfAppropriateSize,
+    pseudoRandomGenerator,
+  );
 
   // Figure out what shape each word makes
   // by centering the word indexes in the grid
