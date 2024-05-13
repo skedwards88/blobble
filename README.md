@@ -14,8 +14,6 @@ A spatial word game.
 
 Do you have feedback or ideas for improvement? [Open an issue](https://github.com/skedwards88/blobble/issues/new).
 
-Want more games? [Check these out](https://skedwards88.github.io/).
-
 Want more games? Check out [Crossjig](https://crossjig.com) and [Lexlet](https://lexlet.com) or see all of my puzzle games [here](https://skedwards88.github.io/).
 
 ## Development
