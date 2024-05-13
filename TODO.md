@@ -1,0 +1,2 @@
+- maybe filter out shapes that can only follow 2 paths (i.e. 1 path forward or backward)
+- maybe filter out shapes that can only fit in a few places on the board
