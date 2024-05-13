@@ -1,7 +1,8 @@
 html {
-  --board-box-diam: min(10vmax, 20vmin);
+  --board-box-diam-4: min(10vmax, 20vmin);
+  --board-box-diam-5: min(8vmax, 16vmin);
   --shape-box-diam: min(5vmin, 3vmax);
-  --default-font-size: calc(var(--board-box-diam) * 0.4);
+  --default-font-size: calc(var(--board-box-diam-4) * 0.4);
   --dark-color: rgb(55 54 71);
   --light-color: rgb(239 239 239);
 
@@ -108,12 +109,20 @@ button:disabled {
   background-color: var(--dark-color);
   touch-action: none;
   justify-content: center;
-  grid-template-columns: repeat(4, var(--board-box-diam));
-  grid-template-rows: repeat(4, var(--board-box-diam));
   justify-self: center;
   align-items: center;
   justify-items: center;
   align-self: center;
+}
+
+#board.size4 {
+  grid-template-columns: repeat(4, var(--board-box-diam-4));
+  grid-template-rows: repeat(4, var(--board-box-diam-4));
+}
+
+#board.size5 {
+  grid-template-columns: repeat(5, var(--board-box-diam-5));
+  grid-template-rows: repeat(5, var(--board-box-diam-5));
 }
 
 .letterBox {
@@ -128,12 +137,19 @@ button:disabled {
   background-color: transparent;
   width: 60%;
   height: 60%;
-  font-size: calc(var(--default-font-size) * 1.2);
   color: var(--dark-color);
   display: flex;
   align-items: center;
   justify-content: center;
   align-self: center;
+}
+
+#board.size4 > .letter {
+  font-size: calc(var(--board-box-diam-4) * 0.5);
+}
+
+#board.size5 > .letter {
+  font-size: calc(var(--board-box-diam-4) * 0.5);
 }
 
 .letterBox.unavailable {
@@ -161,9 +177,17 @@ button:disabled {
 
 .shape {
   display: grid;
+  margin: calc(var(--shape-box-diam) * 0.4);
+}
+
+.shape.size4{
   grid-template-columns: repeat(4, var(--shape-box-diam));
   grid-template-rows: repeat(4, var(--shape-box-diam));
-  margin: calc(var(--shape-box-diam) * 0.4);
+}
+
+.shape.size5{
+  grid-template-columns: repeat(5, var(--shape-box-diam));
+  grid-template-rows: repeat(5, var(--shape-box-diam));
 }
 
 .shapeBox.filled {

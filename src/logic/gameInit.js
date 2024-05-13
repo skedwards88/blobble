@@ -67,12 +67,14 @@ export function gameInit({
     return {...savedState, playedIndexes: [], result: ""};
   }
 
-  const gridSize = 4;
-
   difficultyLevel = isDaily ? getDifficultyLevelForDay() : difficultyLevel || 3;
 
   const [minWordLength, maxWordLength] =
     getShapeSizeForDifficulty(difficultyLevel);
+
+  // if the min word length is >=5, set the grid size to 5; otherwise, set it to 4
+  // This helps prevent shapes that have a low number of possible placements
+  const gridSize = minWordLength >= 5 ? 5 : 4;
 
   const [letters, shapes, officialSolutions] = getGame({
     gridSize,

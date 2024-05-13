@@ -49,7 +49,7 @@ export function Shape({
 
   return (
     <div className="shapeAndWord">
-      <div className="shape">{boxes}</div>
+      <div className={`shape size${gridSize}`}>{boxes}</div>
       <div className="foundWord">{word}</div>
     </div>
   );

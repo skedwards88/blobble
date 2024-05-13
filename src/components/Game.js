@@ -58,6 +58,7 @@ function GameMessage({gameState}) {
 
 function Game({dispatchGameState, gameState, isDaily}) {
   const gameOver = gameIsSolvedQ(gameState.foundSolutions);
+  const gridSize = Math.sqrt(gameState.letters.length);
 
   return (
     <div id="game">
@@ -85,7 +86,7 @@ function Game({dispatchGameState, gameState, isDaily}) {
         <GameMessage gameOver={gameOver} gameState={gameState}></GameMessage>
       )}
 
-      <div id="board">
+      <div id="board" className={`size${gridSize}`}>
         {gameState.letters.map((letter, index) => (
           <Letter
             letter={letter}
