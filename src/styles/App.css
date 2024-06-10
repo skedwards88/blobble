@@ -168,6 +168,7 @@ button:disabled {
 
 .shapeBox.filled {
   background-color: var(--light-color);
+  border: 1px solid var(--dark-color);
 }
 
 .shapeBox.filled.solved {
