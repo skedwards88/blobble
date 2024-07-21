@@ -1,8 +1,8 @@
 import {convertYYYYMMDDToDate} from "./convertYYYYMMDDToDate";
 
-export function hasVisitedSince() {
+export function hasVisitedSince(savedStateName, resetDateString) {
   let lastVisitedYYYYMMDD = JSON.parse(
-    localStorage.getItem("blobbleLastVisited"),
+    localStorage.getItem(savedStateName),
   );
 
   if (!lastVisitedYYYYMMDD) {
@@ -11,10 +11,7 @@ export function hasVisitedSince() {
 
   const lastVisitedDate = convertYYYYMMDDToDate(lastVisitedYYYYMMDD);
 
-  const resetDate = convertYYYYMMDDToDate("20240429");
+  const resetDate = convertYYYYMMDDToDate(resetDateString);
 
-  console.log(lastVisitedDate);
-  console.log(resetDate);
-  console.log(lastVisitedDate >= resetDate);
   return lastVisitedDate >= resetDate;
 }
