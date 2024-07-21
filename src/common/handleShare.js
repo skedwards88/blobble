@@ -1,12 +1,12 @@
 import sendAnalytics from "./sendAnalytics";
 
-export function assembleShareLink({url, seed}) {
-  const fullUrl = seed ? `${url}?id=${seed}` : url;
+export function assembleShareLink({url, seed, query = "id"}) {
+  const fullUrl = seed ? `${url}?${query}=${seed}` : url;
   return fullUrl;
 }
 
-export function handleShare({appName, text, url, seed}) {
-  const fullUrl = assembleShareLink({url, seed});
+export function handleShare({appName, text, url, seed, query}) {
+  const fullUrl = assembleShareLink({url, seed, query});
 
   navigator
     .share({

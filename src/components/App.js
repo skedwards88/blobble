@@ -12,28 +12,18 @@ import {gameInit} from "../logic/gameInit";
 import {gameReducer} from "../logic/gameReducer";
 import getDailySeed from "../common/getDailySeed";
 import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
-import {getInitialState} from "../logic/getInitialState";
-import {hasVisitedSince} from "../logic/hasVisitedSince";
-
-function parseUrlQuery() {
-  const searchParams = new URLSearchParams(document.location.search);
-  const query = searchParams.get("id");
-
-  // The seed query consists of two parts: the seed and the difficulty level, separated by an underscore
-  let difficultyLevel;
-  let seed;
-  if (query) {
-    [seed, difficultyLevel] = query.split("_");
-    difficultyLevel = parseInt(difficultyLevel);
-  }
-
-  return [seed, difficultyLevel];
-}
+import {getInitialState} from "../common/getInitialState";
+import {hasVisitedSince} from "../common/hasVisitedSince";
+import {parseUrlQuery} from "../logic/parseUrlQuery";
 
 export default function App() {
+  // If a query string was passed,
+  // parse it to get the data to regenerate the game described by the query string
   const [seed, difficultyLevel] = parseUrlQuery();
 
-  const hasVisited = hasVisitedSince();
+  // Determine when the player last visited the game
+  // This is used to determine whether to show the rules or an announcement instead of the game
+  const hasVisited = hasVisitedSince("blobbleLastVisited", "20240429");
   const [lastVisited] = React.useState(getDailySeed());
   React.useEffect(() => {
     window.localStorage.setItem(
@@ -42,13 +32,13 @@ export default function App() {
     );
   }, [lastVisited]);
 
-  const savedDisplay = JSON.parse(
-    localStorage.getItem("blobbleDisplaySavedStateName"),
-  );
+  // Determine what view to show the user
+  const savedDisplay = JSON.parse(localStorage.getItem("blobbleDisplay"));
   const [display, setDisplay] = React.useState(
     getInitialState(savedDisplay, hasVisited),
   );
 
+  // Set up states that will be used by the handleAppInstalled and handleBeforeInstallPrompt listeners
   const [installPromptEvent, setInstallPromptEvent] = React.useState();
   const [showInstallButton, setShowInstallButton] = React.useState(true);
 
@@ -115,10 +105,7 @@ export default function App() {
   }, []);
 
   React.useEffect(() => {
-    window.localStorage.setItem(
-      "blobbleDisplaySavedStateName",
-      JSON.stringify(display),
-    );
+    window.localStorage.setItem("blobbleDisplay", JSON.stringify(display));
   }, [display]);
 
   React.useEffect(() => {
