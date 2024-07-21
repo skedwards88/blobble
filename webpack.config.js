@@ -19,6 +19,7 @@ module.exports = (env, argv) => {
   const copyPlugin = new CopyPlugin({
     patterns: [
       {from: "./src/manifest.json", to: "./assets/manifest.json"},
+      {from: "./src/assetlinks.json", to: "./.well-known/assetlinks.json"},
       {from: "./src/privacy.html", to: "./privacy.html"},
       {from: "./src/images/favicons/favicon.svg", to: "./assets/favicon.svg"},
       {from: "./src/images/favicons/icon_512.png", to: "./assets/icon_512.png"},
