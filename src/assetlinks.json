@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "blobble.io.github.skedwards88.twa",
+      "sha256_cert_fingerprints": [
+        "0C:AA:33:39:D6:47:A9:9C:37:AE:0B:7C:F1:9C:1D:DD:BD:47:D7:EF:CA:D8:9E:3B:D7:07:B9:5A:B9:0B:82:53"
+      ]
+    }
+  }
+]
