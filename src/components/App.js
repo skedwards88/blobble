@@ -33,9 +33,7 @@ export default function App() {
   }, [lastVisited]);
 
   // Determine what view to show the user
-  const savedDisplay = JSON.parse(
-    localStorage.getItem("blobbleDisplay"),
-  );
+  const savedDisplay = JSON.parse(localStorage.getItem("blobbleDisplay"));
   const [display, setDisplay] = React.useState(
     getInitialState(savedDisplay, hasVisited),
   );
@@ -107,10 +105,7 @@ export default function App() {
   }, []);
 
   React.useEffect(() => {
-    window.localStorage.setItem(
-      "blobbleDisplay",
-      JSON.stringify(display),
-    );
+    window.localStorage.setItem("blobbleDisplay", JSON.stringify(display));
   }, [display]);
 
   React.useEffect(() => {

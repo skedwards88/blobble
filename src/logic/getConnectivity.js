@@ -7,7 +7,7 @@ export function getConnectivity(indexes, gridSize) {
   if (gridSize <= 0) {
     throw new Error("Grid size must be greater than 0");
   }
-  
+
   // error if index exceeds the grid size
   if (indexes.some((index) => index >= gridSize * gridSize || index < 0)) {
     throw new Error("Index is not within grid size");
@@ -20,7 +20,9 @@ export function getConnectivity(indexes, gridSize) {
       numColumns: gridSize,
       numRows: gridSize,
     });
-    const surroundingIndexesInInput = surroundingIndexesInGrid.filter((neighbor) => neighbor != index && indexes.includes(neighbor));
+    const surroundingIndexesInInput = surroundingIndexesInGrid.filter(
+      (neighbor) => neighbor != index && indexes.includes(neighbor),
+    );
     connectivity += surroundingIndexesInInput.length;
   });
 

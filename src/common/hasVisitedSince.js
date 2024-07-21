@@ -1,9 +1,7 @@
 import {convertYYYYMMDDToDate} from "./convertYYYYMMDDToDate";
 
 export function hasVisitedSince(savedStateName, resetDateString) {
-  let lastVisitedYYYYMMDD = JSON.parse(
-    localStorage.getItem(savedStateName),
-  );
+  let lastVisitedYYYYMMDD = JSON.parse(localStorage.getItem(savedStateName));
 
   if (!lastVisitedYYYYMMDD) {
     return false;
