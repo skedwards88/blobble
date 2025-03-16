@@ -2,7 +2,7 @@
   "name": "Blobble",
   "short_name": "Blobble",
   "description": "A spatial word puzzle",
-  "id": "?blobble=20240502",
+  "id": "https://skedwards88.github.io/blobble/?blobble=20240502",
   "dir": "auto",
   "lang": "en-US",
   "display": "standalone",
