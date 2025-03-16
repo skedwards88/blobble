@@ -17,13 +17,48 @@ import {hasVisitedSince} from "../common/hasVisitedSince";
 import {parseUrlQuery} from "../logic/parseUrlQuery";
 
 export default function App() {
+  // *****
+  // Install handling setup
+  // *****
+  // Set up states that will be used by the handleAppInstalled and handleBeforeInstallPrompt listeners
+  const [installPromptEvent, setInstallPromptEvent] = React.useState();
+  const [showInstallButton, setShowInstallButton] = React.useState(true);
+
+  React.useEffect(() => {
+    // Need to store the function in a variable so that
+    // the add and remove actions can reference the same function
+    const listener = (event) =>
+      handleBeforeInstallPrompt(
+        event,
+        setInstallPromptEvent,
+        setShowInstallButton,
+      );
+
+    window.addEventListener("beforeinstallprompt", listener);
+
+    return () => window.removeEventListener("beforeinstallprompt", listener);
+  }, []);
+
+  React.useEffect(() => {
+    // Need to store the function in a variable so that
+    // the add and remove actions can reference the same function
+    const listener = () =>
+      handleAppInstalled(setInstallPromptEvent, setShowInstallButton);
+
+    window.addEventListener("appinstalled", listener);
+    return () => window.removeEventListener("appinstalled", listener);
+  }, []);
+  // *****
+  // End install handling setup
+  // *****
+
   // If a query string was passed,
   // parse it to get the data to regenerate the game described by the query string
   const [seed, difficultyLevel] = parseUrlQuery();
 
   // Determine when the player last visited the game
   // This is used to determine whether to show the rules or an announcement instead of the game
-  const hasVisited = hasVisitedSince("blobbleLastVisited", "20240429");
+  const hasVisitedSinceLastAnnouncement = hasVisitedSince("blobbleLastVisited", "20240429");
   const [lastVisited] = React.useState(getDailySeed());
   React.useEffect(() => {
     window.localStorage.setItem(
@@ -35,12 +70,8 @@ export default function App() {
   // Determine what view to show the user
   const savedDisplay = JSON.parse(localStorage.getItem("blobbleDisplay"));
   const [display, setDisplay] = React.useState(
-    getInitialState(savedDisplay, hasVisited),
+    getInitialState(savedDisplay, hasVisitedSinceLastAnnouncement),
   );
-
-  // Set up states that will be used by the handleAppInstalled and handleBeforeInstallPrompt listeners
-  const [installPromptEvent, setInstallPromptEvent] = React.useState();
-  const [showInstallButton, setShowInstallButton] = React.useState(true);
 
   const [gameState, dispatchGameState] = React.useReducer(
     gameReducer,
@@ -77,31 +108,6 @@ export default function App() {
     return () => {
       document.removeEventListener("visibilitychange", handleVisibilityChange);
     };
-  }, []);
-
-  React.useEffect(() => {
-    // Need to store the function in a variable so that
-    // the add and remove actions can reference the same function
-    const listener = (event) =>
-      handleBeforeInstallPrompt(
-        event,
-        setInstallPromptEvent,
-        setShowInstallButton,
-      );
-
-    window.addEventListener("beforeinstallprompt", listener);
-
-    return () => window.removeEventListener("beforeinstallprompt", listener);
-  }, []);
-
-  React.useEffect(() => {
-    // Need to store the function in a variable so that
-    // the add and remove actions can reference the same function
-    const listener = () =>
-      handleAppInstalled(setInstallPromptEvent, setShowInstallButton);
-
-    window.addEventListener("appinstalled", listener);
-    return () => window.removeEventListener("appinstalled", listener);
   }, []);
 
   React.useEffect(() => {
