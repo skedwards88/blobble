@@ -2,7 +2,7 @@ import sendAnalytics from "../common/sendAnalytics";
 import getRandomSeed from "../common/getRandomSeed";
 import getDailySeed from "../common/getDailySeed";
 import {getGame} from "./getGame";
-import {getDifficultyLevelForDay} from "./getDifficultyLevelForDay";
+import {getDifficultyLevelForDay} from "../common/getDifficultyLevelForDay";
 import {getShapeSizeForDifficulty} from "./getShapeSizeForDifficulty";
 import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
 
