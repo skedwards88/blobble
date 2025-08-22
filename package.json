@@ -25,6 +25,7 @@
   },
   "homepage": "https://github.com/skedwards88/blobble#readme",
   "dependencies": {
+    "@skedwards88/shared-components": "^0.0.12",
     "@skedwards88/word_lists": "latest",
     "@skedwards88/word_logic": "4.0.1",
     "lodash.clonedeep": "^4.5.0",
