@@ -3,7 +3,8 @@ import {Letter} from "./Letter";
 import {Shape} from "./Shape";
 import {indexesToWord} from "../logic/indexesToWord";
 import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
-import {handleShare} from "../common/handleShare";
+import {assembleShareLink} from "../common/assembleShareLink";
+import Share from "@skedwards88/shared-components/src/components/Share";
 
 function GameOver({gameState, dispatchGameState, isDaily}) {
   if (isDaily) {
@@ -12,21 +13,16 @@ function GameOver({gameState, dispatchGameState, isDaily}) {
 
   return (
     <div className="gameOver">
-      {navigator.canShare ? (
-        <button
-          id="shareButton"
-          onClick={() => {
-            handleShare({
-              appName: "Blobble",
-              text: "Check out this word puzzle!",
-              url: "https://skedwards88.github.io/blobble",
-              seed: `${gameState.seed}_${gameState.difficultyLevel}`,
-            });
-          }}
-        ></button>
-      ) : (
-        <></>
-      )}
+      <Share
+        appName="Blobble"
+        text="Check out this word puzzle!"
+        url={assembleShareLink({
+          url: "https://skedwards88.github.io/blobble/",
+          seed: `${gameState.seed}_${gameState.difficultyLevel}`,
+        })}
+        origin="game over"
+        id="shareButton"
+      ></Share>
       <button
         id="newGameButton"
         onClick={() => {

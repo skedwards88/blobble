@@ -58,7 +58,10 @@ export default function App() {
 
   // Determine when the player last visited the game
   // This is used to determine whether to show the rules or an announcement instead of the game
-  const hasVisitedSinceLastAnnouncement = hasVisitedSince("blobbleLastVisited", "20240429");
+  const hasVisitedSinceLastAnnouncement = hasVisitedSince(
+    "blobbleLastVisited",
+    "20240429",
+  );
   const [lastVisited] = React.useState(getDailySeed());
   React.useEffect(() => {
     window.localStorage.setItem(
@@ -134,13 +137,7 @@ export default function App() {
 
     case "heart":
       return (
-        <Heart
-          setDisplay={setDisplay}
-          appName="Blobble"
-          shareText="Check out this word puzzle!"
-          repoName="blobble"
-          url="https://skedwards88.github.io/blobble"
-        />
+        <Heart setDisplay={setDisplay} appName="Blobble" repoName="blobble" />
       );
 
     case "settings":
@@ -205,9 +202,6 @@ export default function App() {
             dispatchGameState={dispatchGameState}
             gameState={gameState}
             dailyIsSolved={gameIsSolvedQ(dailyGameState.foundSolutions)}
-            appName="Blobble"
-            shareText="Check out this word puzzle!"
-            url="https://skedwards88.github.io/blobble"
           ></ControlBar>
           <Game
             dispatchGameState={dispatchGameState}

@@ -1,6 +1,6 @@
 import React from "react";
 import {handleInstall} from "../common/handleInstall";
-import {handleShare} from "../common/handleShare";
+import Share from "@skedwards88/shared-components/src/components/Share";
 
 function ControlBar({
   dispatchGameState,
@@ -10,9 +10,6 @@ function ControlBar({
   showInstallButton,
   installPromptEvent,
   dailyIsSolved,
-  appName,
-  shareText,
-  url,
 }) {
   return (
     <div id="controls">
@@ -42,17 +39,14 @@ function ControlBar({
         onClick={() => setDisplay("heart")}
       ></button>
 
-      {navigator.canShare ? (
-        <button
-          id="shareButton"
-          className="controlButton"
-          onClick={() => {
-            handleShare({appName, text: shareText, url});
-          }}
-        ></button>
-      ) : (
-        <></>
-      )}
+      <Share
+        appName="Blobble"
+        text="Check out this word puzzle!"
+        url="https://skedwards88.github.io/blobble/"
+        origin="control bar"
+        id="shareButton"
+        className="controlButton"
+      ></Share>
 
       {dailyIsSolved ? (
         <button

@@ -1,13 +1,21 @@
 import React from "react";
-import Share from "./Share";
+import Share from "@skedwards88/shared-components/src/components/Share";
 
-export default function Heart({setDisplay, appName, shareText, repoName, url}) {
+export default function Heart({setDisplay, appName, repoName}) {
   return (
     <div className="App info">
       <h1>{appName}</h1>
       <div className="infoText">
         {"Like this game? Share it with your friends.\n\n"}
-        {<Share appName={appName} text={shareText} url={url}></Share>}
+        {
+          <Share
+            appName="Blobble"
+            text="Check out this word puzzle!"
+            url="https://skedwards88.github.io/blobble/"
+            origin="heart"
+            content="Share"
+          ></Share>
+        }
         {`\n`}
         {<hr></hr>}
         {`\n`}
