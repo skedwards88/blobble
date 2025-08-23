@@ -1,12 +1,14 @@
 import React from "react";
 import Game from "./Game";
-import Heart from "./Heart";
 import Rules from "./Rules";
 import ControlBar from "./ControlBar";
 import {
   handleAppInstalled,
   handleBeforeInstallPrompt,
-} from "../common/handleInstall";
+} from "@skedwards88/shared-components/src/logic/handleInstall";
+import InstallOverview from "@skedwards88/shared-components/src/components/InstallOverview";
+import PWAInstall from "@skedwards88/shared-components/src/components/PWAInstall";
+import MoreGames from "@skedwards88/shared-components/src/components/MoreGames";
 import Settings from "./Settings";
 import {gameInit} from "../logic/gameInit";
 import {gameReducer} from "../logic/gameReducer";
@@ -46,6 +48,7 @@ export default function App() {
       handleAppInstalled(setInstallPromptEvent, setShowInstallButton);
 
     window.addEventListener("appinstalled", listener);
+
     return () => window.removeEventListener("appinstalled", listener);
   }, []);
   // *****
@@ -137,7 +140,39 @@ export default function App() {
 
     case "heart":
       return (
-        <Heart setDisplay={setDisplay} appName="Blobble" repoName="blobble" />
+        <MoreGames
+          setDisplay={setDisplay}
+          games={["crossjig", "lexlet", "wordfall", "gribbles", "logicGrid"]}
+          repoName={"blobble"}
+          includeExtraInfo={true}
+          includeWordAttribution={true}
+          googleLink={
+            "https://play.google.com/store/apps/details?id=blobble.io.github.skedwards88.twa&hl=en_US"
+          }
+        ></MoreGames>
+      );
+
+    case "installOverview":
+      return (
+        <InstallOverview
+          setDisplay={setDisplay}
+          setInstallPromptEvent={setInstallPromptEvent}
+          showInstallButton={showInstallButton}
+          installPromptEvent={installPromptEvent}
+          googleAppLink={
+            "https://play.google.com/store/apps/details?id=com.palettegame.twa&hl=en_US"
+          }
+        ></InstallOverview>
+      );
+
+    case "pwaInstall":
+      return (
+        <PWAInstall
+          setDisplay={setDisplay}
+          googleAppLink={
+            "https://play.google.com/store/apps/details?id=com.palettegame.twa&hl=en_US"
+          }
+        ></PWAInstall>
       );
 
     case "settings":

@@ -1,5 +1,6 @@
 import React from "react";
 import packageJson from "../../package.json";
+import PlayButtons from "@skedwards88/shared-components/src/components/PlayButtons";
 
 export default function Rules({setDisplay}) {
   return (
@@ -15,15 +16,12 @@ export default function Rules({setDisplay}) {
       <p className="rulesText">
         {`Tap on a shape to reveal the next letter in the word.`}
       </p>
-      <button
-        id="rulesClose"
-        className="close"
-        onClick={() => {
+      <PlayButtons
+        onClickPlay={() => {
           setDisplay("game");
         }}
-      >
-        {"Play"}
-      </button>
+        onClickInstall={() => setDisplay("installOverview")}
+      ></PlayButtons>
       <small id="rulesVersion">version {packageJson.version}</small>
     </div>
   );

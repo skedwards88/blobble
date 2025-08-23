@@ -1,16 +1,8 @@
 import React from "react";
-import {handleInstall} from "../common/handleInstall";
 import Share from "@skedwards88/shared-components/src/components/Share";
+import {isRunningStandalone} from "@skedwards88/shared-components/src/logic/isRunningStandalone";
 
-function ControlBar({
-  dispatchGameState,
-  gameState,
-  setDisplay,
-  setInstallPromptEvent,
-  showInstallButton,
-  installPromptEvent,
-  dailyIsSolved,
-}) {
+function ControlBar({dispatchGameState, gameState, setDisplay, dailyIsSolved}) {
   return (
     <div id="controls">
       <button
@@ -64,13 +56,11 @@ function ControlBar({
         ></button>
       )}
 
-      {showInstallButton && installPromptEvent ? (
+      {!isRunningStandalone() ? (
         <button
           id="installButton"
           className="controlButton"
-          onClick={() =>
-            handleInstall(installPromptEvent, setInstallPromptEvent)
-          }
+          onClick={() => setDisplay("installOverview")}
         ></button>
       ) : (
         <></>
