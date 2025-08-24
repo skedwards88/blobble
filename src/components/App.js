@@ -160,7 +160,7 @@ export default function App() {
           showInstallButton={showInstallButton}
           installPromptEvent={installPromptEvent}
           googleAppLink={
-            "https://play.google.com/store/apps/details?id=com.palettegame.twa&hl=en_US"
+            "https://play.google.com/store/apps/details?id=blobble.io.github.skedwards88.twa&hl=en_US"
           }
         ></InstallOverview>
       );
@@ -170,7 +170,7 @@ export default function App() {
         <PWAInstall
           setDisplay={setDisplay}
           googleAppLink={
-            "https://play.google.com/store/apps/details?id=com.palettegame.twa&hl=en_US"
+            "https://play.google.com/store/apps/details?id=blobble.io.github.skedwards88.twa&hl=en_US"
           }
         ></PWAInstall>
       );
