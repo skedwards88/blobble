@@ -1,8 +1,8 @@
-import sendAnalytics from "../common/sendAnalytics";
-import getRandomSeed from "../common/getRandomSeed";
-import getDailySeed from "../common/getDailySeed";
+import {sendAnalytics} from "@skedwards88/shared-components/src/logic/sendAnalytics";
+import {getRandomSeed} from "@skedwards88/shared-components/src/logic/getRandomSeed";
+import {getSeedFromDate} from "@skedwards88/shared-components/src/logic/getSeedFromDate";
 import {getGame} from "./getGame";
-import {getDifficultyLevelForDay} from "../common/getDifficultyLevelForDay";
+import {getDifficultyLevelForDay} from "@skedwards88/shared-components/src/logic/getDifficultyLevelForDay";
 import {getShapeSizeForDifficulty} from "./getShapeSizeForDifficulty";
 import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
 
@@ -42,7 +42,7 @@ export function gameInit({
     : "blobbleGameSavedState";
 
   if (isDaily) {
-    seed = getDailySeed();
+    seed = getSeedFromDate();
   }
 
   if (!seed) {

@@ -12,10 +12,10 @@ import MoreGames from "@skedwards88/shared-components/src/components/MoreGames";
 import Settings from "./Settings";
 import {gameInit} from "../logic/gameInit";
 import {gameReducer} from "../logic/gameReducer";
-import getDailySeed from "../common/getDailySeed";
+import {getSeedFromDate} from "@skedwards88/shared-components/src/logic/getSeedFromDate";
 import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
-import {getInitialState} from "../common/getInitialState";
-import {hasVisitedSince} from "../common/hasVisitedSince";
+import {getInitialState} from "../logic/getInitialState";
+import {hasVisitedSince} from "@skedwards88/shared-components/src/logic/hasVisitedSince";
 import {parseUrlQuery} from "../logic/parseUrlQuery";
 
 export default function App() {
@@ -61,11 +61,14 @@ export default function App() {
 
   // Determine when the player last visited the game
   // This is used to determine whether to show the rules or an announcement instead of the game
+  const lastVisitedYYYYMMDD = JSON.parse(
+    localStorage.getItem("blobbleLastVisited"),
+  );
   const hasVisitedSinceLastAnnouncement = hasVisitedSince(
-    "blobbleLastVisited",
+    lastVisitedYYYYMMDD,
     "20240429",
   );
-  const [lastVisited] = React.useState(getDailySeed());
+  const [lastVisited] = React.useState(getSeedFromDate());
   React.useEffect(() => {
     window.localStorage.setItem(
       "blobbleLastVisited",
@@ -186,7 +189,7 @@ export default function App() {
 
     case "daily":
       // force reinitialize the daily state if the day has changed
-      if (dailyGameState.seed != getDailySeed()) {
+      if (dailyGameState.seed != getSeedFromDate()) {
         dailyDispatchGameState({
           action: "newGame",
           isDaily: true,
@@ -231,9 +234,6 @@ export default function App() {
         >
           <ControlBar
             setDisplay={setDisplay}
-            setInstallPromptEvent={setInstallPromptEvent}
-            showInstallButton={showInstallButton}
-            installPromptEvent={installPromptEvent}
             dispatchGameState={dispatchGameState}
             gameState={gameState}
             dailyIsSolved={gameIsSolvedQ(dailyGameState.foundSolutions)}

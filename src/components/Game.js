@@ -3,7 +3,7 @@ import {Letter} from "./Letter";
 import {Shape} from "./Shape";
 import {indexesToWord} from "../logic/indexesToWord";
 import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
-import {assembleShareLink} from "../common/assembleShareLink";
+import {assembleShareLink} from "@skedwards88/shared-components/src/logic/assembleShareLink";
 import Share from "@skedwards88/shared-components/src/components/Share";
 
 function GameOver({gameState, dispatchGameState, isDaily}) {
