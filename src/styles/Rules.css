@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: space-around;
   text-align: center;
-  overflow: scroll;
+  overflow: auto;
   font-size: calc(var(--default-font-size) * 0.7);
   justify-items: center;
   align-items: center;

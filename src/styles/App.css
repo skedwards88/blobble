@@ -54,7 +54,7 @@ button:disabled {
   height: 90vh; /* fallback if svh isn't handled */
   height: 100svh; /* use svh if supported to account for the url bar gracefully */
   width: 100vw;
-  overflow: scroll;
+  overflow: auto;
 }
 
 #info {

@@ -13,12 +13,13 @@
     align-self: start;
   }
 
+  #settings {
+    width: 50%;
+  }
+
   #controls,
-  #exitDaily {
+  #exitDaily,
+  .gameOver {
     width: 100%;
   }
-}
-
-.gameOver {
-  width: 100%;
 }
