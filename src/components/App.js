@@ -175,6 +175,7 @@ export default function App() {
           googleAppLink={
             "https://play.google.com/store/apps/details?id=blobble.io.github.skedwards88.twa&hl=en_US"
           }
+          pwaLink={"https://skedwards88.github.io/blobble"}
         ></PWAInstall>
       );
 
