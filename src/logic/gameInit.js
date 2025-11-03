@@ -1,4 +1,3 @@
-import {sendAnalytics} from "@skedwards88/shared-components/src/logic/sendAnalytics";
 import {getRandomSeed} from "@skedwards88/shared-components/src/logic/getRandomSeed";
 import {getSeedFromDate} from "@skedwards88/shared-components/src/logic/getSeedFromDate";
 import {getGame} from "./getGame";
@@ -64,7 +63,7 @@ export function gameInit({
     // otherwise, don't use the saved state if the game is solved
     !(!isDaily && gameIsSolvedQ(savedState.foundSolutions))
   ) {
-    return {...savedState, playedIndexes: [], result: ""};
+    return {...savedState, playedIndexes: [], result: "", analyticsToLog: []};
   }
 
   const gridSize = 4;
@@ -89,8 +88,6 @@ export function gameInit({
 
   const foundSolutions = shapes.map((shape) => shape.map(() => undefined));
 
-  sendAnalytics("new_game");
-
   return {
     seed,
     letters,
@@ -101,5 +98,15 @@ export function gameInit({
     playedIndexes: [],
     result: "",
     difficultyLevel,
+    isDaily,
+    analyticsToLog: [
+      {
+        eventName: "new_game",
+        eventInfo: {
+          isDaily,
+          difficultyLevel,
+        },
+      },
+    ],
   };
 }
