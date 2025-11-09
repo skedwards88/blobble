@@ -63,7 +63,7 @@ export function gameInit({
     // otherwise, don't use the saved state if the game is solved
     !(!isDaily && gameIsSolvedQ(savedState.foundSolutions))
   ) {
-    return {...savedState, playedIndexes: [], result: "", analyticsToLog: []};
+    return {...savedState, playedIndexes: [], result: ""};
   }
 
   const gridSize = 4;
@@ -99,14 +99,5 @@ export function gameInit({
     result: "",
     difficultyLevel,
     isDaily,
-    analyticsToLog: [
-      {
-        eventName: "new_game",
-        eventInfo: {
-          isDaily,
-          difficultyLevel,
-        },
-      },
-    ],
   };
 }

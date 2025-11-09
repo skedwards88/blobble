@@ -5,11 +5,8 @@ import {trie} from "./trie";
 import {indexesToWord} from "./indexesToWord";
 import {shapesMatchQ} from "./shapesMatchQ";
 import {shapeIsSolvedQ} from "./shapeIsSolvedQ";
-import {gameIsSolvedQ} from "./gameIsSolvedQ";
 
 export function gameReducer(currentGameState, payload) {
-  let analyticsToLog = [];
-
   if (payload.action === "newGame") {
     return gameInit({...payload, seed: undefined, useSaved: false});
   } else if (payload.action === "startWord") {
@@ -18,7 +15,6 @@ export function gameReducer(currentGameState, payload) {
       ...currentGameState,
       playedIndexes: [playedIndex],
       result: "",
-      analyticsToLog,
     };
   } else if (payload.action === "addLetter") {
     // exit early if a word isn't in progress
@@ -48,7 +44,6 @@ export function gameReducer(currentGameState, payload) {
       ...currentGameState,
       playedIndexes: newPlayedIndexes,
       result: "",
-      analyticsToLog,
     };
   } else if (payload.action === "removeLetter") {
     // exit early if a word isn't in progress
@@ -72,7 +67,6 @@ export function gameReducer(currentGameState, payload) {
       ...currentGameState,
       playedIndexes: newPlayedIndexes,
       result: "",
-      analyticsToLog,
     };
   } else if (payload.action === "endWord") {
     // exit early if a word isn't in progress
@@ -100,7 +94,6 @@ export function gameReducer(currentGameState, payload) {
         ...currentGameState,
         playedIndexes: [],
         result: word.length > 3 ? "Unknown word" : "",
-        analyticsToLog,
       };
     }
 
@@ -131,23 +124,11 @@ export function gameReducer(currentGameState, payload) {
       newFoundSolutions[matchingShapeIndex] = currentGameState.playedIndexes;
     }
 
-    if (gameIsSolvedQ(newFoundSolutions)) {
-      analyticsToLog.push({
-        eventName: "completed_game",
-        eventInfo: {
-          difficultyLevel: currentGameState.difficultyLevel,
-          isDaily: currentGameState.isDaily,
-          numHints: currentGameState.hintTally,
-        },
-      });
-    }
-
     return {
       ...currentGameState,
       playedIndexes: [],
       foundSolutions: newFoundSolutions,
       result: "",
-      analyticsToLog,
     };
   } else if (payload.action === "hint") {
     // A hint reveals one letter at a time (in order) of the official solution
@@ -172,24 +153,9 @@ export function gameReducer(currentGameState, payload) {
 
     const newHintTally = 1 + (currentGameState.hintTally ?? 0);
 
-    console.log(`newHintTally: ${newHintTally}`);
-    analyticsToLog.push({eventName: "hint"});
-
-    if (gameIsSolvedQ(newFoundSolutions)) {
-      analyticsToLog.push({
-        eventName: "completed_game",
-        eventInfo: {
-          difficultyLevel: currentGameState.difficultyLevel,
-          isDaily: currentGameState.isDaily,
-          numHints: newHintTally,
-        },
-      });
-    }
-
     return {
       ...currentGameState,
       foundSolutions: newFoundSolutions,
-      analyticsToLog,
       hintTally: newHintTally,
     };
   } else {

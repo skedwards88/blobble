@@ -5,8 +5,11 @@ import {indexesToWord} from "../logic/indexesToWord";
 import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
 import {assembleShareLink} from "@skedwards88/shared-components/src/logic/assembleShareLink";
 import Share from "@skedwards88/shared-components/src/components/Share";
+import {useMetadataContext} from "@skedwards88/shared-components/src/components/MetadataContextProvider";
 
 function GameOver({gameState, dispatchGameState, isDaily}) {
+  const {userId, sessionId} = useMetadataContext();
+
   if (isDaily) {
     return <div className="gameMessage">Solved!</div>;
   }
@@ -22,6 +25,8 @@ function GameOver({gameState, dispatchGameState, isDaily}) {
         })}
         origin="game over"
         id="shareButton"
+        userId={userId}
+        sessionId={sessionId}
       ></Share>
       <button
         id="newGameButton"
