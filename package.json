@@ -1,5 +1,6 @@
 {
   "name": "blobble",
+  "displayName": "Blobble",
   "version": "1.0.42",
   "description": "",
   "main": "index.js",
