@@ -16,8 +16,15 @@ import {parseUrlQuery} from "../logic/parseUrlQuery";
 import {sendAnalyticsCF} from "@skedwards88/shared-components/src/logic/sendAnalyticsCF";
 import {useMetadataContext} from "@skedwards88/shared-components/src/components/MetadataContextProvider";
 import {inferEventsToLog} from "../logic/inferEventsToLog";
+import {useInstallPrompt} from "@skedwards88/shared-components/src/logic/handleInstall";
 
 export default function App() {
+  const {userId, sessionId} = useMetadataContext();
+
+  // This must live at the top level component, not in InstallOverview where it is used, since the InstallOverview is not rendered initially and therefore misses its chance to attach the listeners
+  const {installPromptEvent, showInstallButton, handleInstall} =
+    useInstallPrompt({userId, sessionId});
+
   // If a query string was passed,
   // parse it to get the data to regenerate the game described by the query string
   const [seed, difficultyLevel] = parseUrlQuery();
@@ -100,8 +107,6 @@ export default function App() {
     );
   }, [dailyGameState]);
 
-  const {userId, sessionId} = useMetadataContext();
-
   // Store the previous state so that we can infer which analytics events to send
   const previousGameStateRef = React.useRef(gameState);
   const previousDailyGameStateRef = React.useRef(dailyGameState);
@@ -158,6 +163,9 @@ export default function App() {
           }
           userId={userId}
           sessionId={sessionId}
+          installPromptEvent={installPromptEvent}
+          showInstallButton={showInstallButton}
+          handleInstall={handleInstall}
         ></InstallOverview>
       );
 
