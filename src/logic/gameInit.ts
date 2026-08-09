@@ -73,10 +73,9 @@ export function gameInit({
     : undefined;
 
   if (
-    savedState?.seed &&
-    // If daily, use the saved state if the seed matches
-    // otherwise, we don't care if the seed matches
-    (!isDaily || savedState.seed == seed) &&
+    savedState &&
+    // If a seed was given, it must match the saved seed in order to use saved state
+    (!seed || savedState.seed === seed) &&
     validateSavedState(savedState) &&
     // Use the saved state if daily even if the game is solved
     // otherwise, don't use the saved state if the game is solved
