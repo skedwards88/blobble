@@ -14,7 +14,7 @@ export type GameState = {
   officialSolutions: number[][];
   foundSolutions: (number | undefined)[][];
   playedIndexes: number[];
-  result: string;
+  lastInvalidWord: string | null;
   difficultyLevel: number;
   isDaily: boolean;
   hintTally: number;
@@ -35,7 +35,6 @@ function validateSavedState(savedState: GameState): boolean {
     Array.isArray(savedState.foundSolutions) &&
     savedState.foundSolutions.every((solution) => Array.isArray(solution)) &&
     typeof savedState.difficultyLevel === "number" &&
-    typeof savedState.result === "string" &&
     Array.isArray(savedState.playedIndexes);
 
   if (!fieldsAreExpectedTypes) {
@@ -81,7 +80,7 @@ export function gameInit({
     // otherwise, don't use the saved state if the game is solved
     !(!isDaily && gameIsSolvedQ(savedState.foundSolutions))
   ) {
-    return {...savedState, playedIndexes: [], result: ""};
+    return {...savedState, playedIndexes: [], lastInvalidWord: null};
   }
 
   const gridSize = 4;
@@ -114,7 +113,7 @@ export function gameInit({
     officialSolutions,
     foundSolutions,
     playedIndexes: [],
-    result: "",
+    lastInvalidWord: null,
     difficultyLevel,
     isDaily,
     hintTally: 0,

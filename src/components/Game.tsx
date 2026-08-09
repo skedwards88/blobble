@@ -59,8 +59,8 @@ function GameMessage({gameState}: {gameState: GameState}): React.JSX.Element {
     );
   }
 
-  if (gameState.result) {
-    return <div className="gameMessage fadeOut">{gameState.result}</div>;
+  if (gameState.lastInvalidWord) {
+    return <div className="gameMessage fadeOut">Unknown word</div>;
   }
 
   return <div className="gameMessage"></div>;

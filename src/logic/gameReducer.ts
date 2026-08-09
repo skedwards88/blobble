@@ -42,7 +42,7 @@ export function gameReducer(
     return {
       ...currentGameState,
       playedIndexes: [playedIndex],
-      result: "",
+      lastInvalidWord: null,
     };
   } else if (payload.action === "addLetter") {
     // exit early if a word isn't in progress
@@ -71,7 +71,7 @@ export function gameReducer(
     return {
       ...currentGameState,
       playedIndexes: newPlayedIndexes,
-      result: "",
+      lastInvalidWord: null,
     };
   } else if (payload.action === "removeLetter") {
     // exit early if a word isn't in progress
@@ -94,7 +94,7 @@ export function gameReducer(
     return {
       ...currentGameState,
       playedIndexes: newPlayedIndexes,
-      result: "",
+      lastInvalidWord: null,
     };
   } else if (payload.action === "endWord") {
     // exit early if a word isn't in progress
@@ -121,7 +121,8 @@ export function gameReducer(
       return {
         ...currentGameState,
         playedIndexes: [],
-        result: word.length > 3 ? "Unknown word" : "",
+        // store the word in the state so we can log it in the analytics to see if the dictionary should be updated
+        lastInvalidWord: word.length >= 3 ? word : null,
       };
     }
 
@@ -156,7 +157,7 @@ export function gameReducer(
       ...currentGameState,
       playedIndexes: [],
       foundSolutions: newFoundSolutions,
-      result: "",
+      lastInvalidWord: null,
     };
   } else if (payload.action === "hint") {
     // A hint reveals one letter at a time (in order) of the official solution
