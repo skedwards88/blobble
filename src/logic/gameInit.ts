@@ -63,10 +63,6 @@ export function gameInit({
     seed = getSeedFromDate();
   }
 
-  if (!seed) {
-    seed = getRandomSeed();
-  }
-
   const savedState = useSaved
     ? getFromStorage<GameState>(savedStateName)
     : undefined;
@@ -81,6 +77,10 @@ export function gameInit({
     !(!isDaily && gameIsSolvedQ(savedState.foundSolutions))
   ) {
     return {...savedState, playedIndexes: [], lastInvalidWord: null};
+  }
+
+  if (!seed) {
+    seed = getRandomSeed();
   }
 
   const gridSize = 4;
