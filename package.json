@@ -10,9 +10,10 @@
     "dev": "webpack-dev-server --mode development",
     "start": "webpack-dev-server",
     "eslint": "npx eslint --ignore-path .gitignore . --fix",
+    "tslint": "npx tsc --noEmit",
     "prettier": "npx prettier --write .",
     "style": "npx stylelint '**/*.css' --fix",
-    "lint": "npm run eslint && npm run prettier && npm run style"
+    "lint": "npm run eslint && npm run tslint && npm run prettier && npm run style"
   },
   "repository": {
     "type": "git",
@@ -28,9 +29,7 @@
   "dependencies": {
     "@skedwards88/shared-components": "latest",
     "@skedwards88/word_lists": "latest",
-    "@skedwards88/word_logic": "4.0.1",
-    "lodash.clonedeep": "^4.5.0",
-    "lodash.isequal": "^4.5.0",
+    "@skedwards88/word_logic": "^4.0.8",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "seedrandom": "3.0.5"
@@ -44,6 +43,7 @@
     "@types/jest": "^30.0.0",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
+    "@types/seedrandom": "^3.0.8",
     "@typescript-eslint/eslint-plugin": "^8.66.0",
     "@typescript-eslint/parser": "^8.66.0",
     "babel-jest": "^29.7.0",

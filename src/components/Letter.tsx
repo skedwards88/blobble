@@ -1,0 +1,102 @@
+import React from "react";
+import {type ReducerPayload} from "../logic/gameReducer";
+import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
+
+function handlePointerDown(
+  event: React.PointerEvent,
+  index: number,
+  letterAvailability: boolean,
+  dispatchGameState: React.Dispatch<ReducerPayload>,
+): void {
+  event.preventDefault();
+  event.currentTarget.releasePointerCapture(event.pointerId);
+  if (letterAvailability) {
+    dispatchGameState({
+      action: "startWord",
+      letterIndex: index,
+    });
+  }
+}
+
+function handlePointerEnter(
+  event: React.PointerEvent,
+  index: number,
+  letterAvailability: boolean,
+  dispatchGameState: React.Dispatch<ReducerPayload>,
+): void {
+  event.preventDefault();
+  if (!letterAvailability) {
+    dispatchGameState({
+      action: "removeLetter",
+      letterIndex: index,
+    });
+  } else {
+    dispatchGameState({
+      action: "addLetter",
+      letterIndex: index,
+    });
+  }
+}
+
+function handlePointerUp(
+  event: React.PointerEvent,
+  dispatchGameState: React.Dispatch<ReducerPayload>,
+): void {
+  event.preventDefault();
+  dispatchGameState({
+    action: "endWord",
+  });
+}
+
+export function Letter({
+  letter,
+  index,
+  letterAvailability,
+  dispatchGameState,
+}: {
+  letter: LetterQu;
+  index: number;
+  letterAvailability: boolean;
+  dispatchGameState: React.Dispatch<ReducerPayload>;
+}): React.JSX.Element {
+  const letterRef = React.useRef<HTMLDivElement | null>(null);
+
+  React.useLayoutEffect(() => {
+    const letterDiv = letterRef.current;
+    if (!letterDiv) {
+      return;
+    }
+    const classes = letterDiv.className
+      .split(" ")
+      .filter((entry) => entry != "unavailable");
+    if (!letterAvailability) {
+      classes.push("unavailable");
+    }
+    const newClassName = classes.join(" ");
+
+    letterDiv.className = newClassName;
+  }, [letterAvailability]);
+
+  return (
+    // Use two different elements for the letter and the background so that touching the edge of a box won't select the letter (without us having to constantly monitor and calculate the pointer position)
+    <div ref={letterRef} className="letterBox">
+      <div
+        className="letter"
+        onPointerDown={(event) =>
+          handlePointerDown(event, index, letterAvailability, dispatchGameState)
+        }
+        onPointerEnter={(event) =>
+          handlePointerEnter(
+            event,
+            index,
+            letterAvailability,
+            dispatchGameState,
+          )
+        }
+        onPointerUp={(event) => handlePointerUp(event, dispatchGameState)}
+      >
+        {letter}
+      </div>
+    </div>
+  );
+}
