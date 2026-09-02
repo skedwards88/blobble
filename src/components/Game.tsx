@@ -41,7 +41,6 @@ function GameOver({
         id="newGameButton"
         onClick={() => {
           dispatchGameState({
-            ...gameState,
             action: "newGame",
           });
         }}

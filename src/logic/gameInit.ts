@@ -50,9 +50,9 @@ export function gameInit({
   isDaily = false,
   seed,
 }: {
-  difficultyLevel?: number | undefined;
-  useSaved?: boolean | undefined;
-  isDaily?: boolean | undefined;
+  difficultyLevel?: number;
+  useSaved?: boolean;
+  isDaily?: boolean;
   seed?: string | undefined;
 }): GameState {
   const savedStateName = isDaily

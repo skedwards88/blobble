@@ -64,8 +64,8 @@ export default function App(): React.JSX.Element {
   const [gameState, dispatchGameState] = React.useReducer(
     gameReducer,
     {
-      seed,
-      difficultyLevel,
+      ...(seed !== undefined && {seed}),
+      ...(difficultyLevel !== undefined && {difficultyLevel}),
     },
     gameInit,
   );
@@ -241,7 +241,6 @@ export default function App(): React.JSX.Element {
           <ControlBar
             setDisplay={setDisplay}
             dispatchGameState={dispatchGameState}
-            gameState={gameState}
             dailyIsSolved={gameIsSolvedQ(dailyGameState.foundSolutions)}
           ></ControlBar>
           <Game

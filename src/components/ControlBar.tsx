@@ -2,17 +2,14 @@ import Share from "@skedwards88/shared-components/src/components/Share";
 import {isRunningStandalone} from "@skedwards88/shared-components/src/logic/isRunningStandalone";
 import {useMetadataContext} from "@skedwards88/shared-components/src/components/MetadataContextProvider";
 import type {ReducerPayload} from "../logic/gameReducer";
-import type {GameState} from "../logic/gameInit";
 import type {DisplayState} from "./App";
 
 function ControlBar({
   dispatchGameState,
-  gameState,
   setDisplay,
   dailyIsSolved,
 }: {
   dispatchGameState: React.Dispatch<ReducerPayload>;
-  gameState: GameState;
   setDisplay: React.Dispatch<React.SetStateAction<DisplayState>>;
   dailyIsSolved: boolean;
 }): React.JSX.Element {
@@ -25,7 +22,6 @@ function ControlBar({
         className="controlButton"
         onClick={() => {
           dispatchGameState({
-            ...gameState,
             action: "newGame",
           });
         }}

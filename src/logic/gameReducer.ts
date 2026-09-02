@@ -36,7 +36,13 @@ export function gameReducer(
   payload: ReducerPayload,
 ): GameState {
   if (payload.action === "newGame") {
-    return gameInit({...payload, seed: undefined, useSaved: false});
+    return gameInit({
+      difficultyLevel:
+        payload.difficultyLevel ?? currentGameState.difficultyLevel,
+      isDaily: payload.isDaily ?? false,
+      seed: undefined,
+      useSaved: false,
+    });
   } else if (payload.action === "startWord") {
     const playedIndex = payload.letterIndex;
     return {
