@@ -40,6 +40,7 @@ export default function Settings({
             <label htmlFor="difficultyLevel">Difficulty</label>
           </div>
           <div id="settingSliderContainer">
+            {/* Ignore the warning about the en dash being confusing here */}
             <div className="settingSliderValue">–</div>
             <input
               id="difficultyLevel"
