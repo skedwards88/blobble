@@ -22,7 +22,6 @@ export function getGame({
   let selectedShapes: number[][];
   let officialSolutions: number[][];
 
-  // eslint-disable-next-line no-constant-condition
   while (true) {
     console.log("again");
     [letters, deduplicatedShapeLookup] = getLettersAndShapes({

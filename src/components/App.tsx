@@ -76,7 +76,7 @@ export default function App(): React.JSX.Element {
     gameInit,
   );
 
-  const [, setLastOpened] = React.useState(Date.now());
+  const [, setLastOpened] = React.useState(() => Date.now());
 
   function handleVisibilityChange(): void {
     // If the visibility of the app changes to become visible,

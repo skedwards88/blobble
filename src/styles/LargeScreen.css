@@ -1,5 +1,5 @@
 /* Landscape, large screen */
-@media (orientation: landscape) and (min-width: 1000px) {
+@media (orientation: landscape) and (width >= 1000px) {
   html {
     --board-box-diam: min(5vmax, 10vmin, 75px);
     --shape-box-diam: min(3vmin, 2vmax, 25px);

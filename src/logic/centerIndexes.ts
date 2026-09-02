@@ -19,7 +19,9 @@ export function centerIndexes(indexes: number[], gridSize: number): number[] {
   }
 
   // Arrange the flat indexes into a 2D grid of 0 and 1 where 1 represents an input index
-  const grid = Array.from({length: gridSize}, () => Array(gridSize).fill(0));
+  const grid = Array.from({length: gridSize}, () =>
+    Array<number>(gridSize).fill(0),
+  );
   for (const index of indexes) {
     const rowIndex = Math.floor(index / gridSize);
     const columnIndex = index % gridSize;
@@ -32,11 +34,11 @@ export function centerIndexes(indexes: number[], gridSize: number): number[] {
   // Flatten the grid, and get the indexes that are occupied
   const filledIndexes = centeredGrid
     .flatMap((i) => i)
-    .reduce((filledIndexes, currentValue, currentIndex) => {
+    .reduce((accumulated: number[], currentValue, currentIndex) => {
       if (currentValue !== 0) {
-        filledIndexes.push(currentIndex);
+        accumulated.push(currentIndex);
       }
-      return filledIndexes;
+      return accumulated;
     }, []);
 
   return filledIndexes;
