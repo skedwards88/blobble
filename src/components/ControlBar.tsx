@@ -45,7 +45,7 @@ function ControlBar({
       <Share
         appName="Blobble"
         text="Check out this word puzzle!"
-        url="https://skedwards88.github.io/blobble/"
+        url="https://blobble.twistedtrailgames.com"
         origin="control bar"
         id="shareButton"
         className="controlButton"

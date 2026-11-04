@@ -29,7 +29,7 @@ function GameOver({
         appName="Blobble"
         text="Check out this word puzzle!"
         url={assembleShareLink({
-          url: "https://skedwards88.github.io/blobble/",
+          url: "https://blobble.twistedtrailgames.com",
           seed: `${gameState.seed}_${gameState.difficultyLevel}`,
         })}
         origin="game over"

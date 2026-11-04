@@ -179,7 +179,7 @@ export default function App(): React.JSX.Element {
           googleAppLink={
             "https://play.google.com/store/apps/details?id=blobble.io.github.skedwards88.twa&hl=en_US"
           }
-          pwaLink={"https://skedwards88.github.io/blobble"}
+          pwaLink={"https://blobble.twistedtrailgames.com"}
           userId={userId}
           sessionId={sessionId}
         ></PWAInstall>

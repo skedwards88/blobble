@@ -6,15 +6,15 @@ A spatial word game.
 
 **Time:** 5 minutes
 
-[Play Now!](https://skedwards88.github.io/blobble/)
+[Play Now!](https://blobble.twistedtrailgames.com)
 
-<a href="https://skedwards88.github.io/blobble/">
+<a href="https://blobble.twistedtrailgames.com">
   <img src="src/images/screenshots/blobble_new_720x1280.png" alt="game icon" width="170"/>
 </a>
 
 Do you have feedback or ideas for improvement? [Open an issue](https://github.com/skedwards88/blobble/issues/new).
 
-Want more games? Check out [Crossjig](https://crossjig.com) and [Lexlet](https://lexlet.com) or see all of my puzzle games [here](https://skedwards88.github.io/).
+Want more games? Check out [Crossjig](https://crossjig.com) and [Lexlet](https://lexlet.com) or see all of my puzzle games [here](https://twistedtrailgames.com).
 
 ## Development
 
