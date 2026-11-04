@@ -57,7 +57,7 @@ export default function App(): React.JSX.Element {
 
   // Determine what view to show the user
   const savedDisplay = getFromStorage<DisplayState>("blobbleDisplay");
-  const [display, setDisplay] = React.useState(
+  const [display, setDisplay] = React.useState<DisplayState>(
     getInitialState(savedDisplay, hasVisitedSinceLastAnnouncement),
   );
 
@@ -145,7 +145,7 @@ export default function App(): React.JSX.Element {
 
     case "heart":
       return (
-        <MoreGames
+        <MoreGames<DisplayState>
           setDisplay={setDisplay}
           games={["crossjig", "lexlet", "wordfall", "gribbles", "logicGrid"]}
           repoName={"blobble"}
@@ -154,12 +154,14 @@ export default function App(): React.JSX.Element {
           googleLink={
             "https://play.google.com/store/apps/details?id=blobble.io.github.skedwards88.twa&hl=en_US"
           }
+          userId={userId}
+          sessionId={sessionId}
         ></MoreGames>
       );
 
     case "installOverview":
       return (
-        <InstallOverview
+        <InstallOverview<DisplayState>
           setDisplay={setDisplay}
           googleAppLink={
             "https://play.google.com/store/apps/details?id=blobble.io.github.skedwards88.twa&hl=en_US"
@@ -174,7 +176,7 @@ export default function App(): React.JSX.Element {
 
     case "pwaInstall":
       return (
-        <PWAInstall
+        <PWAInstall<DisplayState>
           setDisplay={setDisplay}
           googleAppLink={
             "https://play.google.com/store/apps/details?id=blobble.io.github.skedwards88.twa&hl=en_US"
