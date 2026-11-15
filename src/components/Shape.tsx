@@ -1,6 +1,7 @@
 import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
-import {type ReducerPayload} from "../logic/gameReducer";
+import type {ReducerPayload} from "../logic/gameReducer";
 import {indexesToWord} from "../logic/indexesToWord";
+import {shapeIsSolvedQ} from "../logic/shapeIsSolvedQ";
 
 function ShapeBox({
   filled,
@@ -31,7 +32,7 @@ function ShapeBox({
             }
           : undefined
       }
-    ></div>
+    />
   );
 }
 
@@ -44,23 +45,23 @@ export function Shape({
   shapeIndex,
 }: {
   shape: number[];
-  foundSolution: (number | undefined)[];
+  foundSolution: (number | null)[];
   gridSize: number;
   letters: LetterQu[];
   dispatchGameState: React.Dispatch<ReducerPayload>;
   shapeIndex: number;
 }): React.JSX.Element {
-  const shapeIsSolved = foundSolution.every((i) => i != undefined);
+  const shapeIsSolved = shapeIsSolvedQ(foundSolution);
   const emptyGrid = Array(gridSize * gridSize).fill(undefined);
 
   const boxes = emptyGrid.map((_, index) => (
     <ShapeBox
       filled={shape.includes(index)}
       solved={shapeIsSolved}
-      key={index}
+      key={`${String(index)}-${String(shape.includes(index))}`}
       dispatchGameState={dispatchGameState}
       shapeIndex={shapeIndex}
-    ></ShapeBox>
+    />
   ));
 
   const word = indexesToWord(foundSolution, letters);

@@ -25,22 +25,28 @@ function ControlBar({
             action: "newGame",
           });
         }}
-      ></button>
+      />
       <button
         id="settingsButton"
         className="controlButton"
-        onClick={() => setDisplay("settings")}
-      ></button>
+        onClick={() => {
+          setDisplay("settings");
+        }}
+      />
       <button
         id="rulesButton"
         className="controlButton"
-        onClick={() => setDisplay("rules")}
-      ></button>
+        onClick={() => {
+          setDisplay("rules");
+        }}
+      />
       <button
         id="heartButton"
         className="controlButton"
-        onClick={() => setDisplay("heart")}
-      ></button>
+        onClick={() => {
+          setDisplay("heart");
+        }}
+      />
 
       <Share
         appName="Blobble"
@@ -51,7 +57,7 @@ function ControlBar({
         className="controlButton"
         userId={userId}
         sessionId={sessionId}
-      ></Share>
+      />
 
       {dailyIsSolved ? (
         <button
@@ -60,24 +66,26 @@ function ControlBar({
           onClick={() => {
             setDisplay("daily");
           }}
-        ></button>
+        />
       ) : (
         <button
           id="calendarButton"
           className="controlButton"
-          onClick={() => setDisplay("daily")}
-        ></button>
+          onClick={() => {
+            setDisplay("daily");
+          }}
+        />
       )}
 
       {!isRunningStandalone() ? (
         <button
           id="installButton"
           className="controlButton"
-          onClick={() => setDisplay("installOverview")}
-        ></button>
-      ) : (
-        <></>
-      )}
+          onClick={() => {
+            setDisplay("installOverview");
+          }}
+        />
+      ) : null}
     </div>
   );
 }

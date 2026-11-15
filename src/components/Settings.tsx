@@ -2,13 +2,13 @@ import type {GameState} from "../logic/gameInit";
 import type {ReducerPayload} from "../logic/gameReducer";
 import type {DisplayState} from "./App";
 
-interface NewGameFormElements extends HTMLFormControlsCollection {
+type NewGameFormElements = {
   difficultyLevel: HTMLInputElement;
-}
+} & HTMLFormControlsCollection;
 
-interface NewGameFormElement extends HTMLFormElement {
+type NewGameFormElement = {
   readonly elements: NewGameFormElements;
-}
+} & HTMLFormElement;
 
 export default function Settings({
   setDisplay,
@@ -61,7 +61,9 @@ export default function Settings({
         <button
           type="button"
           aria-label="cancel"
-          onClick={() => setDisplay("game")}
+          onClick={() => {
+            setDisplay("game");
+          }}
         >
           Return
         </button>

@@ -6,7 +6,7 @@ describe("getColumnIndex", () => {
     const gridSize = 4;
     const expectedColumns = [0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3, 0, 1, 2, 3];
     const result = indexes.map((index) => getColumnIndex(index, gridSize));
-    expect(result).toEqual(expectedColumns);
+    expect(result).toStrictEqual(expectedColumns);
   });
 
   test("returns the column index of a given index (grid size 5)", () => {
@@ -19,7 +19,7 @@ describe("getColumnIndex", () => {
       0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4, 0, 1, 2, 3, 4,
     ];
     const result = indexes.map((index) => getColumnIndex(index, gridSize));
-    expect(result).toEqual(expectedColumns);
+    expect(result).toStrictEqual(expectedColumns);
   });
 
   test("returns the column index of a given index (grid size 1)", () => {
@@ -27,7 +27,7 @@ describe("getColumnIndex", () => {
     const gridSize = 1;
     const expectedColumn = 0;
     const result = getColumnIndex(index, gridSize);
-    expect(result).toEqual(expectedColumn);
+    expect(result).toStrictEqual(expectedColumn);
   });
 
   test("errors if index exceeds gridSize", () => {

@@ -59,7 +59,7 @@ export function omitDuplicateWordsAcrossShapes({
         shapeId1,
         shapeId2,
       );
-      if (shapeIdToRemove) {
+      if (shapeIdToRemove != null) {
         potentialShapeIDs.delete(shapeIdToRemove);
       }
     }

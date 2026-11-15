@@ -50,10 +50,12 @@ export default function App(): React.JSX.Element {
     lastVisitedYYYYMMDD,
     "20240429",
   );
-  const [lastVisited] = React.useState(getSeedFromDate());
+
+  const [currentYYYYMMDD, setCurrentYYYYMMDD] = React.useState(getSeedFromDate);
+
   React.useEffect(() => {
-    saveToStorage("blobbleLastVisited", lastVisited);
-  }, [lastVisited]);
+    saveToStorage("blobbleLastVisited", currentYYYYMMDD);
+  }, [currentYYYYMMDD]);
 
   // Determine what view to show the user
   const savedDisplay = getFromStorage<DisplayState>("blobbleDisplay");
@@ -76,15 +78,13 @@ export default function App(): React.JSX.Element {
     gameInit,
   );
 
-  const [, setLastOpened] = React.useState(() => Date.now());
-
   function handleVisibilityChange(): void {
     // If the visibility of the app changes to become visible,
-    // update the state to force the app to re-render.
+    // update the state if relevant to force the app to re-render.
     // This is to help the daily challenge refresh if the app has
     // been open in the background since an earlier challenge.
     if (!document.hidden) {
-      setLastOpened(Date.now());
+      setCurrentYYYYMMDD(getSeedFromDate());
     }
   }
 
@@ -141,50 +141,44 @@ export default function App(): React.JSX.Element {
 
   switch (display) {
     case "rules":
-      return <Rules setDisplay={setDisplay}></Rules>;
+      return <Rules setDisplay={setDisplay} />;
 
     case "heart":
       return (
         <MoreGames<DisplayState>
           setDisplay={setDisplay}
           games={["crossjig", "lexlet", "wordfall", "gribbles", "logicGrid"]}
-          repoName={"blobble"}
-          includeExtraInfo={true}
-          includeWordAttribution={true}
-          googleLink={
-            "https://play.google.com/store/apps/details?id=blobble.io.github.skedwards88.twa&hl=en_US"
-          }
+          repoName="blobble"
+          includeExtraInfo
+          includeWordAttribution
+          googleLink="https://play.google.com/store/apps/details?id=blobble.io.github.skedwards88.twa&hl=en_US"
           userId={userId}
           sessionId={sessionId}
-        ></MoreGames>
+        />
       );
 
     case "installOverview":
       return (
         <InstallOverview<DisplayState>
           setDisplay={setDisplay}
-          googleAppLink={
-            "https://play.google.com/store/apps/details?id=blobble.io.github.skedwards88.twa&hl=en_US"
-          }
+          googleAppLink="https://play.google.com/store/apps/details?id=blobble.io.github.skedwards88.twa&hl=en_US"
           userId={userId}
           sessionId={sessionId}
           installPromptEvent={installPromptEvent}
           showInstallButton={showInstallButton}
           handleInstall={handleInstall}
-        ></InstallOverview>
+        />
       );
 
     case "pwaInstall":
       return (
         <PWAInstall<DisplayState>
           setDisplay={setDisplay}
-          googleAppLink={
-            "https://play.google.com/store/apps/details?id=blobble.io.github.skedwards88.twa&hl=en_US"
-          }
-          pwaLink={"https://blobble.twistedtrailgames.com"}
+          googleAppLink="https://play.google.com/store/apps/details?id=blobble.io.github.skedwards88.twa&hl=en_US"
+          pwaLink="https://blobble.twistedtrailgames.com"
           userId={userId}
           sessionId={sessionId}
-        ></PWAInstall>
+        />
       );
 
     case "settings":
@@ -198,7 +192,7 @@ export default function App(): React.JSX.Element {
 
     case "daily":
       // force reinitialize the daily state if the day has changed
-      if (dailyGameState.seed != getSeedFromDate()) {
+      if (dailyGameState.seed !== getSeedFromDate()) {
         dailyDispatchGameState({
           action: "newGame",
           isDaily: true,
@@ -216,19 +210,24 @@ export default function App(): React.JSX.Element {
           }}
         >
           <div id="exitDaily">
-            <button id="exitDailyButton" onClick={() => setDisplay("game")}>
+            <button
+              id="exitDailyButton"
+              onClick={() => {
+                setDisplay("game");
+              }}
+            >
               Exit daily challenge
             </button>
           </div>
           <Game
             dispatchGameState={dailyDispatchGameState}
             gameState={dailyGameState}
-            isDaily={true}
-          ></Game>
+            isDaily
+          />
         </div>
       );
 
-    default:
+    case "game":
       return (
         <div
           className="App"
@@ -244,13 +243,19 @@ export default function App(): React.JSX.Element {
             setDisplay={setDisplay}
             dispatchGameState={dispatchGameState}
             dailyIsSolved={gameIsSolvedQ(dailyGameState.foundSolutions)}
-          ></ControlBar>
+          />
           <Game
             dispatchGameState={dispatchGameState}
             gameState={gameState}
             isDaily={false}
-          ></Game>
+          />
         </div>
       );
+
+    default: {
+      const exhaustiveCheck: never = display;
+
+      throw new Error(`Invalid display type ${String(exhaustiveCheck)}`);
+    }
   }
 }

@@ -1,3 +1,3 @@
-export function shapeIsSolvedQ(foundSolution: (number | undefined)[]): boolean {
-  return foundSolution.every((i) => i != undefined);
+export function shapeIsSolvedQ(foundSolution: (number | null)[]): boolean {
+  return foundSolution.every((i) => i != null);
 }

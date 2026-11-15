@@ -1,11 +1,11 @@
 import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
 
 export function indexesToWord(
-  indexes: (number | undefined)[],
+  indexes: (number | null)[],
   letters: LetterQu[],
 ): string {
   return indexes
-    .map((index) => (index != undefined ? letters[index] : ""))
+    .map((index) => (index != null ? letters[index] : ""))
     .join("")
     .toUpperCase();
 }

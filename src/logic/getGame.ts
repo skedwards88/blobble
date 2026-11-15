@@ -23,7 +23,6 @@ export function getGame({
   let officialSolutions: number[][];
 
   while (true) {
-    console.log("again");
     [letters, deduplicatedShapeLookup] = getLettersAndShapes({
       gridSize,
       minWordLength,

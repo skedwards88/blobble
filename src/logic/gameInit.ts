@@ -6,43 +6,20 @@ import {getShapeSizeForDifficulty} from "./getShapeSizeForDifficulty";
 import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
 import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
 import {getFromStorage} from "@skedwards88/shared-components/src/logic/safeStorage";
+import {savedStateValidQ} from "./savedStateValidQ";
 
 export type GameState = {
   seed: string;
   letters: LetterQu[];
   shapes: number[][];
   officialSolutions: number[][];
-  foundSolutions: (number | undefined)[][];
+  foundSolutions: (number | null)[][];
   playedIndexes: number[];
   lastInvalidWord: string | null;
   difficultyLevel: number;
   isDaily: boolean;
   hintTally: number;
 };
-
-function validateSavedState(savedState: GameState): boolean {
-  if (typeof savedState !== "object" || savedState === null) {
-    return false;
-  }
-
-  const fieldsAreExpectedTypes =
-    Array.isArray(savedState.letters) &&
-    savedState.letters.every((letter) => typeof letter === "string") &&
-    Array.isArray(savedState.shapes) &&
-    savedState.shapes.every((shape) => Array.isArray(shape)) &&
-    Array.isArray(savedState.officialSolutions) &&
-    savedState.officialSolutions.every((shape) => Array.isArray(shape)) &&
-    Array.isArray(savedState.foundSolutions) &&
-    savedState.foundSolutions.every((solution) => Array.isArray(solution)) &&
-    typeof savedState.difficultyLevel === "number" &&
-    Array.isArray(savedState.playedIndexes);
-
-  if (!fieldsAreExpectedTypes) {
-    return false;
-  }
-
-  return true;
-}
 
 export function gameInit({
   difficultyLevel,
@@ -59,19 +36,21 @@ export function gameInit({
     ? "blobbleDailySavedState"
     : "blobbleGameSavedState";
 
+  let resolvedSeed = seed;
+
   if (isDaily) {
-    seed = getSeedFromDate();
+    resolvedSeed = getSeedFromDate();
   }
 
   const savedState = useSaved
-    ? getFromStorage<GameState>(savedStateName)
+    ? getFromStorage<unknown>(savedStateName)
     : undefined;
 
   if (
-    savedState &&
+    savedState != null &&
+    savedStateValidQ(savedState) &&
     // If a seed was given, it must match the saved seed in order to use saved state
-    (!seed || savedState.seed === seed) &&
-    validateSavedState(savedState) &&
+    (resolvedSeed == null || savedState.seed === resolvedSeed) &&
     // Use the saved state if daily even if the game is solved
     // otherwise, don't use the saved state if the game is solved
     !(!isDaily && gameIsSolvedQ(savedState.foundSolutions))
@@ -79,34 +58,30 @@ export function gameInit({
     return {...savedState, playedIndexes: [], lastInvalidWord: null};
   }
 
-  if (!seed) {
-    seed = getRandomSeed();
-  }
+  // Set seed if not yet defined
+  resolvedSeed ??= getRandomSeed();
 
   const gridSize = 4;
 
-  difficultyLevel = isDaily ? getDifficultyLevelForDay() : difficultyLevel || 3;
+  const resolvedDifficultyLevel = isDaily
+    ? getDifficultyLevelForDay()
+    : (difficultyLevel ?? 3);
 
-  const [minWordLength, maxWordLength] =
-    getShapeSizeForDifficulty(difficultyLevel);
+  const [minWordLength, maxWordLength] = getShapeSizeForDifficulty(
+    resolvedDifficultyLevel,
+  );
 
   const [letters, shapes, officialSolutions] = getGame({
     gridSize,
     minWordLength,
     maxWordLength,
-    seed,
+    seed: resolvedSeed,
   });
 
-  console.log(
-    officialSolutions.map((solution) =>
-      solution.map((index) => letters[index]).join(""),
-    ),
-  );
-
-  const foundSolutions = shapes.map((shape) => shape.map(() => undefined));
+  const foundSolutions = shapes.map((shape) => shape.map(() => null));
 
   return {
-    seed,
+    seed: resolvedSeed,
     letters,
     shapes,
     // official solutions is an array of array of indexes where the index order matches the word order
@@ -114,7 +89,7 @@ export function gameInit({
     foundSolutions,
     playedIndexes: [],
     lastInvalidWord: null,
-    difficultyLevel,
+    difficultyLevel: resolvedDifficultyLevel,
     isDaily,
     hintTally: 0,
   };

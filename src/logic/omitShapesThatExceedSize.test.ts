@@ -22,7 +22,7 @@ describe("omitShapesThatExceedSize", () => {
       [3, 7, 11, 15], // width 4, height 4
     ];
     const result = omitShapesThatExceedSize({wordIndexes, gridSize});
-    expect(result).toEqual(expectedWordIndexes);
+    expect(result).toStrictEqual(expectedWordIndexes);
   });
 
   test("removes wordIndexes that exceed a shape width or height of gridSize - 1 (grid size 4)", () => {
@@ -48,7 +48,7 @@ describe("omitShapesThatExceedSize", () => {
       [0, 4, 8, 5], // width 2, height 3
     ];
     const result = omitShapesThatExceedSize({wordIndexes, gridSize});
-    expect(result).toEqual(expectedWordIndexes);
+    expect(result).toStrictEqual(expectedWordIndexes);
   });
 
   test("works with empty wordIndexes input", () => {
@@ -56,7 +56,7 @@ describe("omitShapesThatExceedSize", () => {
     const gridSize = 4;
     const expectedWordIndexes: number[][] = [];
     const result = omitShapesThatExceedSize({wordIndexes, gridSize});
-    expect(result).toEqual(expectedWordIndexes);
+    expect(result).toStrictEqual(expectedWordIndexes);
   });
 
   test("works with singleton wordIndexes input", () => {
@@ -64,7 +64,7 @@ describe("omitShapesThatExceedSize", () => {
     const gridSize = 4;
     const expectedWordIndexes: number[][] = [];
     const result = omitShapesThatExceedSize({wordIndexes, gridSize});
-    expect(result).toEqual(expectedWordIndexes);
+    expect(result).toStrictEqual(expectedWordIndexes);
   });
 
   test("does not remove any indexes if all are within size", () => {
@@ -84,7 +84,7 @@ describe("omitShapesThatExceedSize", () => {
       [0, 4, 8, 5], // width 2, height 3
     ];
     const result = omitShapesThatExceedSize({wordIndexes, gridSize});
-    expect(result).toEqual(expectedWordIndexes);
+    expect(result).toStrictEqual(expectedWordIndexes);
   });
 
   test("removes all input if all exceed size", () => {
@@ -98,6 +98,6 @@ describe("omitShapesThatExceedSize", () => {
     const gridSize = 4;
     const expectedWordIndexes: number[][] = [];
     const result = omitShapesThatExceedSize({wordIndexes, gridSize});
-    expect(result).toEqual(expectedWordIndexes);
+    expect(result).toStrictEqual(expectedWordIndexes);
   });
 });

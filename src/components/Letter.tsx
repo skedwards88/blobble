@@ -1,5 +1,5 @@
 import React from "react";
-import {type ReducerPayload} from "../logic/gameReducer";
+import type {ReducerPayload} from "../logic/gameReducer";
 import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
 
 function handlePointerDown(
@@ -68,7 +68,7 @@ export function Letter({
     }
     const classes = letterDiv.className
       .split(" ")
-      .filter((entry) => entry != "unavailable");
+      .filter((entry) => entry !== "unavailable");
     if (!letterAvailability) {
       classes.push("unavailable");
     }
@@ -82,18 +82,25 @@ export function Letter({
     <div ref={letterRef} className="letterBox">
       <div
         className="letter"
-        onPointerDown={(event) =>
-          handlePointerDown(event, index, letterAvailability, dispatchGameState)
-        }
-        onPointerEnter={(event) =>
+        onPointerDown={(event) => {
+          handlePointerDown(
+            event,
+            index,
+            letterAvailability,
+            dispatchGameState,
+          );
+        }}
+        onPointerEnter={(event) => {
           handlePointerEnter(
             event,
             index,
             letterAvailability,
             dispatchGameState,
-          )
-        }
-        onPointerUp={(event) => handlePointerUp(event, dispatchGameState)}
+          );
+        }}
+        onPointerUp={(event) => {
+          handlePointerUp(event, dispatchGameState);
+        }}
       >
         {letter}
       </div>

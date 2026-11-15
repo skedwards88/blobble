@@ -21,7 +21,7 @@ export function getConnectivity(indexes: number[], gridSize: number): number {
       numRows: gridSize,
     });
     const surroundingIndexesInInput = surroundingIndexesInGrid.filter(
-      (neighbor) => neighbor != index && indexes.includes(neighbor),
+      (neighbor) => neighbor !== index && indexes.includes(neighbor),
     );
     connectivity += surroundingIndexesInInput.length;
   });

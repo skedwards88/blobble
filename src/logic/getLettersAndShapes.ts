@@ -28,7 +28,7 @@ export function getLettersAndShapes({
     minWordLength,
     maxWordLength,
     easyMode: true,
-    trie: trie,
+    trie,
   });
 
   // Remove wordIndexes that exceed a shape width or height of gridSize - 1
@@ -42,21 +42,19 @@ export function getLettersAndShapes({
     pseudoRandomGenerator,
   );
 
-  // Figure out what shape each word makes
-  // by centering the word indexes in the grid
-  const normalizedWordIndexes = shuffledWordIndexes.map((indexes) =>
-    centerIndexes(indexes, gridSize),
-  );
-
   // Arrange the indexes into a dict of shapeIdentifier:[wordIndexes,...]
   // where shapeIdentifier is just a stringified version of the normalized indexes
   const shapeLookup: Record<string, number[][]> = {};
-  for (let index = 0; index < shuffledWordIndexes.length; index++) {
-    const shapeID = normalizedWordIndexes[index].join("-");
-    if (shapeLookup[shapeID]) {
-      shapeLookup[shapeID].push(shuffledWordIndexes[index]);
+  for (const shuffledWordIndex of shuffledWordIndexes) {
+    // Figure out what shape the word makes by centering the word indexes in the grid
+    const normalizedWordIndex = centerIndexes(shuffledWordIndex, gridSize);
+
+    const shapeID = normalizedWordIndex.join("-");
+
+    if (Object.hasOwn(shapeLookup, shapeID)) {
+      shapeLookup[shapeID].push(shuffledWordIndex);
     } else {
-      shapeLookup[shapeID] = [shuffledWordIndexes[index]];
+      shapeLookup[shapeID] = [shuffledWordIndex];
     }
   }
 

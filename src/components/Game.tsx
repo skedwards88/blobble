@@ -5,8 +5,8 @@ import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
 import {assembleShareLink} from "@skedwards88/shared-components/src/logic/assembleShareLink";
 import Share from "@skedwards88/shared-components/src/components/Share";
 import {useMetadataContext} from "@skedwards88/shared-components/src/components/MetadataContextProvider";
-import {type GameState} from "../logic/gameInit";
-import {type ReducerPayload} from "../logic/gameReducer";
+import type {GameState} from "../logic/gameInit";
+import type {ReducerPayload} from "../logic/gameReducer";
 
 function GameOver({
   gameState,
@@ -30,13 +30,13 @@ function GameOver({
         text="Check out this word puzzle!"
         url={assembleShareLink({
           url: "https://blobble.twistedtrailgames.com",
-          seed: `${gameState.seed}_${gameState.difficultyLevel}`,
+          seed: `${gameState.seed}_${String(gameState.difficultyLevel)}`,
         })}
         origin="game over"
         id="shareButton"
         userId={userId}
         sessionId={sessionId}
-      ></Share>
+      />
       <button
         id="newGameButton"
         onClick={() => {
@@ -44,7 +44,7 @@ function GameOver({
             action: "newGame",
           });
         }}
-      ></button>
+      />
     </div>
   );
 }
@@ -58,11 +58,11 @@ function GameMessage({gameState}: {gameState: GameState}): React.JSX.Element {
     );
   }
 
-  if (gameState.lastInvalidWord) {
+  if (gameState.lastInvalidWord != null) {
     return <div className="gameMessage fadeOut">Unknown word</div>;
   }
 
-  return <div className="gameMessage"></div>;
+  return <div className="gameMessage" />;
 }
 
 function Game({
@@ -88,7 +88,7 @@ function Game({
             key={shape.join("-")}
             dispatchGameState={dispatchGameState}
             shapeIndex={index}
-          ></Shape>
+          />
         ))}
       </div>
 
@@ -97,9 +97,9 @@ function Game({
           gameState={gameState}
           dispatchGameState={dispatchGameState}
           isDaily={isDaily}
-        ></GameOver>
+        />
       ) : (
-        <GameMessage gameState={gameState}></GameMessage>
+        <GameMessage gameState={gameState} />
       )}
 
       <div id="board">
@@ -111,8 +111,8 @@ function Game({
               gameOver ? false : !gameState.playedIndexes.includes(index)
             }
             dispatchGameState={dispatchGameState}
-            key={index}
-          ></Letter>
+            key={`${String(index)}-${letter}`}
+          />
         ))}
       </div>
     </div>

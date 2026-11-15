@@ -17,9 +17,8 @@ export function findIncompatibleShapeIdIfAny(
   if (sharedWordsQ(wordsForShape1, wordsForShape2)) {
     if (wordsForShape1.size <= wordsForShape2.size) {
       return shapeId2;
-    } else {
-      return shapeId1;
     }
+    return shapeId1;
   }
 
   // If the singular and plural form of a word are both in the game,
@@ -28,12 +27,12 @@ export function findIncompatibleShapeIdIfAny(
   // and because it doesn't account for words that end in "S" that aren't plural,
   // but it should catch most cases that are likely to be present in the game.
   for (const word of wordsForShape1) {
-    if (wordsForShape2.has(word + "S")) {
+    if (wordsForShape2.has(`${word}S`)) {
       return shapeId2;
     }
   }
   for (const word of wordsForShape2) {
-    if (wordsForShape1.has(word + "S")) {
+    if (wordsForShape1.has(`${word}S`)) {
       return shapeId1;
     }
   }
