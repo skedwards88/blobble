@@ -25,33 +25,28 @@ export function omitDuplicateWordsAcrossShapes({
   // It also feels weird to have the single and plural form of a word.
   // This function eliminates those cases.
 
-  const allShapeIDs = Object.keys(shapeLookup);
-  const potentialShapeIDs = new Set(allShapeIDs);
+  const potentialShapeIDs = new Set(Object.keys(shapeLookup));
 
-  // Compare each shape to each other shape
-  for (let index1 = 0; index1 < allShapeIDs.length - 1; index1++) {
-    // Get the ID of the first shape. (The ID is just the indexes of the normalized shape, joined by a hyphen.)
-    const shapeId1 = allShapeIDs[index1];
+  const allShapes = Object.entries(shapeLookup);
 
+  for (const [index1, [shapeId1, shape1]] of allShapes.entries()) {
     // Skip this round if this shape has already been removed
     if (!potentialShapeIDs.has(shapeId1)) {
       continue;
     }
 
     // Get the words that can solve the first shape
-    const wordsForShape1 = getWordsForShape(shapeLookup[shapeId1], letters);
+    const wordsForShape1 = getWordsForShape(shape1, letters);
 
     // Compare this shape to each later shape
-    for (let index2 = index1 + 1; index2 < allShapeIDs.length; index2++) {
-      const shapeId2 = allShapeIDs[index2];
-
+    for (const [shapeId2, shape2] of allShapes.slice(index1 + 1)) {
       // Skip this round if this shape has already been removed
       if (!potentialShapeIDs.has(shapeId2)) {
         continue;
       }
 
       // Get the words that can solve the second shape
-      const wordsForShape2 = getWordsForShape(shapeLookup[shapeId2], letters);
+      const wordsForShape2 = getWordsForShape(shape2, letters);
 
       const shapeIdToRemove = findIncompatibleShapeIdIfAny(
         wordsForShape1,
@@ -59,16 +54,18 @@ export function omitDuplicateWordsAcrossShapes({
         shapeId1,
         shapeId2,
       );
+
       if (shapeIdToRemove != null) {
         potentialShapeIDs.delete(shapeIdToRemove);
       }
     }
   }
 
-  const deduplicatedShapeLookup: Record<string, number[][]> = {};
-  for (const shapeID of Array.from(potentialShapeIDs)) {
-    deduplicatedShapeLookup[shapeID] = shapeLookup[shapeID];
-  }
+  const deduplicatedShapeLookup = Object.fromEntries(
+    Object.entries(shapeLookup).filter(([shapeID]) =>
+      potentialShapeIDs.has(shapeID),
+    ),
+  );
 
   return deduplicatedShapeLookup;
 }

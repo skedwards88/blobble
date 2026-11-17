@@ -5,7 +5,13 @@ export function parseUrlQuery(): [string, number] | [undefined, undefined] {
   // The seed query consists of two parts: the seed and the difficulty level, separated by an underscore
   if (query != null) {
     const [seed, difficultyLevelRaw] = query.split("_");
+
+    if (seed === undefined || difficultyLevelRaw === undefined) {
+      return [undefined, undefined];
+    }
+
     const difficultyLevel = parseInt(difficultyLevelRaw);
+
     return [seed, difficultyLevel];
   }
 

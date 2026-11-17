@@ -1,6 +1,6 @@
 import type seedrandom from "seedrandom";
 import {letterPool} from "./letterPool";
-import {shuffleArray} from "@skedwards88/word_logic";
+import {pickRandomItemFromArray, shuffleArray} from "@skedwards88/word_logic";
 import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
 
 export function getLetters(
@@ -23,10 +23,10 @@ export function getLetters(
       qIndex < (gridSize * gridSize) / 2
         ? qIndex + gridSize
         : qIndex - gridSize;
-    const replacementLetter = shuffleArray<LetterQu>(
+    const replacementLetter = pickRandomItemFromArray<LetterQu>(
       ["A", "E", "I", "O"],
       pseudoRandomGenerator,
-    )[0];
+    );
     chosenLetters[replacementPosition] = replacementLetter;
   }
 

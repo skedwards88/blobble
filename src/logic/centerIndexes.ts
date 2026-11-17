@@ -25,7 +25,13 @@ export function centerIndexes(indexes: number[], gridSize: number): number[] {
   for (const index of indexes) {
     const rowIndex = Math.floor(index / gridSize);
     const columnIndex = index % gridSize;
-    grid[rowIndex][columnIndex] = 1;
+    const row = grid[rowIndex];
+    if (row === undefined) {
+      throw new Error(
+        `rowIndex ${String(rowIndex)} out of bounds for grid length ${String(grid.length)}`,
+      );
+    }
+    row[columnIndex] = 1;
   }
 
   // Center the grid

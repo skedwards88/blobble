@@ -144,16 +144,20 @@ export function gameReducer(
       // if a match for the shape hasn't been found
       // check if the played indexes match the shape
       let matchingShapeIndex;
-      for (let index = 0; index < currentGameState.shapes.length; index++) {
-        const shapeIsSolved = shapeIsSolvedQ(
-          currentGameState.foundSolutions[index],
-        );
+      for (const [index, shape] of currentGameState.shapes.entries()) {
+        const foundSolution = currentGameState.foundSolutions[index];
+
+        if (foundSolution === undefined) {
+          throw new Error(`no solution found for index ${String(index)}`);
+        }
+
+        const shapeIsSolved = shapeIsSolvedQ(foundSolution);
         if (shapeIsSolved) {
           continue;
         }
         const shapesMatch = shapesMatchQ({
           indexes1: currentGameState.playedIndexes,
-          indexes2: currentGameState.shapes[index],
+          indexes2: shape,
           gridSize: Math.sqrt(currentGameState.letters.length),
         });
         if (shapesMatch) {
@@ -186,6 +190,10 @@ export function gameReducer(
       );
       const hintedSolution = newFoundSolutions[payload.shapeIndex];
 
+      if (actualSolution === undefined || hintedSolution === undefined) {
+        throw new Error(`no solution at ${String(payload.shapeIndex)}`);
+      }
+
       // Since hints may have been given previously, get the next unrevealed index for the hint
       const nextHintIndex = hintedSolution.findIndex((i) => i == null);
 
@@ -196,7 +204,10 @@ export function gameReducer(
 
       // Otherwise, reveal the next letter
       const hintValue = actualSolution[nextHintIndex];
-      newFoundSolutions[payload.shapeIndex][nextHintIndex] = hintValue;
+      if (hintValue === undefined) {
+        throw new Error(`no next hint at ${String(nextHintIndex)}`);
+      }
+      hintedSolution[nextHintIndex] = hintValue;
 
       const newHintTally = 1 + currentGameState.hintTally;
 

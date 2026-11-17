@@ -79,17 +79,24 @@ function Game({
   return (
     <div id="game">
       <div id="shapes">
-        {gameState.shapes.map((shape, index) => (
-          <Shape
-            shape={shape}
-            foundSolution={gameState.foundSolutions[index]}
-            gridSize={Math.sqrt(gameState.letters.length)}
-            letters={gameState.letters}
-            key={shape.join("-")}
-            dispatchGameState={dispatchGameState}
-            shapeIndex={index}
-          />
-        ))}
+        {gameState.shapes.map((shape, index) => {
+          if (gameState.foundSolutions[index] === undefined) {
+            throw new Error(
+              `foundSolutions not index-matched to shapes as expected`,
+            );
+          }
+          return (
+            <Shape
+              shape={shape}
+              foundSolution={gameState.foundSolutions[index]}
+              gridSize={Math.sqrt(gameState.letters.length)}
+              letters={gameState.letters}
+              key={shape.join("-")}
+              dispatchGameState={dispatchGameState}
+              shapeIndex={index}
+            />
+          );
+        })}
       </div>
 
       {gameOver ? (

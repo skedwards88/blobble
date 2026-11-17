@@ -51,11 +51,8 @@ export function getLettersAndShapes({
 
     const shapeID = normalizedWordIndex.join("-");
 
-    if (Object.hasOwn(shapeLookup, shapeID)) {
-      shapeLookup[shapeID].push(shuffledWordIndex);
-    } else {
-      shapeLookup[shapeID] = [shuffledWordIndex];
-    }
+    shapeLookup[shapeID] ??= [];
+    shapeLookup[shapeID].push(shuffledWordIndex);
   }
 
   // Remove shapes so that the same word cannot be used to solve two different shapes

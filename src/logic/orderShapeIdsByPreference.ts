@@ -5,15 +5,11 @@ export function orderShapeIdsByPreference(
   shapeLookup: Record<string, number[][]>,
   letters: LetterQu[],
 ): string[] {
-  const shapeIds = Object.keys(shapeLookup);
+  const shapeEntries = Object.entries(shapeLookup);
 
-  shapeIds.sort((shapeId1, shapeId2) =>
-    determineShapePreference(
-      shapeLookup[shapeId1],
-      shapeLookup[shapeId2],
-      letters,
-    ),
+  shapeEntries.sort(([, shape1], [, shape2]) =>
+    determineShapePreference(shape1, shape2, letters),
   );
 
-  return shapeIds;
+  return shapeEntries.map(([key]) => key);
 }

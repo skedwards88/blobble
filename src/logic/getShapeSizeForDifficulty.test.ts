@@ -9,15 +9,19 @@ describe("getShapeSizeForDifficulty", () => {
 
   test("Errors if the input is out of range", () => {
     expect(() => getShapeSizeForDifficulty(0)).toThrow(
-      "difficultyLevel must be between 1 and 7, inclusive",
+      "difficultyLevel must be integer between 1 and 7, inclusive",
     );
 
     expect(() => getShapeSizeForDifficulty(8)).toThrow(
-      "difficultyLevel must be between 1 and 7, inclusive",
+      "difficultyLevel must be integer between 1 and 7, inclusive",
     );
 
     expect(() => getShapeSizeForDifficulty(-1)).toThrow(
-      "difficultyLevel must be between 1 and 7, inclusive",
+      "difficultyLevel must be integer between 1 and 7, inclusive",
+    );
+
+    expect(() => getShapeSizeForDifficulty(3.5)).toThrow(
+      "difficultyLevel must be integer between 1 and 7, inclusive",
     );
   });
 });

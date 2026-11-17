@@ -43,9 +43,15 @@ export function getGame({
         id.split("-").map((i) => parseInt(i)),
       );
       // the "official" answer is the first word for each selected shape
-      officialSolutions = selectedShapeIDs.map(
-        (id) => deduplicatedShapeLookup[id][0],
-      );
+      officialSolutions = selectedShapeIDs.map((id) => {
+        const entry = deduplicatedShapeLookup[id];
+
+        if (entry?.[0] === undefined) {
+          throw new Error(`shape ID not found in lookup`);
+        }
+
+        return entry[0];
+      });
       return [letters, selectedShapes, officialSolutions];
     }
   }
