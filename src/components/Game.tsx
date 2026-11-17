@@ -74,24 +74,21 @@ function Game({
   gameState: GameState;
   isDaily: boolean;
 }): React.JSX.Element {
-  const gameOver = gameIsSolvedQ(gameState.foundSolutions);
+  const gameOver = gameIsSolvedQ(
+    gameState.clues.map((clue) => clue.foundSolution),
+  );
 
   return (
     <div id="game">
       <div id="shapes">
-        {gameState.shapes.map((shape, index) => {
-          if (gameState.foundSolutions[index] === undefined) {
-            throw new Error(
-              `foundSolutions not index-matched to shapes as expected`,
-            );
-          }
+        {gameState.clues.map((clue, index) => {
           return (
             <Shape
-              shape={shape}
-              foundSolution={gameState.foundSolutions[index]}
+              shape={clue.shape}
+              foundSolution={clue.foundSolution}
               gridSize={Math.sqrt(gameState.letters.length)}
               letters={gameState.letters}
-              key={shape.join("-")}
+              key={clue.shape.join("-")}
               dispatchGameState={dispatchGameState}
               shapeIndex={index}
             />

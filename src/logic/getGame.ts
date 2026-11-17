@@ -2,6 +2,7 @@ import seedrandom from "seedrandom";
 import {getLettersAndShapes} from "./getLettersAndShapes";
 import {orderShapeIdsByPreference} from "./orderShapeIdsByPreference";
 import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
+import type {Clue} from "./gameInit";
 
 export function getGame({
   gridSize,
@@ -13,14 +14,13 @@ export function getGame({
   minWordLength: number;
   maxWordLength: number;
   seed: string;
-}): [LetterQu[], number[][], number[][]] {
+}): [LetterQu[], Clue[]] {
   // Create a new seedable random number generator
   const pseudoRandomGenerator = seedrandom(seed);
 
   let letters: LetterQu[];
   let deduplicatedShapeLookup: Record<string, number[][]>;
-  let selectedShapes: number[][];
-  let officialSolutions: number[][];
+  let clues: Clue[];
 
   while (true) {
     [letters, deduplicatedShapeLookup] = getLettersAndShapes({
@@ -38,21 +38,30 @@ export function getGame({
       );
 
       const selectedShapeIDs = sortedShapeIDs.slice(0, 4);
-      // Convert the shape ID back to an array of indexes
-      selectedShapes = selectedShapeIDs.map((id) =>
-        id.split("-").map((i) => parseInt(i)),
-      );
-      // the "official" answer is the first word for each selected shape
-      officialSolutions = selectedShapeIDs.map((id) => {
-        const entry = deduplicatedShapeLookup[id];
 
-        if (entry?.[0] === undefined) {
+      clues = selectedShapeIDs.map((id) => {
+        // Convert the shape ID back to an array of indexes
+        const shape = id.split("-").map((i) => parseInt(i));
+
+        // the "official" answer is the first word for each selected shape
+        const officialSolution = deduplicatedShapeLookup[id]?.[0];
+
+        // This should never get hit but is required to satisfy TS
+        if (officialSolution === undefined) {
           throw new Error(`shape ID not found in lookup`);
         }
 
-        return entry[0];
+        // The found answer is all nulls at this point
+        const foundSolution = shape.map(() => null);
+
+        return {
+          shape,
+          officialSolution,
+          foundSolution,
+        };
       });
-      return [letters, selectedShapes, officialSolutions];
+
+      return [letters, clues];
     }
   }
 }

@@ -17,8 +17,8 @@ export function inferEventsToLog(
 
   // Game won
   if (
-    gameIsSolvedQ(newState.foundSolutions) &&
-    !gameIsSolvedQ(oldState.foundSolutions)
+    gameIsSolvedQ(newState.clues.map((clue) => clue.foundSolution)) &&
+    !gameIsSolvedQ(oldState.clues.map((clue) => clue.foundSolution))
   ) {
     analyticsToLog.push({
       eventName: "completed_game",

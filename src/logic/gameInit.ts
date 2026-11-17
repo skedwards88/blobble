@@ -8,12 +8,17 @@ import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
 import {getFromStorage} from "@skedwards88/shared-components/src/logic/safeStorage";
 import {savedStateValidQ} from "./savedStateValidQ";
 
+export type Clue = {
+  shape: number[];
+  // official solution is an array of indexes where the index order matches the word order
+  officialSolution: number[];
+  foundSolution: (number | null)[];
+};
+
 export type GameState = {
   seed: string;
   letters: LetterQu[];
-  shapes: number[][];
-  officialSolutions: number[][];
-  foundSolutions: (number | null)[][];
+  clues: Clue[];
   playedIndexes: number[];
   lastInvalidWord: string | null;
   difficultyLevel: number;
@@ -53,7 +58,10 @@ export function gameInit({
     (resolvedSeed == null || savedState.seed === resolvedSeed) &&
     // Use the saved state if daily even if the game is solved
     // otherwise, don't use the saved state if the game is solved
-    !(!isDaily && gameIsSolvedQ(savedState.foundSolutions))
+    !(
+      !isDaily &&
+      gameIsSolvedQ(savedState.clues.map((clue) => clue.foundSolution))
+    )
   ) {
     return {...savedState, playedIndexes: [], lastInvalidWord: null};
   }
@@ -71,22 +79,17 @@ export function gameInit({
     resolvedDifficultyLevel,
   );
 
-  const [letters, shapes, officialSolutions] = getGame({
+  const [letters, clues] = getGame({
     gridSize,
     minWordLength,
     maxWordLength,
     seed: resolvedSeed,
   });
 
-  const foundSolutions = shapes.map((shape) => shape.map(() => null));
-
   return {
     seed: resolvedSeed,
     letters,
-    shapes,
-    // official solutions is an array of array of indexes where the index order matches the word order
-    officialSolutions,
-    foundSolutions,
+    clues,
     playedIndexes: [],
     lastInvalidWord: null,
     difficultyLevel: resolvedDifficultyLevel,

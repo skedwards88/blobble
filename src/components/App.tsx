@@ -242,7 +242,9 @@ export default function App(): React.JSX.Element {
           <ControlBar
             setDisplay={setDisplay}
             dispatchGameState={dispatchGameState}
-            dailyIsSolved={gameIsSolvedQ(dailyGameState.foundSolutions)}
+            dailyIsSolved={gameIsSolvedQ(
+              dailyGameState.clues.map((clue) => clue.foundSolution),
+            )}
           />
           <Game
             dispatchGameState={dispatchGameState}

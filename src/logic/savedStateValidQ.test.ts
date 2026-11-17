@@ -72,63 +72,212 @@ describe("savedStateValidQ", () => {
     ["letters", ["A", "Q"]],
     ["letters", ["A", 1]],
     ["letters", []],
-    ["shapes", [1, 2, 3]],
-    ["shapes", {}],
-    ["shapes", [[1, 2], ["2"]]],
-    ["shapes", [[1, 2], "2"]],
+    // string element:
     [
-      "shapes",
+      "clues",
       [
-        [1, 2],
-        [3, NaN],
+        {
+          shape: [1, "2", 3],
+          officialSolution: [4, 5, 6],
+          foundSolution: [null, null, null],
+        },
       ],
     ],
-    ["shapes", [[1, Infinity]]],
-    ["shapes", []],
-    ["shapes", [[]]],
-    ["shapes", [[], []]],
-    ["shapes", [[1, 2], []]],
-    ["officialSolutions", [1, 2, 3]],
-    ["officialSolutions", {}],
-    ["officialSolutions", [[1, 2], ["2"]]],
-    ["officialSolutions", [[1, 2], "2"]],
     [
-      "officialSolutions",
+      "clues",
       [
-        [1, 2],
-        [3, NaN],
+        {
+          shape: [1, 2, 3],
+          officialSolution: ["4", 5, 6],
+          foundSolution: [null, null, null],
+        },
       ],
     ],
-    ["officialSolutions", [1, 2, 3]],
-    ["officialSolutions", [[1, Infinity]]],
-    ["officialSolutions", []],
-    ["officialSolutions", [[]]],
-    ["officialSolutions", [[], []]],
-    ["officialSolutions", [[1, 2], []]],
-    ["foundSolutions", [[1, "2"]]],
-    ["foundSolutions", [[0, undefined]]],
-    ["foundSolutions", []],
-    ["foundSolutions", [[]]],
-    ["foundSolutions", [[], []]],
-    ["foundSolutions", [[1, 2], []]],
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, 5, 6],
+          foundSolution: [null, null, "9"],
+        },
+      ],
+    ],
+    // NaN element:
+    [
+      "clues",
+      [
+        {
+          shape: [1, NaN, 3],
+          officialSolution: [4, 5, 6],
+          foundSolution: [null, null, null],
+        },
+      ],
+    ],
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, NaN, 6],
+          foundSolution: [null, null, null],
+        },
+      ],
+    ],
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, 5, 6],
+          foundSolution: [null, NaN, null],
+        },
+      ],
+    ],
+    // Infinity element
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, Infinity],
+          officialSolution: [4, 5, 6],
+          foundSolution: [null, null, null],
+        },
+      ],
+    ],
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, 5, Infinity],
+          foundSolution: [null, null, null],
+        },
+      ],
+    ],
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, 5, 6],
+          foundSolution: [null, null, Infinity],
+        },
+      ],
+    ],
+    // undefined entry
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, 5, 6],
+          foundSolution: [null, null, undefined],
+        },
+      ],
+    ],
+    // empty array
+    [
+      "clues",
+      [
+        {
+          shape: [],
+          officialSolution: [],
+          foundSolution: [],
+        },
+      ],
+    ],
+    // empty object
+    [
+      "clues",
+      [
+        {
+          shape: {},
+          officialSolution: {},
+          foundSolution: {},
+        },
+      ],
+    ],
+    // not array
+    [
+      "clues",
+      [
+        {
+          shape: 1,
+          officialSolution: 2,
+          foundSolution: 3,
+        },
+      ],
+    ],
+    // different length
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3, 4],
+          officialSolution: [4, 5, 6],
+          foundSolution: [null, null, null],
+        },
+      ],
+    ],
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, 5, 6, 7],
+          foundSolution: [null, null, null],
+        },
+      ],
+    ],
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, 5, 6],
+          foundSolution: [null, null, null, null],
+        },
+      ],
+    ],
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, 5, 6],
+          foundSolution: [8, 9, 1, 2],
+        },
+      ],
+    ],
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, 5, 6],
+          foundSolution: [null, 1, 2, null],
+        },
+      ],
+    ],
   ])("wrong type is invalid: %s - %j", (key, value) => {
     expect(savedStateValidQ({...validGameState, [key]: value})).toBe(false);
   });
 
   test.each<[string, unknown]>([
     [
-      "foundSolutions",
+      "clues",
       [
-        [1, 2, 3],
-        [3, 4, 5, 6],
-      ],
-    ],
-    [
-      "foundSolutions",
-      [
-        [1, null, 3],
-        [3, 4, 5, 6],
-        [null, null],
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, 5, 6],
+          foundSolution: [7, 8, 9],
+        },
+        {
+          shape: [1, 2, 3, 4],
+          officialSolution: [4, 5, 6, 8],
+          foundSolution: [7, 8, null, null],
+        },
       ],
     ],
     ["playedIndexes", [2, 4, 6]],

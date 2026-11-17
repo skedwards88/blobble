@@ -121,15 +121,17 @@ export function gameReducer(
         currentGameState.letters,
       );
 
-      // Check if it matches the original solution (in case word list changed)
-      const matchesSolution = currentGameState.officialSolutions
-        .map((solution) => indexesToWord(solution, currentGameState.letters))
+      // Check if it matches any original solution words (in case word list changed)
+      const matchesSolution = currentGameState.clues
+        .map((clue) =>
+          indexesToWord(clue.officialSolution, currentGameState.letters),
+        )
         .includes(word);
 
       // Check for word validity
       const {isWord} = isKnown(word, trie);
 
-      // if it isn't a word or doesn't match the original solution
+      // if it isn't a word or doesn't match the original solution words
       // end the word and show and "unknown word" message
       if (!isWord && !matchesSolution) {
         return {
@@ -140,62 +142,54 @@ export function gameReducer(
         };
       }
 
+      const newClues = structuredClone(currentGameState.clues);
+
       // For each shape,
       // if a match for the shape hasn't been found
       // check if the played indexes match the shape
-      let matchingShapeIndex;
-      for (const [index, shape] of currentGameState.shapes.entries()) {
-        const foundSolution = currentGameState.foundSolutions[index];
+      for (const clue of currentGameState.clues) {
+        const shapeIsSolved = shapeIsSolvedQ(clue.foundSolution);
 
-        if (foundSolution === undefined) {
-          throw new Error(`no solution found for index ${String(index)}`);
-        }
-
-        const shapeIsSolved = shapeIsSolvedQ(foundSolution);
         if (shapeIsSolved) {
           continue;
         }
+
         const shapesMatch = shapesMatchQ({
           indexes1: currentGameState.playedIndexes,
-          indexes2: shape,
+          indexes2: clue.shape,
           gridSize: Math.sqrt(currentGameState.letters.length),
         });
+
         if (shapesMatch) {
-          matchingShapeIndex = index;
+          clue.foundSolution = currentGameState.playedIndexes;
           break;
         }
-      }
-
-      const newFoundSolutions = structuredClone(
-        currentGameState.foundSolutions,
-      );
-      if (matchingShapeIndex != null) {
-        newFoundSolutions[matchingShapeIndex] = currentGameState.playedIndexes;
       }
 
       return {
         ...currentGameState,
         playedIndexes: [],
-        foundSolutions: newFoundSolutions,
+        clues: newClues,
         lastInvalidWord: null,
       };
     }
 
     case "hint": {
       // A hint reveals one letter at a time (in order) of the official solution
-      const actualSolution =
-        currentGameState.officialSolutions[payload.shapeIndex];
-      const newFoundSolutions = structuredClone(
-        currentGameState.foundSolutions,
-      );
-      const hintedSolution = newFoundSolutions[payload.shapeIndex];
 
-      if (actualSolution === undefined || hintedSolution === undefined) {
-        throw new Error(`no solution at ${String(payload.shapeIndex)}`);
+      const newClues = structuredClone(currentGameState.clues);
+
+      // This shouldn't get hit but is required to satisfy TS
+      const requestedClue = newClues[payload.shapeIndex];
+
+      if (requestedClue === undefined) {
+        return currentGameState;
       }
 
       // Since hints may have been given previously, get the next unrevealed index for the hint
-      const nextHintIndex = hintedSolution.findIndex((i) => i == null);
+      const nextHintIndex = requestedClue.foundSolution.findIndex(
+        (i) => i == null,
+      );
 
       // If all hints have been given for the shape, return
       if (nextHintIndex < 0) {
@@ -203,17 +197,20 @@ export function gameReducer(
       }
 
       // Otherwise, reveal the next letter
-      const hintValue = actualSolution[nextHintIndex];
+      const hintValue = requestedClue.officialSolution[nextHintIndex];
+
+      // This shouldn't get hit but is required to satisfy TS
       if (hintValue === undefined) {
         throw new Error(`no next hint at ${String(nextHintIndex)}`);
       }
-      hintedSolution[nextHintIndex] = hintValue;
+
+      requestedClue.foundSolution[nextHintIndex] = hintValue;
 
       const newHintTally = 1 + currentGameState.hintTally;
 
       return {
         ...currentGameState,
-        foundSolutions: newFoundSolutions,
+        clues: newClues,
         hintTally: newHintTally,
       };
     }

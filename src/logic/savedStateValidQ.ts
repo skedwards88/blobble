@@ -1,5 +1,5 @@
 import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
-import type {GameState} from "./gameInit";
+import type {Clue, GameState} from "./gameInit";
 
 type Validators<T> = {[K in keyof T]-?: (input: unknown) => input is T[K]};
 
@@ -58,6 +58,28 @@ function isArrayOf<T>(
   );
 }
 
+function isRecord(input: unknown): input is Record<string, unknown> {
+  return typeof input === "object" && input !== null && !Array.isArray(input);
+}
+
+function validateObject<T>(
+  input: unknown,
+  validators: Validators<T>,
+): input is T {
+  if (!isRecord(input)) {
+    return false;
+  }
+
+  // False if any of the validators are false
+  for (const key in validators) {
+    if (!validators[key](input[key])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 // This should give a type error if I add/remove a key in the GameState type and don't update it here
 const gameStateValidators: Validators<GameState> = {
   seed: (input): input is string => typeof input === "string",
@@ -68,24 +90,23 @@ const gameStateValidators: Validators<GameState> = {
     input === null || typeof input === "string",
   playedIndexes: (input) => isArrayOf(input, isFiniteNumber, true),
   letters: (input) => isArrayOf(input, isLetterQu, false),
-  shapes: (input) =>
-    isArrayOf(input, (input) => isArrayOf(input, isFiniteNumber, false), false),
-  officialSolutions: (input) =>
-    isArrayOf(input, (input) => isArrayOf(input, isFiniteNumber, false), false),
-  foundSolutions: (input) =>
-    isArrayOf(input, (input) => isArrayOf(input, isNumberOrNull, false), false),
+  clues: (input) => isArrayOf(input, clueValidQ, false),
 };
 
-export function savedStateValidQ(input: unknown): input is GameState {
-  if (typeof input !== "object" || input === null) {
-    return false;
-  }
+const clueValidators: Validators<Clue> = {
+  shape: (input) => isArrayOf(input, isFiniteNumber, false),
+  officialSolution: (input) => isArrayOf(input, isFiniteNumber, false),
+  foundSolution: (input) => isArrayOf(input, isNumberOrNull, false),
+};
 
-  // eslint-disable-next-line @typescript-eslint/no-unsafe-type-assertion -- object narrowed above; reading keys as unknown
-  const record = input as Record<string, unknown>;
-
-  // False if any of the validators are false
-  return Object.entries(gameStateValidators).every(([key, validate]) =>
-    validate(record[key]),
+function clueValidQ(input: unknown): input is Clue {
+  return (
+    validateObject(input, clueValidators) &&
+    input.foundSolution.length === input.officialSolution.length &&
+    input.foundSolution.length === input.shape.length
   );
+}
+
+export function savedStateValidQ(input: unknown): input is GameState {
+  return validateObject(input, gameStateValidators);
 }
