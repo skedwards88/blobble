@@ -1,4 +1,4 @@
-import {centerGrid} from "@skedwards88/word_logic";
+import {centerGrid, indexToColumn, indexToRow} from "@skedwards88/word_logic";
 
 export function centerIndexes(indexes: number[], gridSize: number): number[] {
   if (!Array.isArray(indexes) || !indexes.every(Number.isInteger)) {
@@ -23,8 +23,8 @@ export function centerIndexes(indexes: number[], gridSize: number): number[] {
     Array<number>(gridSize).fill(0),
   );
   for (const index of indexes) {
-    const rowIndex = Math.floor(index / gridSize);
-    const columnIndex = index % gridSize;
+    const rowIndex = indexToRow(index, gridSize);
+    const columnIndex = indexToColumn(index, gridSize);
     const row = grid[rowIndex];
     if (row === undefined) {
       throw new Error(

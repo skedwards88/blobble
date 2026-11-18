@@ -1,5 +1,4 @@
-import {getColumnIndex} from "./getColumnIndex";
-import {getRowIndex} from "./getRowIndex";
+import {indexToColumn, indexToRow} from "@skedwards88/word_logic";
 
 // Remove wordIndexes that exceed a shape width or height of gridSize - 1
 export function omitShapesThatExceedSize({
@@ -10,9 +9,9 @@ export function omitShapesThatExceedSize({
   gridSize: number;
 }): number[][] {
   const filteredWordIndexes = wordIndexes.filter((indexes) => {
-    const rowIndexes = indexes.map((index) => getRowIndex(index, gridSize));
+    const rowIndexes = indexes.map((index) => indexToRow(index, gridSize));
     const columnIndexes = indexes.map((index) =>
-      getColumnIndex(index, gridSize),
+      indexToColumn(index, gridSize),
     );
     const maxRow = Math.max(...rowIndexes);
     const minRow = Math.min(...rowIndexes);
