@@ -2,9 +2,12 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "target": "es2023",
+    // letting lib be automatically set by target since TS isn't emitting, just type checking
     "module": "esnext",
-    "lib": ["es2023", "dom"],
+    "moduleResolution": "bundler",
     "types": ["jest", "node"],
+    "noEmit": true,
+    "isolatedModules": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
@@ -22,5 +25,6 @@
     "noUncheckedIndexedAccess": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true
-  }
+  },
+  "include": ["./src/**/*"]
 }
