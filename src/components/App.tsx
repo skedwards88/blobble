@@ -6,7 +6,11 @@ import InstallOverview from "@skedwards88/shared-components/src/components/Insta
 import PWAInstall from "@skedwards88/shared-components/src/components/PWAInstall";
 import MoreGames from "@skedwards88/shared-components/src/components/MoreGames";
 import Settings from "./Settings";
-import {gameInit} from "../logic/gameInit";
+import {
+  gameInit,
+  SAVED_DAILY_STATE_KEY,
+  SAVED_STATE_KEY,
+} from "../logic/gameInit";
 import {gameReducer} from "../logic/gameReducer";
 import {getSeedFromDate} from "@skedwards88/shared-components/src/logic/getSeedFromDate";
 import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
@@ -113,11 +117,11 @@ export default function App(): React.JSX.Element {
   }, [display]);
 
   React.useEffect(() => {
-    saveToStorage("blobbleGameSavedState", gameState);
+    saveToStorage(SAVED_STATE_KEY, gameState);
   }, [gameState]);
 
   React.useEffect(() => {
-    saveToStorage("blobbleDailySavedState", dailyGameState);
+    saveToStorage(SAVED_DAILY_STATE_KEY, dailyGameState);
   }, [dailyGameState]);
 
   // Store the previous state so that we can infer which analytics events to send

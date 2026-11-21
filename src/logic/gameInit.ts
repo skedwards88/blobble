@@ -8,6 +8,9 @@ import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
 import {getFromStorage} from "@skedwards88/shared-components/src/logic/safeStorage";
 import {savedStateValidQ} from "./savedStateValidQ";
 
+export const SAVED_STATE_KEY = "blobbleGameSavedState";
+export const SAVED_DAILY_STATE_KEY = "blobbleDailySavedState";
+
 export type Clue = {
   shape: number[];
   // official solution is an array of indexes where the index order matches the word order
@@ -37,9 +40,7 @@ export function gameInit({
   isDaily?: boolean;
   seed?: string | undefined;
 }): GameState {
-  const savedStateName = isDaily
-    ? "blobbleDailySavedState"
-    : "blobbleGameSavedState";
+  const savedStateName = isDaily ? SAVED_DAILY_STATE_KEY : SAVED_STATE_KEY;
 
   let resolvedSeed = seed;
 
