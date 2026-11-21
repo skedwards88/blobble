@@ -52,13 +52,12 @@ export function Shape({
   shapeIndex: number;
 }): React.JSX.Element {
   const shapeIsSolved = shapeIsSolvedQ(foundSolution);
-  const emptyGrid = Array(gridSize * gridSize).fill(undefined);
 
-  const boxes = emptyGrid.map((_, index) => (
+  const boxes = Array.from({length: gridSize * gridSize}, (_, index) => (
     <ShapeBox
       filled={shape.includes(index)}
       solved={shapeIsSolved}
-      key={`${String(index)}-${String(shape.includes(index))}`}
+      key={index}
       dispatchGameState={dispatchGameState}
       shapeIndex={shapeIndex}
     />
