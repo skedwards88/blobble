@@ -48,12 +48,11 @@ export function gameInit({
   }
 
   const savedState = useSaved
-    ? getFromStorage<unknown>(savedStateName)
+    ? getFromStorage(savedStateName, savedStateValidQ)
     : undefined;
 
   if (
     savedState != null &&
-    savedStateValidQ(savedState) &&
     // If a seed was given, it must match the saved seed in order to use saved state
     (resolvedSeed == null || savedState.seed === resolvedSeed) &&
     // Use the saved state if daily even if the game is solved

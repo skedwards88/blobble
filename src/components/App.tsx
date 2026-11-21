@@ -22,14 +22,17 @@ import {
   saveToStorage,
 } from "@skedwards88/shared-components/src/logic/safeStorage";
 
-export type DisplayState =
-  | "rules"
-  | "heart"
-  | "installOverview"
-  | "pwaInstall"
-  | "settings"
-  | "daily"
-  | "game";
+const displayStates = [
+  "rules",
+  "heart",
+  "installOverview",
+  "pwaInstall",
+  "settings",
+  "daily",
+  "game",
+] as const;
+
+export type DisplayState = (typeof displayStates)[number];
 
 export default function App(): React.JSX.Element {
   const {userId, sessionId} = useMetadataContext();
@@ -44,7 +47,10 @@ export default function App(): React.JSX.Element {
 
   // Determine when the player last visited the game
   // This is used to determine whether to show the rules or an announcement instead of the game
-  const lastVisitedYYYYMMDD = getFromStorage<string>("blobbleLastVisited");
+  const lastVisitedYYYYMMDD = getFromStorage(
+    "blobbleLastVisited",
+    (input) => typeof input === "string",
+  );
 
   const hasVisitedSinceLastAnnouncement = hasVisitedSince(
     lastVisitedYYYYMMDD,
@@ -58,7 +64,11 @@ export default function App(): React.JSX.Element {
   }, [currentYYYYMMDD]);
 
   // Determine what view to show the user
-  const savedDisplay = getFromStorage<DisplayState>("blobbleDisplay");
+  const savedDisplay = getFromStorage(
+    "blobbleDisplay",
+    (input): input is DisplayState =>
+      (displayStates as readonly unknown[]).includes(input),
+  );
   const [display, setDisplay] = React.useState<DisplayState>(
     getInitialState(savedDisplay, hasVisitedSinceLastAnnouncement),
   );
