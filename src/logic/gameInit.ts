@@ -59,8 +59,8 @@ export function gameInit({
     // Use the saved state if daily even if the game is solved
     // otherwise, don't use the saved state if the game is solved
     !(
-      !isDaily &&
-      gameIsSolvedQ(savedState.clues.map((clue) => clue.foundSolution))
+      isDaily ||
+      !gameIsSolvedQ(savedState.clues.map((clue) => clue.foundSolution))
     )
   ) {
     return {...savedState, playedIndexes: [], lastInvalidWord: null};
