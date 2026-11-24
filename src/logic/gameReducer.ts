@@ -147,7 +147,7 @@ export function gameReducer(
       // For each shape,
       // if a match for the shape hasn't been found
       // check if the played indexes match the shape
-      for (const clue of currentGameState.clues) {
+      for (const clue of newClues) {
         const shapeIsSolved = shapeIsSolvedQ(clue.foundSolution);
 
         if (shapeIsSolved) {
