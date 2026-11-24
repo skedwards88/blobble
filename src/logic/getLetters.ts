@@ -1,7 +1,7 @@
 import type seedrandom from "seedrandom";
 import {letterPool} from "./letterPool";
 import {pickRandomItemFromArray, shuffleArray} from "@skedwards88/word_logic";
-import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
+import type {LetterQu} from "@skedwards88/word_logic";
 
 export function getLetters(
   gridSize: number,

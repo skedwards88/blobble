@@ -4,7 +4,7 @@ import {getGame} from "./getGame";
 import {getDifficultyLevelForDay} from "@skedwards88/shared-components/src/logic/getDifficultyLevelForDay";
 import {getShapeSizeForDifficulty} from "./getShapeSizeForDifficulty";
 import {gameIsSolvedQ} from "../logic/gameIsSolvedQ";
-import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
+import type {LetterQu} from "@skedwards88/word_logic";
 import {getFromStorage} from "@skedwards88/shared-components/src/logic/safeStorage";
 import {savedStateValidQ} from "./savedStateValidQ";
 

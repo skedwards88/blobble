@@ -1,4 +1,4 @@
-import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
+import type {LetterQu} from "@skedwards88/word_logic";
 import {omitDuplicateWordsAcrossShapes} from "./omitDuplicateWordsAcrossShapes";
 
 describe("omitDuplicateWordsAcrossShapes", () => {

@@ -25,6 +25,7 @@ import {
   getFromStorage,
   saveToStorage,
 } from "@skedwards88/shared-components/src/logic/safeStorage";
+import {isYYYYMMDDString} from "@skedwards88/shared-components/src/logic/validators";
 
 const displayStates = [
   "rules",
@@ -53,7 +54,7 @@ export default function App(): React.JSX.Element {
   // This is used to determine whether to show the rules or an announcement instead of the game
   const lastVisitedYYYYMMDD = getFromStorage(
     "blobbleLastVisited",
-    (input) => typeof input === "string",
+    isYYYYMMDDString,
   );
 
   const hasVisitedSinceLastAnnouncement = hasVisitedSince(

@@ -1,102 +1,30 @@
-import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
 import type {Clue, GameState} from "./gameInit";
-
-type Validators<T> = {[K in keyof T]-?: (input: unknown) => input is T[K]};
-
-// This should give a type error if I add/remove an entry in the LetterQu type and don't update it here
-const letterValid: Record<LetterQu, true> = {
-  A: true,
-  B: true,
-  C: true,
-  D: true,
-  E: true,
-  F: true,
-  G: true,
-  H: true,
-  I: true,
-  J: true,
-  K: true,
-  L: true,
-  M: true,
-  N: true,
-  O: true,
-  P: true,
-  Qu: true,
-  QU: true,
-  R: true,
-  S: true,
-  T: true,
-  U: true,
-  V: true,
-  W: true,
-  X: true,
-  Y: true,
-  Z: true,
-};
-
-function isFiniteNumber(input: unknown): input is number {
-  return typeof input === "number" && Number.isFinite(input);
-}
-
-function isNumberOrNull(input: unknown): input is number | null {
-  return input === null || isFiniteNumber(input);
-}
-
-function isLetterQu(input: unknown): input is LetterQu {
-  return typeof input === "string" && Object.hasOwn(letterValid, input);
-}
-
-function isArrayOf<T>(
-  input: unknown,
-  guard: (input: unknown) => input is T,
-  allowEmpty: boolean,
-): input is T[] {
-  return (
-    Array.isArray(input) &&
-    input.every(guard) &&
-    (allowEmpty || input.length > 0)
-  );
-}
-
-function isRecord(input: unknown): input is Record<string, unknown> {
-  return typeof input === "object" && input !== null && !Array.isArray(input);
-}
-
-function validateObject<T>(
-  input: unknown,
-  validators: Validators<T>,
-): input is T {
-  if (!isRecord(input)) {
-    return false;
-  }
-
-  // False if any of the validators are false
-  for (const key in validators) {
-    if (!validators[key](input[key])) {
-      return false;
-    }
-  }
-
-  return true;
-}
+import type {Validators} from "@skedwards88/shared-components/src/logic/validators";
+import {
+  isArrayOf,
+  isNonNegativeInteger,
+  isNonNegativeIntegerOrNull,
+  validateObject,
+} from "@skedwards88/shared-components/src/logic/validators";
+import {isLetterQu} from "@skedwards88/word_logic";
 
 // This should give a type error if I add/remove a key in the GameState type and don't update it here
 const gameStateValidators: Validators<GameState> = {
   seed: (input): input is string => typeof input === "string",
   isDaily: (input): input is boolean => typeof input === "boolean",
-  difficultyLevel: isFiniteNumber,
-  hintTally: isFiniteNumber,
+  difficultyLevel: isNonNegativeInteger,
+  hintTally: isNonNegativeInteger,
   lastInvalidWord: (input): input is string | null =>
     input === null || typeof input === "string",
-  playedIndexes: (input) => isArrayOf(input, isFiniteNumber, true),
+  playedIndexes: (input) => isArrayOf(input, isNonNegativeInteger, true),
   letters: (input) => isArrayOf(input, isLetterQu, false),
   clues: (input) => isArrayOf(input, clueValidQ, false),
 };
 
 const clueValidators: Validators<Clue> = {
-  shape: (input) => isArrayOf(input, isFiniteNumber, false),
-  officialSolution: (input) => isArrayOf(input, isFiniteNumber, false),
-  foundSolution: (input) => isArrayOf(input, isNumberOrNull, false),
+  shape: (input) => isArrayOf(input, isNonNegativeInteger, false),
+  officialSolution: (input) => isArrayOf(input, isNonNegativeInteger, false),
+  foundSolution: (input) => isArrayOf(input, isNonNegativeIntegerOrNull, false),
 };
 
 function clueValidQ(input: unknown): input is Clue {

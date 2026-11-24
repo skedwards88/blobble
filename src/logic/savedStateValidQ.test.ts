@@ -51,11 +51,15 @@ describe("savedStateValidQ", () => {
     ["isDaily", undefined],
     ["isDaily", null],
     ["difficultyLevel", "3"],
+    ["difficultyLevel", -3],
+    ["difficultyLevel", 3.4],
     ["difficultyLevel", NaN],
     ["difficultyLevel", Infinity],
     ["difficultyLevel", null],
     ["difficultyLevel", undefined],
     ["hintTally", "3"],
+    ["hintTally", -3],
+    ["hintTally", 3.4],
     ["hintTally", NaN],
     ["hintTally", Infinity],
     ["hintTally", null],
@@ -64,6 +68,8 @@ describe("savedStateValidQ", () => {
     ["lastInvalidWord", undefined],
     ["playedIndexes", "not an array"],
     ["playedIndexes", [1, "2", 3]],
+    ["playedIndexes", [1, -2, 3]],
+    ["playedIndexes", [1, 2.2, 3]],
     ["playedIndexes", [1, NaN]],
     ["letters", "ABC"],
     ["letters", ["ABC"]],
@@ -100,6 +106,68 @@ describe("savedStateValidQ", () => {
           shape: [1, 2, 3],
           officialSolution: [4, 5, 6],
           foundSolution: [null, null, "9"],
+        },
+      ],
+    ],
+    // Negative element:
+    [
+      "clues",
+      [
+        {
+          shape: [1, -2, 3],
+          officialSolution: [4, 5, 6],
+          foundSolution: [null, null, null],
+        },
+      ],
+    ],
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, -2, 6],
+          foundSolution: [null, null, null],
+        },
+      ],
+    ],
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, 5, 6],
+          foundSolution: [null, -2, null],
+        },
+      ],
+    ],
+    // Decimal element:
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2.2, 3],
+          officialSolution: [4, 5, 6],
+          foundSolution: [null, null, null],
+        },
+      ],
+    ],
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, 2.2, 6],
+          foundSolution: [null, null, null],
+        },
+      ],
+    ],
+    [
+      "clues",
+      [
+        {
+          shape: [1, 2, 3],
+          officialSolution: [4, 5, 6],
+          foundSolution: [null, 2.2, null],
         },
       ],
     ],

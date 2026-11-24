@@ -1,4 +1,4 @@
-import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
+import type {LetterQu} from "@skedwards88/word_logic";
 import {orderShapeIdsByPreference} from "./orderShapeIdsByPreference";
 
 describe("orderShapeIdsByPreference", () => {

@@ -1,4 +1,4 @@
-import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
+import type {LetterQu} from "@skedwards88/word_logic";
 import type {ReducerPayload} from "../logic/gameReducer";
 import {indexesToWord} from "../logic/indexesToWord";
 import {shapeIsSolvedQ} from "../logic/shapeIsSolvedQ";

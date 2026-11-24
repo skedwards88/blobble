@@ -1,7 +1,7 @@
 import seedrandom from "seedrandom";
 import {getLettersAndShapes} from "./getLettersAndShapes";
 import {orderShapeIdsByPreference} from "./orderShapeIdsByPreference";
-import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
+import type {LetterQu} from "@skedwards88/word_logic";
 import type {Clue} from "./gameInit";
 
 export function getGame({

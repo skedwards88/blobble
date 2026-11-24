@@ -1,6 +1,6 @@
 import {indexesToWord} from "./indexesToWord";
 import {getNumberOfWordsEndingInSingleS} from "./getNumberOfWordsEndingInSingleS";
-import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
+import type {LetterQu} from "@skedwards88/word_logic";
 
 export function determineShapePreference(
   shapeIndexes1: number[][],

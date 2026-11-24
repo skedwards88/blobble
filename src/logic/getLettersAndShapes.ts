@@ -6,7 +6,7 @@ import {omitDuplicateWordsAcrossShapes} from "./omitDuplicateWordsAcrossShapes";
 import {centerIndexes} from "./centerIndexes";
 import {omitShapesThatExceedSize} from "./omitShapesThatExceedSize";
 import type seedrandom from "seedrandom";
-import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
+import type {LetterQu} from "@skedwards88/word_logic";
 
 export function getLettersAndShapes({
   gridSize,

@@ -1,6 +1,6 @@
 import {indexesToWord} from "./indexesToWord";
 import {findIncompatibleShapeIdIfAny} from "./findIncompatibleShapeIdIfAny";
-import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
+import type {LetterQu} from "@skedwards88/word_logic";
 
 function getWordsForShape(
   indexListsForShape: number[][],

@@ -1,6 +1,6 @@
 import React from "react";
 import type {ReducerPayload} from "../logic/gameReducer";
-import type {LetterQu} from "@skedwards88/word_logic/dist/Types";
+import type {LetterQu} from "@skedwards88/word_logic";
 
 function handlePointerDown(
   event: React.PointerEvent,
